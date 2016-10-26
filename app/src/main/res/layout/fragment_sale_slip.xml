@@ -1,0 +1,166 @@
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/myScrollingContent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.sale.history.SaleSlipFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/iv_card_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_mastercard_75dp" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_card_pan"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:gravity="center_vertical"
+                android:text="**** **** **** 0001"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_payment_made"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/sale_slip_payment_made"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_payment_made_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@id/tv_payment_made"
+                android:gravity="right"
+                android:text="2016/10/20 15:00"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_payment_voided"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_payment_voided"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/sale_slip_payment_voided"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_payment_voided_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@id/tv_payment_voided"
+                android:gravity="right"
+                android:text="2016/10/20 15:00"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/sale_slip_amount"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_amount_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@id/tv_amount"
+                android:gravity="right"
+                android:text="RM 99,999.00"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_approval_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/sale_slip_approval_code"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_approval_code_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@id/tv_approval_code"
+                android:gravity="right"
+                android:text="000126"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_txn_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/sale_slip_transaction_number"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_txn_num_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@id/tv_txn_num"
+                android:gravity="right"
+                android:text="00001234567"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
