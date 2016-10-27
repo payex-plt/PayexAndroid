@@ -17,6 +17,9 @@ import io.payex.android.ui.sale.EmailSlipActivity;
 
 public class SaleSlipActivity extends AppCompatActivity {
 
+
+    @BindView(R.id.root_container) View view;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +39,7 @@ public class SaleSlipActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_void)
     public void voidSale() {
-        // TODO void sale
+        Snackbar.make(view, "Void page under construction", Snackbar.LENGTH_LONG).show();
     }
 
 

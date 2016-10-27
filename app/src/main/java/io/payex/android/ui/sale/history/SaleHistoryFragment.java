@@ -39,7 +39,7 @@ public class SaleHistoryFragment extends Fragment {
     }
 
     @SuppressWarnings("unused")
-    public static SaleHistoryFragment newInstance(int columnCount) {
+    public static SaleHistoryFragment newInstance() {
         SaleHistoryFragment fragment = new SaleHistoryFragment();
         return fragment;
     }

@@ -25,7 +25,8 @@
             android:name=".ui.sale.history.SaleSlipActivity"
             android:label="@string/title_activity_sale_slip"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.sale.EmailSlipActivity" />
+        <activity android:name=".ui.sale.EmailSlipActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:label="@string/title_activity_login">

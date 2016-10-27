@@ -37,6 +37,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.payex.android.R;
@@ -53,11 +54,13 @@ public class LoginActivity extends AppCompatActivity
         implements LoginFragment.OnFragmentInteractionListener
 {
 
+    @BindView(R.id.root_container) View view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ButterKnife.bind(this);
 
         // Check that the activity is using the layout version with
         // the fragment_container FrameLayout
@@ -102,13 +105,15 @@ public class LoginActivity extends AppCompatActivity
 
     @Override
     public void onRegisterButtonPressed() {
-        Log.e("TAG", "go to register page");
+
+        Snackbar.make(view, "Register page under construction", Snackbar.LENGTH_LONG).show();
     }
 
     @Override
     public void onLoginButtonPressed() {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
+        finish();
     }
 
 
