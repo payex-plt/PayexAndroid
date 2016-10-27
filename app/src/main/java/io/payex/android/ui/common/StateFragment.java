@@ -3,6 +3,7 @@ package io.payex.android.ui.common;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,17 +39,11 @@ public class StateFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment StateFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static StateFragment newInstance(String param1, String param2) {
+    public static StateFragment newInstance() {
         StateFragment fragment = new StateFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
@@ -68,12 +63,18 @@ public class StateFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_state, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    @Override
+    public void onResume() {
+        super.onResume();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mListener.onDoneLoading();
+            }
+        }, 3000);
+
     }
+
 
     @Override
     public void onAttach(Context context) {
@@ -104,6 +105,6 @@ public class StateFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onDoneLoading();
     }
 }

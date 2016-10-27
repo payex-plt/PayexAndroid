@@ -1,6 +1,7 @@
 package io.payex.android.ui;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,9 +20,11 @@ import android.view.MenuItem;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import eu.davidea.flexibleadapter.items.IFlexible;
 import io.payex.android.R;
 import io.payex.android.ui.login.LoginActivity;
+import io.payex.android.ui.sale.CardReaderActivity;
 import io.payex.android.ui.sale.SaleFragment;
 import io.payex.android.ui.sale.history.SaleHistoryFragment;
 import io.payex.android.ui.sale.history.SaleHistoryItem;
@@ -29,10 +32,13 @@ import io.payex.android.ui.sale.history.SaleSlipActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        SaleHistoryFragment.OnListFragmentInteractionListener {
+        SaleHistoryFragment.OnListFragmentInteractionListener,
+        SaleFragment.OnFragmentInteractionListener {
 
-    @BindView(R.id.drawer_layout) DrawerLayout mDrawer;
-    @BindView(R.id.nav_view) NavigationView mNavigationView;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout mDrawer;
+    @BindView(R.id.nav_view)
+    NavigationView mNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,9 +149,16 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onListFragmentInteraction(IFlexible item) {
         if (item instanceof SaleHistoryItem) {
-            Log.e("TAG" ,  ((SaleHistoryItem) item).getTitle());
+            Log.e("TAG", ((SaleHistoryItem) item).getTitle());
             Intent i = new Intent(this, SaleSlipActivity.class);
             startActivity(i);
         }
+    }
+
+
+    @Override
+    public void onAmountEntered() {
+        Intent i = new Intent(this, CardReaderActivity.class);
+        startActivity(i);
     }
 }

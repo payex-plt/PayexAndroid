@@ -7,7 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.payex.android.R;
 
 /**
@@ -18,6 +22,13 @@ import io.payex.android.R;
  */
 public class CardReaderNfcFragment extends AbstractCardReaderFragment {
 
+
+    @OnClick(R.id.btn_scan)
+    public void scanCard() {
+        if (mListener != null) {
+            mListener.onSuccess();
+        }
+    }
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -36,7 +47,9 @@ public class CardReaderNfcFragment extends AbstractCardReaderFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_card_reader_nfc, container, false);
+        View view =inflater.inflate(R.layout.fragment_card_reader_nfc, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
