@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context="io.payex.android.ui.login.LoginFragment">
 
     <android.support.v4.widget.NestedScrollView
@@ -13,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="16dp"
+            android:layout_margin="@dimen/activity_horizontal_margin"
             android:orientation="vertical">
 
             <ImageView
@@ -62,7 +63,6 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/login_hint_password"
                     android:imeActionId="@+id/login"
-                    android:imeActionLabel="@string/login_ime_login"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1" />
@@ -71,6 +71,7 @@
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btn_login"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -78,17 +79,19 @@
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btn_login_help"
-                style="@style/Base.Widget.AppCompat.Button.Borderless"
-                android:layout_width="match_parent"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:text="@string/login_btn_login_help"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btn_register"
-                style="@style/Base.Widget.AppCompat.Button.Borderless"
-                android:layout_width="match_parent"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:text="@string/login_btn_register"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
