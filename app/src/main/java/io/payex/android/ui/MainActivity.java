@@ -14,7 +14,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import org.chromium.customtabsclient.CustomTabsActivityHelper;
 
@@ -43,7 +42,6 @@ public class MainActivity extends BaseActivity
             new CustomTabsActivityHelper.CustomTabsFallback() {
                 @Override
                 public void openUri(Activity activity, Uri uri) {
-//                    Snackbar.make(mDrawer, "Fallback", Snackbar.LENGTH_LONG).show();
                     try {
                         activity.startActivity(new Intent(Intent.ACTION_VIEW, uri));
                     } catch (ActivityNotFoundException e) {
@@ -102,17 +100,7 @@ public class MainActivity extends BaseActivity
         } else if (id == R.id.nav_sale_history) {
             changeFragment(R.id.fragment_container, SaleHistoryFragment.newInstance(), null);
         } else if (id == R.id.nav_about) {
-            // todo about page
-//            Snackbar.make(mDrawer, "About page under construction", Snackbar.LENGTH_LONG).show();
-
-            mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
-            mCustomTabsIntent = new CustomTabsIntent.Builder()
-                    .enableUrlBarHiding()
-                    .setToolbarColor(mColorPrimary)
-                    .setShowTitle(true)
-                    .build();
-
-            CustomTabsHelperFragment.open(this, mCustomTabsIntent, PROJECT_URI, mCustomTabsFallback);
+            openWithCustomTabs();
         } else if (id == R.id.nav_logout) {
             // todo clear all the cache before logout
             startActivity(LoginActivity.class, true);
@@ -133,5 +121,28 @@ public class MainActivity extends BaseActivity
     @Override
     public void onAmountEntered() {
         startActivity(CardReaderActivity.class, false);
+    }
+
+    private void openWithCustomTabs() {
+        // fixme may not be needed
+        mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
+
+        mCustomTabsHelperFragment.setConnectionCallback(
+                new CustomTabsActivityHelper.ConnectionCallback() {
+                    @Override
+                    public void onCustomTabsConnected() {
+                        mCustomTabsHelperFragment.mayLaunchUrl(PROJECT_URI, null, null);
+                    }
+                    @Override
+                    public void onCustomTabsDisconnected() {}
+                });
+
+        mCustomTabsIntent = new CustomTabsIntent.Builder()
+                .enableUrlBarHiding()
+                .setToolbarColor(mColorPrimary)
+                .setShowTitle(true)
+                .build();
+
+        CustomTabsHelperFragment.open(this, mCustomTabsIntent, PROJECT_URI, mCustomTabsFallback);
     }
 }
