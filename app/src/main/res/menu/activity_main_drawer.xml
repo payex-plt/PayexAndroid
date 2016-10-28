@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_sale"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Sales" />
+            android:title="@string/drawer_menu_sales" />
         <item
             android:id="@+id/nav_void_transaction"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Void" />
+            android:title="@string/drawer_menu_void" />
         <item
             android:id="@+id/nav_sale_history"
             android:icon="@drawable/ic_menu_camera"
-            android:title="History" />
+            android:title="@string/drawer_menu_history" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/drawer_menu_help">
         <menu>
             <item
                 android:id="@+id/nav_about"
-                android:icon="@drawable/ic_menu_camera"
-                android:title="About" />
+                android:title="@string/drawer_menu_about" />
             <item
                 android:id="@+id/nav_logout"
-                android:icon="@drawable/ic_menu_camera"
-                android:title="Terminal Logout" />
+                android:title="@string/drawer_menu_logout" />
         </menu>
     </item>
 
