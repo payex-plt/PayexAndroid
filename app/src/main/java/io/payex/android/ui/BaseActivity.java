@@ -5,6 +5,7 @@ import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 
 
 public class BaseActivity extends AppCompatActivity {
@@ -26,12 +27,18 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     protected void changeFragment(@IdRes int containerViewId, Fragment fragment) {
+        changeFragment(containerViewId, fragment, null);
+    }
+
+    protected void changeFragment(@IdRes int containerViewId, Fragment fragment, String addToBackStack) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
         // Replace whatever is in the fragment_container mRootView with this fragment,
         // and add the transaction to the back stack so the user can navigate back
         ft.replace(containerViewId, fragment);
-        ft.addToBackStack(null);
+        if (!TextUtils.isEmpty(addToBackStack)) {
+            ft.addToBackStack(null);
+        }
 
         // Commit the transaction
         ft.commit();

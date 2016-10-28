@@ -35,6 +35,7 @@ dependencies {
     //compile 'com.roughike:bottom-bar:2.0.2'
     compile 'eu.davidea:flexible-adapter:5.0.0-b8'
     compile 'com.github.renaudcerrato:ViewPagerIndicator:2.4.1-gradle'
+    compile 'me.zhanghai.android.customtabshelper:library:1.0.3'
 
     compile 'com.jakewharton:butterknife:8.4.0'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'

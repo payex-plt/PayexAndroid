@@ -1,6 +1,11 @@
 package io.payex.android.ui;
 
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.support.design.widget.NavigationView;
@@ -9,7 +14,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import org.chromium.customtabsclient.CustomTabsActivityHelper;
+
+import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.davidea.flexibleadapter.items.IFlexible;
@@ -20,15 +29,38 @@ import io.payex.android.ui.sale.SaleFragment;
 import io.payex.android.ui.sale.history.SaleHistoryFragment;
 import io.payex.android.ui.sale.history.SaleHistoryItem;
 import io.payex.android.ui.sale.history.SaleSlipActivity;
+import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         SaleHistoryFragment.OnListFragmentInteractionListener,
         SaleFragment.OnFragmentInteractionListener {
 
+    private static final Uri PROJECT_URI = Uri.parse(
+            "https://www.google.com");
+
+    private final CustomTabsActivityHelper.CustomTabsFallback mCustomTabsFallback =
+            new CustomTabsActivityHelper.CustomTabsFallback() {
+                @Override
+                public void openUri(Activity activity, Uri uri) {
+//                    Snackbar.make(mDrawer, "Fallback", Snackbar.LENGTH_LONG).show();
+                    try {
+                        activity.startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                    } catch (ActivityNotFoundException e) {
+                        Log.e(getLocalClassName(), "Activity not found");
+                        Snackbar.make(mDrawer, "Activity not found", Snackbar.LENGTH_LONG).show();
+                    }
+                }
+            };
+
     @BindView(R.id.toolbar) Toolbar mToolbar;
     @BindView(R.id.drawer_layout) DrawerLayout mDrawer;
     @BindView(R.id.nav_view) NavigationView mNavView;
+
+    @BindColor(R.color.colorPrimary) int mColorPrimary;
+
+    private CustomTabsHelperFragment mCustomTabsHelperFragment;
+    private CustomTabsIntent mCustomTabsIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +78,7 @@ public class MainActivity extends BaseActivity
 
         // select the default
         onNavigationItemSelected(mNavView.getMenu().getItem(0));
+        mNavView.setCheckedItem(mNavView.getMenu().getItem(0).getItemId());
     }
 
     @Override
@@ -63,14 +96,23 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_sale) {
-            changeFragment(R.id.fragment_container, SaleFragment.newInstance());
+            changeFragment(R.id.fragment_container, SaleFragment.newInstance(), null);
         } else if (id == R.id.nav_void_transaction) {
-            changeFragment(R.id.fragment_container, SaleHistoryFragment.newInstance());
+            changeFragment(R.id.fragment_container, SaleHistoryFragment.newInstance(), null);
         } else if (id == R.id.nav_sale_history) {
-            changeFragment(R.id.fragment_container, SaleHistoryFragment.newInstance());
+            changeFragment(R.id.fragment_container, SaleHistoryFragment.newInstance(), null);
         } else if (id == R.id.nav_about) {
             // todo about page
-            Snackbar.make(mDrawer, "About page under construction", Snackbar.LENGTH_LONG).show();
+//            Snackbar.make(mDrawer, "About page under construction", Snackbar.LENGTH_LONG).show();
+
+            mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
+            mCustomTabsIntent = new CustomTabsIntent.Builder()
+                    .enableUrlBarHiding()
+                    .setToolbarColor(mColorPrimary)
+                    .setShowTitle(true)
+                    .build();
+
+            CustomTabsHelperFragment.open(this, mCustomTabsIntent, PROJECT_URI, mCustomTabsFallback);
         } else if (id == R.id.nav_logout) {
             // todo clear all the cache before logout
             startActivity(LoginActivity.class, true);
