@@ -33,7 +33,6 @@ dependencies {
     compile 'com.android.support:design:25.0.0'
     testCompile 'junit:junit:4.12'
 
-    //compile 'com.roughike:bottom-bar:2.0.2'
     compile 'eu.davidea:flexible-adapter:5.0.0-b8'
     compile 'com.github.renaudcerrato:ViewPagerIndicator:2.4.1-gradle'
     compile 'me.zhanghai.android.customtabshelper:library:1.0.3'
