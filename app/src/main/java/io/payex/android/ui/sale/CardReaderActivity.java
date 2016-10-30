@@ -12,11 +12,14 @@ import android.support.v7.widget.Toolbar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.payex.android.R;
+import io.payex.android.ui.BaseActivity;
+import io.payex.android.ui.MainActivity;
 import io.payex.android.ui.common.StateFragment;
 import io.payex.android.ui.login.LoginFragment;
+import io.payex.android.ui.login.LoginHelperFragment;
 
 
-public class CardReaderActivity extends AppCompatActivity
+public class CardReaderActivity extends BaseActivity
         implements AbstractCardReaderFragment.OnScanListener ,
         StateFragment.OnFragmentInteractionListener
 {
@@ -29,32 +32,15 @@ public class CardReaderActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
 
-        // Check that the activity is using the layout version with
-        // the fragment_container FrameLayout
-        if (findViewById(R.id.content_main) != null) {
-
-            // However, if we're being restored from a previous state,
-            // then we don't need to do anything and should return or else
-            // we could end up with overlapping fragments.
-            if (savedInstanceState != null) {
-                return;
-            }
-
-            // Create a new Fragment to be placed in the activity layout
-            CardReaderFragment f = CardReaderFragment.newInstance();
-
-
-            // Add the fragment to the 'fragment_container' FrameLayout
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.content_main, f).commit();
+        if (savedInstanceState == null) {
+            addFragment(R.id.fragment_container, CardReaderFragment.newInstance());
         }
     }
 
     @Override
     public void onSuccess() {
-        StateFragment f = StateFragment.newInstance(
-                R.drawable.ic_mood_black_72dp, R.string.state_title_loading, 0);
-        changeFragment(f);
+        changeFragment(R.id.fragment_container, StateFragment.newInstance(
+                R.drawable.ic_mood_black_72dp, R.string.state_title_loading, 0));
     }
 
     @Override
@@ -62,22 +48,8 @@ public class CardReaderActivity extends AppCompatActivity
 
     }
 
-    public void changeFragment(Fragment f) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-        // Replace whatever is in the fragment_container view with this fragment,
-        // and add the transaction to the back stack so the user can navigate back
-        transaction.replace(R.id.content_main, f);
-        transaction.addToBackStack(null);
-
-        // Commit the transaction
-        transaction.commit();
-    }
-
     @Override
     public void onDoneLoading() {
-        Intent i = new Intent(this, EmailSlipActivity.class);
-        startActivity(i);
-        finish();
+        startActivity(EmailSlipActivity.class, true);
     }
 }

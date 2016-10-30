@@ -23,10 +23,6 @@ public class CardReaderFragment extends Fragment {
     @BindView(R.id.vp_card_reader) ViewPager mViewPager;
     @BindView(R.id.tl_card_reader) TabLayout mTabLayout;
 
-    public CardReaderFragment() {
-        // Required empty public constructor
-    }
-
     public static CardReaderFragment newInstance() {
         return new CardReaderFragment();
     }

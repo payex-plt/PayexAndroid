@@ -107,8 +107,12 @@ public class StateFragment extends Fragment {
         mListener = null;
     }
 
+    /**
+     * fixme for demo only
+     * use this page as ui/ux only by using addFragment, remove when job done (act as dialog)
+     * putting any job / logic here is not recommended
+     */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onDoneLoading();
     }
 }
