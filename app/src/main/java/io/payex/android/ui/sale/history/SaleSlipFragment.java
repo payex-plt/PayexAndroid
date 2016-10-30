@@ -43,12 +43,12 @@ public class SaleSlipFragment extends Fragment {
      * @return A new instance of fragment SaleSlipFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SaleSlipFragment newInstance(String param1, String param2) {
+    public static SaleSlipFragment newInstance() {
         SaleSlipFragment fragment = new SaleSlipFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+//        Bundle args = new Bundle();
+//        args.putString(ARG_PARAM1, param1);
+//        args.putString(ARG_PARAM2, param2);
+//        fragment.setArguments(args);
         return fragment;
     }
 

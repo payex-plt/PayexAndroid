@@ -13,33 +13,26 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.payex.android.R;
+import io.payex.android.ui.BaseActivity;
+import io.payex.android.ui.login.LoginFragment;
 import io.payex.android.ui.sale.EmailSlipActivity;
 
-public class SaleSlipActivity extends AppCompatActivity {
+public class SaleSlipActivity extends BaseActivity {
 
 
     @BindView(R.id.root_container) View view;
+    @BindView(R.id.toolbar) Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sale_slip);
+        setSupportActionBar(mToolbar);
         ButterKnife.bind(this);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-    }
 
-    // TODO use bottom navigation bar v25.0.0 to handle email/void
-
-    @OnClick(R.id.btn_email)
-    public void emailSlip() {
-        Intent i = new Intent(this, EmailSlipActivity.class);
-        startActivity(i);
-    }
-
-    @OnClick(R.id.btn_void)
-    public void voidSale() {
-        Snackbar.make(view, "Void page under construction", Snackbar.LENGTH_LONG).show();
+        if (savedInstanceState == null) {
+            addFragment(R.id.fragment_container, SaleSlipFragment.newInstance());
+        }
     }
 
 
