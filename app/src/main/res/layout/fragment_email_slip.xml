@@ -9,16 +9,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_margin="@dimen/activity_horizontal_margin"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/iv_state"
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/iv_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="24dp"
             app:srcCompat="@drawable/ic_mail_black_72dp" />
 
         <android.support.design.widget.TextInputLayout
@@ -29,25 +28,25 @@
                 android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
+                android:hint="@string/email_slip_hint_email"
                 android:inputType="textEmailAddress" />
         </android.support.design.widget.TextInputLayout>
 
-        <Button
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_send"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Send" />
+            android:text="@string/email_slip_btn_send" />
 
-        <TextView
-            android:id="@+id/tv_state"
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_gravity="center"
-            android:text="You will receive your slip shortly."
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/spacing_lg"
+            android:text="@string/email_slip_sent_success"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
-
 
     </LinearLayout>
 
