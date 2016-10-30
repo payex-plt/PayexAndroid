@@ -19,9 +19,7 @@ import io.payex.android.ui.login.LoginFragment;
 public class CardReaderActivity extends AppCompatActivity
         implements AbstractCardReaderFragment.OnScanListener ,
         StateFragment.OnFragmentInteractionListener
-
 {
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +52,8 @@ public class CardReaderActivity extends AppCompatActivity
 
     @Override
     public void onSuccess() {
-        StateFragment f = StateFragment.newInstance();
+        StateFragment f = StateFragment.newInstance(
+                R.drawable.ic_mood_black_72dp, R.string.state_title_loading, 0);
         changeFragment(f);
     }
 

@@ -31,6 +31,11 @@
     <string name="drawer_menu_logout">Terminal Logout</string>
     <string name="drawer_menu_help">Need help?</string>
 
+    <string name="state_title_loading">Please wait..</string>
+    <string name="state_title_payment_approved">Payment approved!</string>
+    <string name="state_title_payment_rejected">Payment rejected!</string>
+    <string name="state_title_sale_voided">Sale voided!</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_test">TestActivity</string>
