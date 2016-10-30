@@ -159,11 +159,6 @@
 
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="?android:attr/listDivider" />
-
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/btn_email"
                     style="@style/Widget.AppCompat.Button.Colored"

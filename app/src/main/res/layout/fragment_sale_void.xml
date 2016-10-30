@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/activity_horizontal_margin"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_title"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/spacing_lg"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@string/sale_void_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_no"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/sale_void_btn_no" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_yes"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/sale_void_btn_yes" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -40,6 +40,10 @@
     <string name="email_slip_sent_success">You will receive your slip shortly.</string>
     <string name="email_slip_btn_send">Send</string>
 
+    <string name="sale_void_title">Confirm void?</string>
+    <string name="sale_void_btn_yes">Yes</string>
+    <string name="sale_void_btn_no">No</string>
+
 
 
     <!-- TODO: Remove or change this placeholder text -->

@@ -1,23 +1,12 @@
 package io.payex.android.ui.sale;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.payex.android.R;
 import io.payex.android.ui.BaseActivity;
-import io.payex.android.ui.MainActivity;
 import io.payex.android.ui.common.StateFragment;
-import io.payex.android.ui.login.LoginFragment;
-import io.payex.android.ui.login.LoginHelperFragment;
-
 
 public class CardReaderActivity extends BaseActivity
         implements AbstractCardReaderFragment.OnScanListener ,
