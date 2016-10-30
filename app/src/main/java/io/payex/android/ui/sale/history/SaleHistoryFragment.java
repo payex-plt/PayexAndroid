@@ -1,16 +1,24 @@
 package io.payex.android.ui.sale.history;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -19,29 +27,14 @@ import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.items.IFlexible;
 import io.payex.android.R;
 
-/**
- * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
- * interface.
- */
 public class SaleHistoryFragment extends Fragment {
 
     @BindView(R.id.rv_sale_history) RecyclerView mRecyclerView;
 
     private OnListFragmentInteractionListener mListener;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
-    public SaleHistoryFragment() {
-    }
-
-    @SuppressWarnings("unused")
     public static SaleHistoryFragment newInstance() {
-        SaleHistoryFragment fragment = new SaleHistoryFragment();
-        return fragment;
+        return new SaleHistoryFragment();
     }
 
     @Override
@@ -74,8 +67,24 @@ public class SaleHistoryFragment extends Fragment {
     public List<IFlexible> getDatabaseList() {
         List<IFlexible> list = new ArrayList<>();
 
+        Drawable d = VectorDrawableCompat.create(getResources(), R.drawable.ic_mastercard_40dp, null);
+        d = DrawableCompat.wrap(d);
+
+        Calendar c = Calendar.getInstance();
+
         for (int i = 0 ; i < 25 ; i++) {
-            list.add(new SaleHistoryItem(i + "", "Payment RM8.00 " + i));
+            c.add(Calendar.DATE, -i);
+
+            list.add(new SaleHistoryItem(
+                    i+1 + "",
+                    d,
+                    "Paid RM80.99",
+                    "Ending with 1234",
+                    DateUtils.getRelativeTimeSpanString(
+                            c.getTimeInMillis(),
+                            System.currentTimeMillis(),
+                            DateUtils.DAY_IN_MILLIS).toString()
+            ));
         }
         return list;
     }

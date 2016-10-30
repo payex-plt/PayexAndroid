@@ -39,7 +39,7 @@ public class TestActivity extends AppCompatActivity
     @Override
     public void onListFragmentInteraction(IFlexible item) {
         if (item instanceof SaleHistoryItem) {
-            Log.e("TAG" ,  ((SaleHistoryItem) item).getTitle());
+//            Log.e("TAG" ,  ((SaleHistoryItem) item).getTitle());
             Intent i = new Intent(this, SaleSlipActivity.class);
             startActivity(i);
         }

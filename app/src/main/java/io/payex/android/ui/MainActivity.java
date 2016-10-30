@@ -113,7 +113,8 @@ public class MainActivity extends BaseActivity
     @Override
     public void onListFragmentInteraction(IFlexible item) {
         if (item instanceof SaleHistoryItem) {
-            Log.i(getLocalClassName(), ((SaleHistoryItem) item).getTitle());
+            SaleHistoryItem saleHistoryItem = (SaleHistoryItem) item;
+            Log.i(getLocalClassName(), saleHistoryItem.getPrimaryText());
             startActivity(SaleSlipActivity.class, false);
         }
     }
