@@ -16,15 +16,14 @@ public class SaleSlipActivity extends BaseActivity
         SaleVoidFragment.OnFragmentInteractionListener,
         StateFragment.OnFragmentInteractionListener {
 
-
     @BindView(R.id.root_container) View view;
-    @BindView(R.id.toolbar) Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sale_slip);
-        setSupportActionBar(mToolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         ButterKnife.bind(this);
 
         if (savedInstanceState == null) {
