@@ -45,6 +45,7 @@ public class SaleHistoryFragment extends Fragment {
 
         Context context = view.getContext();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+        mRecyclerView.setHasFixedSize(true);
 
         final List<IFlexible> myItems = getDatabaseList();
 

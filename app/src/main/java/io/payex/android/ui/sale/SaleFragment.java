@@ -1,78 +1,172 @@
 package io.payex.android.ui.sale;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+
+import com.dgreenhalgh.android.simpleitemdecoration.grid.GridDividerItemDecoration;
+
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
+import eu.davidea.flexibleadapter.FlexibleAdapter;
+import eu.davidea.flexibleadapter.items.IFlexible;
 import io.payex.android.R;
+import io.payex.android.util.HapticFeedbackUtil;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link SaleFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link SaleFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class SaleFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
+    @BindView(R.id.tv_primary) AppCompatTextView mPrimaryText;
+    @BindView(R.id.rv_numpad) RecyclerView mNumpad;
+    @BindView(R.id.rv_logo) RecyclerView mLogo;
+
+    private static final int NUMPAD_COL = 3;
 
     private OnFragmentInteractionListener mListener;
 
-    public SaleFragment() {
-        // Required empty public constructor
-    }
-
-    @OnClick(R.id.btn_ok)
-    public void scanCard() {
-        if (mListener != null) {
-            mListener.onAmountEntered();
-        }
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment SaleFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static SaleFragment newInstance() {
-        SaleFragment fragment = new SaleFragment();
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
-        }
+        return new SaleFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sale, container, false);
         ButterKnife.bind(this, view);
+
+        Context context = view.getContext();
+        setupLogo(context);
+        setupNumPad(context);
+
+        // todo experiment on display text
+//        String pattern = getString(R.string.sale_default_amount_pattern);
+//        String display = String.format(pattern, "RM", "0", "00");
+//        String display = "<sup><small>RM</small></sup>0.00";
+//        HtmlCompat.setSpannedText(mPrimaryText, display);
+        mPrimaryText.setText("RM0.00");
+
         return view;
     }
 
+    private void setupLogo(Context context) {
+        // todo size of columns need more research. max now is 4 on my tiny phone
+        List<IFlexible> logos = getLogos();
+        mLogo.setLayoutManager(new GridLayoutManager(context, logos.size()));
+        mLogo.setHasFixedSize(true);
+        mLogo.setAdapter(new FlexibleAdapter<>(logos));
+    }
+
+    private void setupNumPad(final Context context) {
+        mNumpad.setLayoutManager(new SpanningGridLayoutManager(context, NUMPAD_COL));
+        mNumpad.setHasFixedSize(true);
+
+        Drawable divider = ContextCompat.getDrawable(context, R.drawable.divider);
+        mNumpad.addItemDecoration(new GridDividerItemDecoration(divider, divider, NUMPAD_COL));
+
+        final List<IFlexible> numpadItems = getNumPadItems();
+
+        //Initialize the Adapter
+        FlexibleAdapter<IFlexible> adapter = new FlexibleAdapter<>(numpadItems);
+        adapter.initializeListeners(new FlexibleAdapter.OnItemClickListener() {
+            @Override
+            public boolean onItemClick(int position) {
+                SaleNumPadItem item = (SaleNumPadItem) numpadItems.get(position);
+                int max = numpadItems.size();
+
+                if (position == max - 1) { // entered
+                    mListener.onEnterPressed(item.getPrimaryText());
+                } else if (position == max - 3) { // backspace
+                    if (mCurrentCents == MIN_CENTS) {
+                        performHapticFeedback(context);
+                    } else {
+                        long afterBal =  mCurrentCents /  10;
+                        System.out.println(" afterBal " + afterBal);
+                        mCurrentCents = afterBal;
+                    }
+                    invalidateDisplayedAmount();
+                } else { // numpad
+                    int pressedDigit = Character.getNumericValue(item.getPrimaryText().charAt(0));
+                    if (isExceeded(pressedDigit)) {
+                        mCurrentCents = MAX_CENTS;
+                        performHapticFeedback(context);
+                    } else {
+                        mCurrentCents = mCurrentCents * 10 + pressedDigit;
+                    }
+                    invalidateDisplayedAmount();
+                }
+                return false;
+            }
+        });
+
+        mNumpad.setAdapter(adapter);
+    }
+
+    private static final String CURRENCY_SYMBOL = "RM";
+    private static final long MAX_CENTS = 9999999;
+    private static final long MIN_CENTS = 0;
+    private long mCurrentCents = 0;
+
+
+    private void invalidateDisplayedAmount() {
+        DecimalFormat f = new DecimalFormat("###,###,##0.00");
+        double d =  (double) mCurrentCents / (double) 100; // not work in cents - so convert to dollar
+        String displayText = CURRENCY_SYMBOL + f.format(d);
+        mPrimaryText.setText(displayText);
+    }
+
+    private boolean isExceeded( int newDigit ) {
+        return mCurrentCents * 10 + newDigit > MAX_CENTS;
+    }
+
+    private void performHapticFeedback(Context context) {
+        HapticFeedbackUtil.vibrate(context);
+        HapticFeedbackUtil.shake(mPrimaryText);
+    }
+
+    private List<IFlexible> getLogos() {
+        List<IFlexible> list = new ArrayList<>();
+
+        int max = 4;
+        for (int i = 0 ; i < max ; i++) {
+
+            Drawable d = VectorDrawableCompat.create(getResources(), R.drawable.ic_mastercard_40dp, null);
+            d = DrawableCompat.wrap(d);
+
+            list.add(new SaleLogoItem(i + 1 + "", d));
+        }
+        return list;
+    }
+
+    private List<IFlexible> getNumPadItems() {
+        List<IFlexible> list = new ArrayList<>();
+
+        int max = 12;
+        for (int i = 0 ; i < max ; i++) {
+            String displayText = String.valueOf(i+1);
+            if (i == max - 3) {
+                displayText = "C";
+            } else if (i == max - 2) {
+                displayText = "0";
+            } else if (i == max - 1) {
+                displayText = "OK";
+            }
+            list.add(new SaleNumPadItem(displayText, displayText));
+        }
+        return list;
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -91,18 +185,9 @@ public class SaleFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onAmountEntered();
+//        void onNumberPressed(String text);
+//        void onBackspacePressed(String text);
+        void onEnterPressed(String text);
     }
 }

@@ -14,6 +14,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import org.chromium.customtabsclient.CustomTabsActivityHelper;
 
@@ -119,11 +120,6 @@ public class MainActivity extends BaseActivity
         }
     }
 
-    @Override
-    public void onAmountEntered() {
-        startActivity(CardReaderActivity.class, false);
-    }
-
     private void openWithCustomTabs() {
         // fixme may not be needed
         mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
@@ -145,5 +141,20 @@ public class MainActivity extends BaseActivity
                 .build();
 
         CustomTabsHelperFragment.open(this, mCustomTabsIntent, PROJECT_URI, mCustomTabsFallback);
+    }
+
+//    @Override
+//    public void onNumberPressed(String text) {
+//        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+//    }
+//
+//    @Override
+//    public void onBackspacePressed(String text) {
+//        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+//    }
+
+    @Override
+    public void onEnterPressed(String text) {
+        startActivity(CardReaderActivity.class, false);
     }
 }
