@@ -34,10 +34,11 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     compile 'eu.davidea:flexible-adapter:5.0.0-b8'
-    compile 'com.github.renaudcerrato:ViewPagerIndicator:2.4.1-gradle'
+    // compile 'com.github.renaudcerrato:ViewPagerIndicator:2.4.1-gradle'
     compile 'me.zhanghai.android.customtabshelper:library:1.0.3'
-    compile 'me.grantland:autofittextview:0.2.+'
+    // compile 'me.grantland:autofittextview:0.2.+'
     compile 'com.bignerdranch.android:simple-item-decoration:1.0.0'
+    compile 'com.squareup:android-times-square:1.6.5@aar'
 
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.daimajia.easing:library:1.0.1@aar'
