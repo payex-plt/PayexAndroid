@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="io.payex.android">
 
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -12,14 +12,7 @@
         android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".ui.TestActivity"
-            android:label="@string/title_activity_test">
-            <!--
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            -->
-        </activity>
+            android:label="@string/title_activity_test"></activity>
         <activity
             android:name=".ui.sale.history.SaleSlipActivity"
             android:label="@string/title_activity_sale_slip" />

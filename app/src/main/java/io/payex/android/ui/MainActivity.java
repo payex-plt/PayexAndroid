@@ -6,15 +6,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.customtabs.CustomTabsIntent;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import org.chromium.customtabsclient.CustomTabsActivityHelper;
 
@@ -52,11 +51,15 @@ public class MainActivity extends BaseActivity
                 }
             };
 
-    @BindView(R.id.toolbar) Toolbar mToolbar;
-    @BindView(R.id.drawer_layout) DrawerLayout mDrawer;
-    @BindView(R.id.nav_view) NavigationView mNavView;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout mDrawer;
+    @BindView(R.id.nav_view)
+    NavigationView mNavView;
 
-    @BindColor(R.color.colorPrimary) int mColorPrimary;
+    @BindColor(R.color.colorPrimary)
+    int mColorPrimary;
 
     private CustomTabsHelperFragment mCustomTabsHelperFragment;
     private CustomTabsIntent mCustomTabsIntent;
@@ -130,8 +133,10 @@ public class MainActivity extends BaseActivity
                     public void onCustomTabsConnected() {
                         mCustomTabsHelperFragment.mayLaunchUrl(PROJECT_URI, null, null);
                     }
+
                     @Override
-                    public void onCustomTabsDisconnected() {}
+                    public void onCustomTabsDisconnected() {
+                    }
                 });
 
         mCustomTabsIntent = new CustomTabsIntent.Builder()

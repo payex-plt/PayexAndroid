@@ -1,40 +1,81 @@
 package io.payex.android.ui.sale.history;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.items.IFlexible;
 import io.payex.android.R;
 
-public class SaleHistoryFragment extends Fragment {
+public class SaleHistoryFragment extends Fragment
+//        implements CalendarFragment.OnCalendarInteractionListener
+{
 
-    @BindView(R.id.rv_sale_history) RecyclerView mRecyclerView;
+    @BindView(R.id.rv_sale_history)
+    RecyclerView mRecyclerView;
 
     private OnListFragmentInteractionListener mListener;
 
+    // todo experiment calendar
+    @OnClick(R.id.fab)
+    public void fabClick() {
+        CalendarFragment f = CalendarFragment.newInstance();
+
+        FragmentManager fm = getFragmentManager();
+        f.setTargetFragment(this, DIALOG_FRAGMENT);
+        f.show(fm, "fragment_edit_name");
+
+    }
+
+    public static final int DIALOG_FRAGMENT = 1;
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch(requestCode) {
+            case DIALOG_FRAGMENT:
+
+                if (resultCode == Activity.RESULT_OK) {
+                    System.out.println("> " + data.getStringExtra("HELLO"));
+                }
+
+                break;
+        }
+    }
+
     public static SaleHistoryFragment newInstance() {
         return new SaleHistoryFragment();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.filter_calendar) {
+            Toast.makeText(getContext(), "calendar", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -73,11 +114,11 @@ public class SaleHistoryFragment extends Fragment {
 
         Calendar c = Calendar.getInstance();
 
-        for (int i = 0 ; i < 25 ; i++) {
+        for (int i = 0; i < 25; i++) {
             c.add(Calendar.DATE, -i);
 
             list.add(new SaleHistoryItem(
-                    i+1 + "",
+                    i + 1 + "",
                     d,
                     "Paid RM80.99",
                     "Ending with 1234",
@@ -108,18 +149,12 @@ public class SaleHistoryFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+//    @Override
+//    public void onSelectedDateRange(List<Date> dates) {
+//        System.out.println("onSelectedDateRange " + dates);
+//    }
+
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onListFragmentInteraction(IFlexible item);
     }
 }
