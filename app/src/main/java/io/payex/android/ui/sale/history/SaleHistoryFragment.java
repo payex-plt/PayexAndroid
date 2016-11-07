@@ -14,7 +14,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.text.InputType;
-import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,6 +25,7 @@ import android.view.inputmethod.EditorInfo;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -55,11 +55,24 @@ public class SaleHistoryFragment extends Fragment
         switch(requestCode) {
             case DIALOG_FRAGMENT:
                 if (resultCode == Activity.RESULT_OK) {
-                    System.out.println("> " + data.getStringExtra("HELLO"));
+                    System.out.println("> " + data.getSerializableExtra("INPUT"));
+                    List<Date> dates = (List<Date>)data.getSerializableExtra("INPUT");
+                    for (Date d : dates) {
+                        System.out.println(d.getTime());
+                    }
+
+                    // fixme filter by date range
+
+//                    mAdapter.setSearchText(newText);
+//                    //Fill and Filter mItems with your custom list and automatically animate the changes
+//                    //Watch out! The original list must be a copy
+//                    mAdapter.filterItems(mSaleHistoryClone, 200L);
                 }
                 break;
         }
     }
+
+
 
     public static SaleHistoryFragment newInstance() {
         return new SaleHistoryFragment();
@@ -111,10 +124,7 @@ public class SaleHistoryFragment extends Fragment
                     d,
                     "Paid RM80.99",
                     "Ending with " + (1234 + i),
-                    DateUtils.getRelativeTimeSpanString(
-                            c.getTimeInMillis(),
-                            System.currentTimeMillis(),
-                            DateUtils.DAY_IN_MILLIS).toString()
+                    c.getTimeInMillis()
             ));
         }
         return list;
@@ -146,10 +156,14 @@ public class SaleHistoryFragment extends Fragment
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
         if (itemId == R.id.menu_calendar) {
+//            CalendarFragment f = new CalendarFragment();
+//            f.show(getFragmentManager(), f.getTag());
+
+
             CalendarFragment f = CalendarFragment.newInstance();
             FragmentManager fm = getFragmentManager();
             f.setTargetFragment(this, DIALOG_FRAGMENT);
-            f.show(fm, "fragment_edit_name");
+            f.show(fm, f.getTag());
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -176,13 +190,12 @@ public class SaleHistoryFragment extends Fragment
         }
     }
 
-    public static final String TAG = "SaleHistory";
 
     @Override
     public boolean onQueryTextChange(String newText) {
 //        Log.e(TAG, "onQueryTextChange newText: " + newText);
         if (mAdapter.hasNewSearchText(newText)) {
-            Log.e(TAG, "onQueryTextChange newText: " + newText);
+            Log.e("SaleHistory", "onQueryTextChange newText: " + newText);
             mAdapter.setSearchText(newText);
             //Fill and Filter mItems with your custom list and automatically animate the changes
             //Watch out! The original list must be a copy
@@ -195,7 +208,7 @@ public class SaleHistoryFragment extends Fragment
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        Log.v(TAG, "onQueryTextSubmit called!");
+        Log.v("SaleHistory", "onQueryTextSubmit called!");
         return onQueryTextChange(query);
     }
 }

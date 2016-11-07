@@ -3,6 +3,7 @@ package io.payex.android.ui.sale.history;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,7 @@ implements IFilterable
     private Drawable mIcon;
     private String mPrimaryText;
     private String mSecondaryText;
-    private String mTimestampText;
+    private long mTimestampMs;
 
     public String getPrimaryText() {
         return mPrimaryText;
@@ -33,16 +34,16 @@ implements IFilterable
         return mSecondaryText;
     }
 
-    public String getTimestampText() {
-        return mTimestampText;
+    public long getTimestampText() {
+        return mTimestampMs;
     }
 
-    SaleHistoryItem(String id, Drawable icon, String primary, String secondary, String timestamp) {
+    SaleHistoryItem(String id, Drawable icon, String primary, String secondary, long timestamp) {
         this.mId = id;
         this.mIcon = icon;
         this.mPrimaryText = primary;
         this.mSecondaryText = secondary;
-        this.mTimestampText = timestamp;
+        this.mTimestampMs = timestamp;
     }
 
     /**
@@ -57,6 +58,15 @@ implements IFilterable
             return this.mId.equals(inItem.mId);
         }
         return false;
+    }
+
+    /**
+     * Override this method too, when using functionalities like Filter or CollapseAll.
+     * FlexibleAdapter is making use of HashSet to improve performance in big list.
+     */
+    @Override
+    public int hashCode() {
+        return mId.hashCode();
     }
 
     /**
@@ -88,12 +98,15 @@ implements IFilterable
         holder.mIconView.setImageDrawable(mIcon);
         holder.mPrimaryView.setText(mPrimaryText);
         holder.mSecondaryView.setText(mSecondaryText);
-        holder.mTimestampView.setText(mTimestampText);
+        holder.mTimestampView.setText(
+                DateUtils.getRelativeTimeSpanString(
+                        mTimestampMs,
+                        System.currentTimeMillis(),
+                        DateUtils.DAY_IN_MILLIS).toString());
     }
 
     @Override
     public boolean filter(String constraint) {
-
         return mSecondaryText.contains(constraint);
     }
 
