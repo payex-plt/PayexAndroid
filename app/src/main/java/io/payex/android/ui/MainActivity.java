@@ -96,10 +96,13 @@ public class MainActivity extends BaseActivity
 
         if (id == R.id.nav_sale) {
             changeFragment(R.id.fragment_container, SaleFragment.newInstance(), null);
+            setTitle(R.string.title_activity_sale);
         } else if (id == R.id.nav_void_transaction) {
             changeFragment(R.id.fragment_container, SaleHistoryFragment.newInstance(), null);
+            setTitle(R.string.title_activity_void);
         } else if (id == R.id.nav_sale_history) {
             changeFragment(R.id.fragment_container, SaleHistoryFragment.newInstance(), null);
+            setTitle(R.string.title_activity_sale_history);
         } else if (id == R.id.nav_about) {
             openWithCustomTabs();
         } else if (id == R.id.nav_logout) {

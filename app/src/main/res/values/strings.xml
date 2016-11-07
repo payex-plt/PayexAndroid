@@ -57,9 +57,12 @@
     <string name="title_activity_test_reader">TestReaderActivity</string>
     <string name="title_activity_sale_slip">Sale Slip</string>
     <string name="title_activity_login">Sign in</string>
-    <string name="title_activity_main">Payex</string>
+    <!--<string name="title_activity_main">Payex</string>-->
     <string name="title_activity_email_slip">Email Slip</string>
     <string name="title_activity_card_reader">Card Reader</string>
+    <string name="title_activity_sale">Sale</string>
+    <string name="title_activity_void">Void</string>
+    <string name="title_activity_sale_history">Sale History</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

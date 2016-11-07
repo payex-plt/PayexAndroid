@@ -14,7 +14,6 @@ public class BaseActivity extends AppCompatActivity {
     protected void setBackButton() {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
         }
     }
 
