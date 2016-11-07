@@ -6,16 +6,18 @@ import android.support.v7.widget.AppCompatTextView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.List;
 
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem;
+import eu.davidea.flexibleadapter.items.IFilterable;
 import eu.davidea.viewholders.FlexibleViewHolder;
 import io.payex.android.R;
 
-public class SaleHistoryItem extends AbstractFlexibleItem<SaleHistoryItem.SaleHistoryItemHolder> {
+public class SaleHistoryItem extends AbstractFlexibleItem<SaleHistoryItem.SaleHistoryItemHolder>
+implements IFilterable
+{
 
     private String mId;
     private Drawable mIcon;
@@ -87,6 +89,12 @@ public class SaleHistoryItem extends AbstractFlexibleItem<SaleHistoryItem.SaleHi
         holder.mPrimaryView.setText(mPrimaryText);
         holder.mSecondaryView.setText(mSecondaryText);
         holder.mTimestampView.setText(mTimestampText);
+    }
+
+    @Override
+    public boolean filter(String constraint) {
+
+        return mSecondaryText.contains(constraint);
     }
 
     class SaleHistoryItemHolder extends FlexibleViewHolder {

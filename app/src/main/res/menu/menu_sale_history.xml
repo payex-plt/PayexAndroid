@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <item
-        android:id="@+id/filter_calendar"
-        android:title="@string/sale_history_menu_calendar"
-        android:orderInCategory="100"
+        android:id="@+id/menu_calendar"
+        android:animateLayoutChanges="true"
         android:icon="@drawable/ic_menu_camera"
+        android:orderInCategory="100"
+        android:title="@string/sale_history_menu_calendar"
         app:showAsAction="ifRoom" />
+
+    <!-- Search, should appear as action button -->
+    <item
+        android:id="@+id/menu_search"
+        android:animateLayoutChanges="true"
+        android:icon="@drawable/ic_menu_gallery"
+        android:title="@string/sale_history_menu_search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="collapseActionView|always" />
 
 </menu>

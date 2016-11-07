@@ -68,8 +68,8 @@ public class MainActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setSupportActionBar(mToolbar);
         ButterKnife.bind(this);
+        setSupportActionBar(mToolbar);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -148,18 +148,9 @@ public class MainActivity extends BaseActivity
         CustomTabsHelperFragment.open(this, mCustomTabsIntent, PROJECT_URI, mCustomTabsFallback);
     }
 
-//    @Override
-//    public void onNumberPressed(String text) {
-//        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
-//    }
-//
-//    @Override
-//    public void onBackspacePressed(String text) {
-//        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
-//    }
-
     @Override
     public void onEnterPressed(String text) {
         startActivity(CardReaderActivity.class, false);
     }
+
 }
