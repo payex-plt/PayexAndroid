@@ -20,6 +20,7 @@ public class CardReaderActivity extends BaseActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
+        setBackButton();
 
         if (savedInstanceState == null) {
             addFragment(R.id.fragment_container, CardReaderFragment.newInstance());

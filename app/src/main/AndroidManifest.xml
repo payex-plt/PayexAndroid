@@ -17,8 +17,10 @@
         <activity
             android:name=".ui.sale.history.SaleSlipActivity"
             android:label="@string/title_activity_sale_slip" />
-        <activity android:name=".ui.sale.EmailSlipActivity" />
-        <activity android:name=".ui.sale.CardReaderActivity" />
+        <activity android:name=".ui.sale.EmailSlipActivity"
+            android:label="@string/title_activity_email_slip" />
+        <activity android:name=".ui.sale.CardReaderActivity"
+            android:label="@string/title_activity_card_reader" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:label="@string/title_activity_login"

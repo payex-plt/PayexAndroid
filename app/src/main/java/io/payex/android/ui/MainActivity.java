@@ -51,12 +51,9 @@ public class MainActivity extends BaseActivity
                 }
             };
 
-    @BindView(R.id.toolbar)
-    Toolbar mToolbar;
-    @BindView(R.id.drawer_layout)
-    DrawerLayout mDrawer;
-    @BindView(R.id.nav_view)
-    NavigationView mNavView;
+    @BindView(R.id.toolbar) Toolbar mToolbar;
+    @BindView(R.id.drawer_layout) DrawerLayout mDrawer;
+    @BindView(R.id.nav_view) NavigationView mNavView;
 
     @BindColor(R.color.colorPrimary)
     int mColorPrimary;
