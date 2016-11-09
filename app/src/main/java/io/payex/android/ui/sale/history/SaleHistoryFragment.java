@@ -15,6 +15,7 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -27,11 +28,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,10 +42,13 @@ import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.items.IFlexible;
 import io.payex.android.R;
 
+import static android.content.ContentValues.TAG;
+
 public class SaleHistoryFragment extends Fragment
 //        implements CalendarFragment.OnCalendarInteractionListener
     implements SearchView.OnQueryTextListener,
-        FlexibleAdapter.OnUpdateListener
+        FlexibleAdapter.OnUpdateListener,
+        FlexibleAdapter.EndlessScrollListener
 {
 
     @BindView(R.id.rv_sale_history)
@@ -116,6 +122,12 @@ public class SaleHistoryFragment extends Fragment
 
         //Initialize the RecyclerView and attach the Adapter to it as usual
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        //EndlessScrollListener - OnLoadMore (v5.0.0)
+        mAdapter.setEndlessScrollListener(this, new ProgressItem());
+        mAdapter.setEndlessScrollThreshold(1);//Default=1
+
 
         // init swipe
         mSwipeRefreshLayout.setEnabled(true);
@@ -286,6 +298,50 @@ public class SaleHistoryFragment extends Fragment
             mEmptyView.setAlpha(0);
             mRefreshHandler.sendEmptyMessage(2);
         }
+    }
+
+
+    // ===================== LOAD MORE
+
+    @Override
+    public void onLoadMore() {
+        //We don't want load more items when searching into the current Collection!
+        //Alternatively, for a special filter, if we want load more items when filter is active, the
+        // new items that arrive from remote, should be already filtered, before adding them to the Adapter!
+        if (mAdapter.hasSearchText()) {
+            mAdapter.onLoadMoreComplete(null);
+            return;
+        }
+        Log.i(TAG, "onLoadMore invoked!");
+        //Simulating asynchronous call
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                final List<IFlexible> newItems = new ArrayList<>();
+
+                //Simulating success/failure
+                int count = new Random().nextInt(5);
+                int totalItemsOfType = mAdapter.getItemCountOfTypes(R.layout.fragment_sale_history_item);
+                List<IFlexible> fakeItems = getSaleHistory();
+                for (int i = 1; i <= count; i++) {
+                    newItems.add(fakeItems.get(i));
+                }
+
+                //Callback the Adapter to notify the change:
+                //- New items will be added to the end of the list
+                //- When list is null or empty, ProgressItem will be hidden
+                mAdapter.onLoadMoreComplete(newItems);
+                for (IFlexible item : newItems) {
+                    mAdapter.addItem(mAdapter.getItemCount(), item);
+                }
+
+                //Notify user
+                String message = (newItems.size() > 0 ?
+                        "Simulated: " + newItems.size() + " new items arrived :-)" :
+                        "Simulated: No more items to load :-(");
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+            }
+        }, 2500);
     }
 
 
