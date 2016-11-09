@@ -1,18 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_sale_history"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        app:layoutManager="LinearLayoutManager"
-        tools:context=".ui.sale.history.SaleHistoryFragment"
-        tools:listitem="@layout/fragment_sale_history_item" />
+        android:layout_height="match_parent"
+        android:enabled="true"><!-- To restore to false when bug is fixed by Android team -->
 
-</LinearLayout>
+        <!-- This FrameLayout is needed ONLY IF sticky headers are used, in order to
+			 display the refresh circle on the top of sticky_header_layout.
+			  -->
+        <!--<FrameLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_sale_history"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="LinearLayoutManager"
+                tools:context=".ui.sale.history.SaleHistoryFragment"
+                tools:listitem="@layout/fragment_sale_history_item" />
+
+            <!--<include layout="@layout/sticky_header_layout" />-->
+
+        <!--</FrameLayout>-->
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <!-- Custom EmptyView for RV when empty-->
+    <include layout="@layout/view_empty"/>
+
+</FrameLayout>

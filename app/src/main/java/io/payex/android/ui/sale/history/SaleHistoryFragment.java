@@ -5,11 +5,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -36,11 +41,18 @@ import io.payex.android.R;
 
 public class SaleHistoryFragment extends Fragment
 //        implements CalendarFragment.OnCalendarInteractionListener
-    implements SearchView.OnQueryTextListener
+    implements SearchView.OnQueryTextListener,
+        FlexibleAdapter.OnUpdateListener
 {
 
     @BindView(R.id.rv_sale_history)
     RecyclerView mRecyclerView;
+
+    @BindView(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
+
+    @BindView(R.id.empty_view)
+    View mEmptyView;
 
     private OnListFragmentInteractionListener mListener;
     private FlexibleAdapter<IFlexible> mAdapter;
@@ -104,6 +116,10 @@ public class SaleHistoryFragment extends Fragment
 
         //Initialize the RecyclerView and attach the Adapter to it as usual
         mRecyclerView.setAdapter(mAdapter);
+
+        // init swipe
+        mSwipeRefreshLayout.setEnabled(true);
+        initializeSwipeToRefresh();
 
         return view;
     }
@@ -211,4 +227,66 @@ public class SaleHistoryFragment extends Fragment
         Log.v("SaleHistory", "onQueryTextSubmit called!");
         return onQueryTextChange(query);
     }
+
+
+    // ==================== swipe refresh
+
+    private void initializeSwipeToRefresh() {
+        //Swipe down to force synchronize
+        //mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefreshLayout.setDistanceToTriggerSync(390);
+        //mSwipeRefreshLayout.setEnabled(true); Controlled by fragments!
+        mSwipeRefreshLayout.setColorSchemeResources(
+                android.R.color.holo_purple, android.R.color.holo_blue_light,
+                android.R.color.holo_green_light, android.R.color.holo_orange_light);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //Passing true as parameter we always animate the changes between the old and the new data set
+                mAdapter.updateDataSet(getSaleHistory(), true);
+                mSwipeRefreshLayout.setEnabled(false);
+
+                // todo refresh here
+                mRefreshHandler.sendEmptyMessageDelayed(0, 3000L);//Simulate network time
+            }
+        });
+    }
+
+
+    private final Handler mRefreshHandler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
+        public boolean handleMessage(Message message) {
+            switch (message.what) {
+                case 0: //Stop
+                    mSwipeRefreshLayout.setRefreshing(false);
+                    mSwipeRefreshLayout.setEnabled(true);
+                    return true;
+                case 1: //Start
+                    mSwipeRefreshLayout.setRefreshing(true);
+                    mSwipeRefreshLayout.setEnabled(false);
+                    return true;
+                case 2: //Show empty view
+                    ViewCompat.animate(mEmptyView).alpha(1);
+                    return true;
+                default:
+                    return false;
+            }
+        }
+    });
+
+    @Override
+    public void onUpdateEmptyView(int size) {
+        Log.d("SaleHistoryFragment", "onUpdateEmptyView size=" + size);
+
+//        TextView emptyText = (TextView) findViewById(R.id.empty_text);
+//        emptyText.setText(getString(R.string.no_items));
+        if (size > 0) {
+            mRefreshHandler.removeMessages(2);
+            mEmptyView.setAlpha(0);
+        } else {
+            mEmptyView.setAlpha(0);
+            mRefreshHandler.sendEmptyMessage(2);
+        }
+    }
+
+
 }
