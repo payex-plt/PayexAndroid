@@ -139,7 +139,7 @@ public class SaleFragment extends Fragment {
     private List<IFlexible> getLogos() {
         List<IFlexible> list = new ArrayList<>();
 
-        int max = 4;
+        int max = 3;
         for (int i = 0 ; i < max ; i++) {
 
             Drawable d = VectorDrawableCompat.create(getResources(), R.drawable.ic_mastercard_40dp, null);
