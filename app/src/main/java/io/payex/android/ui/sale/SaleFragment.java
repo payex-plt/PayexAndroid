@@ -100,7 +100,7 @@ public class SaleFragment extends Fragment {
                 } else { // numpad
                     int pressedDigit = Character.getNumericValue(item.getPrimaryText().charAt(0));
                     if (isExceeded(pressedDigit)) {
-                        mCurrentCents = MAX_CENTS;
+//                        mCurrentCents = MAX_CENTS; // fix as per Kevin's request
                         performHapticFeedback(context);
                     } else {
                         mCurrentCents = mCurrentCents * 10 + pressedDigit;
