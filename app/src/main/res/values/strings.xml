@@ -15,6 +15,19 @@
 
     <string name="login_helper_btn_reset">Reset</string>
 
+    <string name="about_btn_faq">F.A.Q.</string>
+    <string name="about_btn_libs">Third-party libraries</string>
+    <string name="about_btn_terms_of_use">Conditions of use</string>
+    <string name="about_btn_legal">Legal information</string>
+    <string name="about_btn_tutorial">Tutorial</string>
+    <string name="about_copyright">
+        <![CDATA[
+            Powered by %1$s<br/>
+            Version %2$s<br/>
+            %3$s &#xA9; %4$s
+        ]]>
+    </string>
+
     <string name="sale_slip_payment_made">PAYMENT MADE</string>
     <string name="sale_slip_payment_voided">PAYMENT VOIDED</string>
     <string name="sale_slip_amount">AMOUNT</string>
@@ -63,6 +76,7 @@
     <string name="title_activity_sale">Sale</string>
     <string name="title_activity_void">Void</string>
     <string name="title_activity_sale_history">Sale History</string>
+    <string name="title_activity_about">About Us</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

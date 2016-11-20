@@ -22,6 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.davidea.flexibleadapter.items.IFlexible;
 import io.payex.android.R;
+import io.payex.android.ui.about.AboutFragment;
 import io.payex.android.ui.login.LoginActivity;
 import io.payex.android.ui.sale.CardReaderActivity;
 import io.payex.android.ui.sale.SaleFragment;
@@ -33,10 +34,9 @@ import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         SaleHistoryFragment.OnListFragmentInteractionListener,
-        SaleFragment.OnFragmentInteractionListener {
-
-    private static final Uri PROJECT_URI = Uri.parse(
-            "https://www.google.com");
+        SaleFragment.OnFragmentInteractionListener,
+        AboutFragment.OnFragmentInteractionListener
+{
 
     private final CustomTabsActivityHelper.CustomTabsFallback mCustomTabsFallback =
             new CustomTabsActivityHelper.CustomTabsFallback() {
@@ -104,7 +104,8 @@ public class MainActivity extends BaseActivity
             changeFragment(R.id.fragment_container, SaleHistoryFragment.newInstance(), null);
             setTitle(R.string.title_activity_sale_history);
         } else if (id == R.id.nav_about) {
-            openWithCustomTabs();
+            changeFragment(R.id.fragment_container, AboutFragment.newInstance(), AboutFragment.TAG);
+            setTitle(R.string.title_activity_about);
         } else if (id == R.id.nav_logout) {
             // todo clear all the cache before logout
             startActivity(LoginActivity.class, true);
@@ -123,7 +124,7 @@ public class MainActivity extends BaseActivity
         }
     }
 
-    private void openWithCustomTabs() {
+    private void openWithCustomTabs(final Uri uri) {
         // fixme may not be needed
         mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
 
@@ -131,7 +132,7 @@ public class MainActivity extends BaseActivity
                 new CustomTabsActivityHelper.ConnectionCallback() {
                     @Override
                     public void onCustomTabsConnected() {
-                        mCustomTabsHelperFragment.mayLaunchUrl(PROJECT_URI, null, null);
+                        mCustomTabsHelperFragment.mayLaunchUrl(uri, null, null);
                     }
 
                     @Override
@@ -145,7 +146,7 @@ public class MainActivity extends BaseActivity
                 .setShowTitle(true)
                 .build();
 
-        CustomTabsHelperFragment.open(this, mCustomTabsIntent, PROJECT_URI, mCustomTabsFallback);
+        CustomTabsHelperFragment.open(this, mCustomTabsIntent, uri, mCustomTabsFallback);
     }
 
     @Override
@@ -153,4 +154,14 @@ public class MainActivity extends BaseActivity
         startActivity(CardReaderActivity.class, false);
     }
 
+    @Override
+    public void onLinkClicked(Uri uri) {
+        openWithCustomTabs(uri);
+    }
+
+    @Override
+    public void onTutorialClicked() {
+        // todo add tutorial page
+        Snackbar.make(mDrawer, "Under construction", Snackbar.LENGTH_LONG).show();
+    }
 }

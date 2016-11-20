@@ -12,11 +12,23 @@ android {
         versionName "0.1.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary true
+
+        resValue 'string', 'COMPANY_ABBR', '"Payex"'
+        resValue 'string', 'COMPANY', '"Payex Plt"'
+        resValue 'string', 'FAQ_LINK', '"https://www.google.com"'
+        resValue 'string', 'LIBS_LINK', '"https://www.google.com"'
+        resValue 'string', 'TERMS_LINK', '"https://www.google.com"'
+        resValue 'string', 'LEGAL_LINK', '"https://www.google.com"'
     }
     buildTypes {
+        debug {
+            resValue 'string', 'APP_VER', defaultConfig.versionName + '" Beta"'
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            resValue 'string', 'APP_VER', defaultConfig.versionName
         }
     }
 }
