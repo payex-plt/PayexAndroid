@@ -42,7 +42,8 @@
     <string name="drawer_menu_sales">Sales</string>
     <string name="drawer_menu_void">Void</string>
     <string name="drawer_menu_history">History</string>
-    <string name="drawer_menu_about">About Us</string>
+    <string name="drawer_menu_account">My Account</string>
+    <string name="drawer_menu_about">About Payex</string>
     <string name="drawer_menu_logout">Terminal Logout</string>
     <string name="drawer_menu_help">Need help?</string>
 

@@ -103,6 +103,9 @@ public class MainActivity extends BaseActivity
         } else if (id == R.id.nav_sale_history) {
             changeFragment(R.id.fragment_container, SaleHistoryFragment.newInstance(), null);
             setTitle(R.string.title_activity_sale_history);
+        } else if (id == R.id.nav_account) { //todo my account
+//            changeFragment(R.id.fragment_container, SaleHistoryFragment.newInstance(), null);
+//            setTitle(R.string.title_activity_sale_history);
         } else if (id == R.id.nav_about) {
             changeFragment(R.id.fragment_container, AboutFragment.newInstance(), AboutFragment.TAG);
             setTitle(R.string.title_activity_about);

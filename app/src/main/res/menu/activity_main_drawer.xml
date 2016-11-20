@@ -5,27 +5,27 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_sale"
-            android:icon="@drawable/ic_menu_sale_black_24dp"
             android:title="@string/drawer_menu_sales" />
         <item
             android:id="@+id/nav_void_transaction"
-            android:icon="@drawable/ic_menu_void_black_24dp"
             android:title="@string/drawer_menu_void" />
         <item
             android:id="@+id/nav_sale_history"
-            android:icon="@drawable/ic_menu_history_black_24dp"
             android:title="@string/drawer_menu_history" />
+        <item
+            android:id="@+id/nav_account"
+            android:title="@string/drawer_menu_account" />
+        <item
+            android:id="@+id/nav_about"
+            android:title="@string/drawer_menu_about" />
+        <item
+            android:id="@+id/nav_logout"
+            android:title="@string/drawer_menu_logout" />
     </group>
 
-    <item android:title="@string/drawer_menu_help">
+    <!--<item android:title="@string/drawer_menu_help">
         <menu>
-            <item
-                android:id="@+id/nav_about"
-                android:title="@string/drawer_menu_about" />
-            <item
-                android:id="@+id/nav_logout"
-                android:title="@string/drawer_menu_logout" />
         </menu>
-    </item>
+    </item>-->
 
 </menu>
