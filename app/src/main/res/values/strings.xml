@@ -28,6 +28,8 @@
         ]]>
     </string>
 
+    <string name="sale_enter_sale_amount">Enter Sale Amount</string>
+
     <string name="sale_slip_payment_made">PAYMENT MADE</string>
     <string name="sale_slip_payment_voided">PAYMENT VOIDED</string>
     <string name="sale_slip_amount">AMOUNT</string>
