@@ -89,13 +89,17 @@ public class SaleFragment extends Fragment {
                 if (position == max - 1) { // entered
                     mListener.onEnterPressed(item.getPrimaryText());
                 } else if (position == max - 3) { // backspace
-                    if (mCurrentCents == MIN_CENTS) {
+                    // backspace - not intended as per Kevin's request
+                    /*if (mCurrentCents == MIN_CENTS) {
                         performHapticFeedback(context);
                     } else {
                         long afterBal =  mCurrentCents /  10;
                         System.out.println(" afterBal " + afterBal);
                         mCurrentCents = afterBal;
-                    }
+                    }*/
+                    // clear instead
+                    mCurrentCents = MIN_CENTS;
+                    performHapticFeedback(context);
                     invalidateDisplayedAmount();
                 } else { // numpad
                     int pressedDigit = Character.getNumericValue(item.getPrimaryText().charAt(0));
