@@ -28,6 +28,22 @@
         ]]>
     </string>
 
+    <string name="account_merchant">
+        <![CDATA[
+            <b>%1$s</b><br/>
+            BIN : %2$s<br/>
+            MID : %3$s
+        ]]>
+    </string>
+    <string name="account_acquirer">
+        <![CDATA[
+            <b>%1$s</b><br/>
+            Tel &nbsp;: %2$s<br/>
+            &nbsp;&nbsp;&nbsp;%3$s<br/>
+            Email : %4$s
+        ]]>
+    </string>
+
     <string name="sale_enter_sale_amount">Enter Sale Amount</string>
 
     <string name="sale_slip_payment_made">PAYMENT MADE</string>
@@ -80,6 +96,7 @@
     <string name="title_activity_void">Void</string>
     <string name="title_activity_sale_history">Sale History</string>
     <string name="title_activity_about">About Us</string>
+    <string name="title_activity_my_account">My Account</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

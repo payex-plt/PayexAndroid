@@ -23,6 +23,7 @@ import butterknife.ButterKnife;
 import eu.davidea.flexibleadapter.items.IFlexible;
 import io.payex.android.R;
 import io.payex.android.ui.about.AboutFragment;
+import io.payex.android.ui.account.MyAccountFragment;
 import io.payex.android.ui.login.LoginActivity;
 import io.payex.android.ui.sale.CardReaderActivity;
 import io.payex.android.ui.sale.SaleFragment;
@@ -103,9 +104,9 @@ public class MainActivity extends BaseActivity
         } else if (id == R.id.nav_sale_history) {
             changeFragment(R.id.fragment_container, SaleHistoryFragment.newInstance(), null);
             setTitle(R.string.title_activity_sale_history);
-        } else if (id == R.id.nav_account) { //todo my account
-//            changeFragment(R.id.fragment_container, SaleHistoryFragment.newInstance(), null);
-//            setTitle(R.string.title_activity_sale_history);
+        } else if (id == R.id.nav_account) {
+            changeFragment(R.id.fragment_container, MyAccountFragment.newInstance(), null);
+            setTitle(R.string.title_activity_my_account);
         } else if (id == R.id.nav_about) {
             changeFragment(R.id.fragment_container, AboutFragment.newInstance(), AboutFragment.TAG);
             setTitle(R.string.title_activity_about);
