@@ -44,6 +44,10 @@
         ]]>
     </string>
 
+    <string name="setup_welcome">welcome</string>
+    <string name="setup_progress">Downloading profile (%1$s)</string>
+    <string name="setup_message">It will take a few minutes depending on your connection</string>
+
     <string name="sale_enter_sale_amount">Enter Sale Amount</string>
 
     <string name="sale_slip_payment_made">PAYMENT MADE</string>

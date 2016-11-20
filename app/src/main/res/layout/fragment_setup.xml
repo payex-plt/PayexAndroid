@@ -1,0 +1,53 @@
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context="io.payex.android.ui.login.SetupFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/spacing_lg"
+        android:paddingRight="@dimen/spacing_lg">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/spacing_xxl"
+            android:gravity="center"
+            android:text="@string/setup_welcome"
+            android:textColor="@android:color/primary_text_dark"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Display2" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:layout_marginBottom="@dimen/spacing_md" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/spacing_md"
+            android:gravity="center"
+            android:text="@string/setup_progress"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/setup_message"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

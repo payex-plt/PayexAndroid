@@ -12,7 +12,9 @@ import io.payex.android.ui.BaseActivity;
 import io.payex.android.ui.MainActivity;
 
 public class LoginActivity extends BaseActivity
-        implements LoginFragment.OnFragmentInteractionListener, LoginHelperFragment.OnFragmentInteractionListener {
+        implements LoginFragment.OnFragmentInteractionListener, LoginHelperFragment.OnFragmentInteractionListener,
+SetupFragment.OnFragmentInteractionListener
+{
 
     @BindView(R.id.root_container) View mRootView;
 
@@ -40,13 +42,17 @@ public class LoginActivity extends BaseActivity
 
     @Override
     public void onLoginButtonPressed() {
-        startActivity(MainActivity.class, true);
+        changeFragment(R.id.fragment_container, SetupFragment.newInstance());
     }
 
     @Override
     public void onPasswordReset() {
-        startActivity(MainActivity.class, true);
+        Snackbar.make(mRootView, "Resetting password", Snackbar.LENGTH_LONG).show();
     }
 
+    @Override
+    public void onSetupCompleted() {
+        startActivity(MainActivity.class, true);
+    }
 }
 
