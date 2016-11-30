@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.github.devnied.emvnfccard.model.EmvCard;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -21,7 +23,6 @@ import io.payex.android.R;
  *
  */
 public class CardReaderNfcFragment extends AbstractCardReaderFragment {
-
 
     @OnClick(R.id.btn_scan)
     public void scanCard() {

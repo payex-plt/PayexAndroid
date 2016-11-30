@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PayexAndroid</string>
+    <string name="app_name">Payex</string>
 
     <string name="vpi_nfc">NFC</string>
     <string name="vpi_ocr">OCR</string>
@@ -92,7 +92,7 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_test_reader">TestReaderActivity</string>
     <string name="title_activity_sale_slip">Sale Slip</string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_login">Payex</string>
     <!--<string name="title_activity_main">Payex</string>-->
     <string name="title_activity_email_slip">Email Slip</string>
     <string name="title_activity_card_reader">Card Reader</string>

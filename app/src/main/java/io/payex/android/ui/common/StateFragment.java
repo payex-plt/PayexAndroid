@@ -82,12 +82,12 @@ public class StateFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mListener.onDoneLoading();
-            }
-        }, 2000);
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                mListener.onDoneLoading();
+//            }
+//        }, 2000);
     }
 
     @Override
