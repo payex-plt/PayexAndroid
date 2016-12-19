@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="24dp"
-            app:srcCompat="@drawable/ic_mail_black_72dp" />
+            app:srcCompat="@drawable/ic_emailicon" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"

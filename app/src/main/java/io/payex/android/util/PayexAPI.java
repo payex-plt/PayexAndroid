@@ -9,6 +9,6 @@ import retrofit2.http.Path;
  */
 
 public interface PayexAPI {
-    @GET("/api/merchantsapi/authenticate/{MID2P}/{BIN}/{password}")
-    Call<Boolean> authenticate(@Path("MID2P") String MID2P, @Path("BIN") String BIN, @Path("password") String password);
+    @GET("/api/merchantsapi/authenticate/{BIN}/{MID2P}/{password}")
+    Call<Integer> authenticate(@Path("BIN") String BIN, @Path("MID2P") String MID2P, @Path("password") String password);
 }

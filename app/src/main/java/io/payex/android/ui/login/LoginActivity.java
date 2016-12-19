@@ -24,7 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends BaseActivity
         implements LoginFragment.OnFragmentInteractionListener, LoginHelperFragment.OnFragmentInteractionListener,
-SetupFragment.OnFragmentInteractionListener, Callback<Boolean>
+SetupFragment.OnFragmentInteractionListener, Callback<Integer>
 {
     private static final String TAG = LoginActivity.class.getSimpleName();
 
@@ -71,7 +71,7 @@ SetupFragment.OnFragmentInteractionListener, Callback<Boolean>
                 PayexAPI payexAPI = retrofit.create(PayexAPI.class);
 
                 //Call<Boolean> call = payexAPI.authenticate("429313", "10000052", "123456");
-                Call<Boolean> call = payexAPI.authenticate(loginFragment.mBinEditText.getText().toString(),
+                Call<Integer> call = payexAPI.authenticate(loginFragment.mBinEditText.getText().toString(),
                         loginFragment.mMidEditText.getText().toString(), loginFragment.mPasswordEditText.getText().toString());
                 //asynchronous call
                 call.enqueue(this);
@@ -97,8 +97,9 @@ SetupFragment.OnFragmentInteractionListener, Callback<Boolean>
     }
 
     @Override
-    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-        Log.d(TAG, "response -> " + response.raw());
+    public void onResponse(Call<Integer> call, Response<Integer> response) {
+        Log.d(TAG, "on response -> " + response.raw());
+        Log.d(TAG, "on response -> " + response.body());
 
         if (response.message().equals("OK")) {
             changeFragment(R.id.fragment_container, SetupFragment.newInstance());
@@ -108,7 +109,8 @@ SetupFragment.OnFragmentInteractionListener, Callback<Boolean>
     }
 
     @Override
-    public void onFailure(Call<Boolean> call, Throwable t) {
+    public void onFailure(Call<Integer> call, Throwable t) {
+        Log.d(TAG, "on failure -> " + t.getMessage());
         Toast.makeText(this, "Login error!", Toast.LENGTH_LONG).show();
     }
 }
