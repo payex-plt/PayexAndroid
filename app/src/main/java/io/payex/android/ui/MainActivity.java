@@ -30,12 +30,16 @@ import io.payex.android.ui.sale.SaleFragment;
 import io.payex.android.ui.sale.history.SaleHistoryFragment;
 import io.payex.android.ui.sale.history.SaleHistoryItem;
 import io.payex.android.ui.sale.history.SaleSlipActivity;
+import io.payex.android.ui.sale.voided.VoidFragment;
+import io.payex.android.ui.sale.voided.VoidItem;
+import io.payex.android.ui.sale.voided.VoidSlipActivity;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         SaleHistoryFragment.OnListFragmentInteractionListener,
         SaleFragment.OnFragmentInteractionListener,
+        VoidFragment.OnListFragmentInteractionListener,
         AboutFragment.OnFragmentInteractionListener
 {
 
@@ -99,7 +103,7 @@ public class MainActivity extends BaseActivity
             changeFragment(R.id.fragment_container, SaleFragment.newInstance(), null);
             setTitle(R.string.title_activity_sale);
         } else if (id == R.id.nav_void_transaction) {
-            changeFragment(R.id.fragment_container, SaleHistoryFragment.newInstance(), null);
+            changeFragment(R.id.fragment_container, VoidFragment.newInstance(), null);
             setTitle(R.string.title_activity_void);
         } else if (id == R.id.nav_sale_history) {
             changeFragment(R.id.fragment_container, SaleHistoryFragment.newInstance(), null);
@@ -167,5 +171,14 @@ public class MainActivity extends BaseActivity
     public void onTutorialClicked() {
         // todo add tutorial page
         Snackbar.make(mDrawer, "Under construction", Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onVoidItemClicked(IFlexible item) {
+        if (item instanceof VoidItem) {
+            VoidItem voidItem = (VoidItem) item;
+            Log.i(getLocalClassName(), voidItem.getPrimaryText());
+            startActivity(VoidSlipActivity.class, false);
+        }
     }
 }

@@ -1,4 +1,4 @@
-package io.payex.android.ui.sale.history;
+package io.payex.android.ui.common;
 
 import android.animation.Animator;
 import android.support.annotation.NonNull;

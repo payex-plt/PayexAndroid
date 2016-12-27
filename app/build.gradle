@@ -64,4 +64,5 @@ dependencies {
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
 
     compile 'com.github.devnied.emvnfccard:library:2.1.1'
+    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
 }

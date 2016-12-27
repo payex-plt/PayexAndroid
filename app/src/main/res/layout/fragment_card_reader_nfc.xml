@@ -9,9 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="This is NFC scanner" />
-    <Button
-        android:text="SCANNED"
-        android:layout_width="wrap_content"
+    <TextView
+        android:text="Now tap your card at the back of the phone..."
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:gravity="center_horizontal"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:id="@+id/btn_scan" />

@@ -21,6 +21,9 @@
         <activity
             android:name=".ui.sale.history.SaleSlipActivity"
             android:label="@string/title_activity_sale_slip" />
+        <activity
+            android:name=".ui.sale.voided.VoidSlipActivity"
+            android:label="@string/title_activity_void_slip" />
         <activity android:name=".ui.sale.EmailSlipActivity"
             android:label="@string/title_activity_email_slip" />
         <activity android:name=".ui.sale.CardReaderActivity"
@@ -42,7 +45,11 @@
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>
             </intent-filter>
-        </activity>
+        </activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>

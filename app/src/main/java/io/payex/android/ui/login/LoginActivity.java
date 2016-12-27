@@ -24,7 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends BaseActivity
         implements LoginFragment.OnFragmentInteractionListener, LoginHelperFragment.OnFragmentInteractionListener,
-SetupFragment.OnFragmentInteractionListener, Callback<Integer>
+        SetupFragment.OnFragmentInteractionListener, Callback<Integer>
 {
     private static final String TAG = LoginActivity.class.getSimpleName();
 
@@ -63,15 +63,15 @@ SetupFragment.OnFragmentInteractionListener, Callback<Integer>
 
                 Log.d(TAG, "set bank -> " + bank.getName());
 
-                Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("http://payexterminals.azurewebsites.net")
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-
-                PayexAPI payexAPI = retrofit.create(PayexAPI.class);
+//                Retrofit retrofit = new Retrofit.Builder()
+//                        .baseUrl("http://payexterminals.azurewebsites.net")
+//                        .addConverterFactory(GsonConverterFactory.create())
+//                        .build();
+//
+//                PayexAPI payexAPI = retrofit.create(PayexAPI.class);
 
                 //Call<Boolean> call = payexAPI.authenticate("429313", "10000052", "123456");
-                Call<Integer> call = payexAPI.authenticate(loginFragment.mBinEditText.getText().toString(),
+                Call<Integer> call = MyApp.payexAPI.authenticate(loginFragment.mBinEditText.getText().toString(),
                         loginFragment.mMidEditText.getText().toString(), loginFragment.mPasswordEditText.getText().toString());
                 //asynchronous call
                 call.enqueue(this);

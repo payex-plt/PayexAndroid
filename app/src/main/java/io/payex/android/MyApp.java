@@ -8,6 +8,10 @@ import android.util.Log;
 
 import java.util.HashMap;
 
+import io.payex.android.util.PayexAPI;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 /**
  * Created by vince on 11/28/2016.
  */
@@ -17,6 +21,13 @@ public class MyApp extends Application {
 
     static Bank[] banks;
     static Bank bank;
+
+    static Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl("http://payexterminals.payex.io")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+
+    static public PayexAPI payexAPI = retrofit.create(PayexAPI.class);
 
     public HashMap<String, Merchant> merchants = new HashMap<String, Merchant>();
 
