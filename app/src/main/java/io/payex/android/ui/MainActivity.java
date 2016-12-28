@@ -32,7 +32,9 @@ import io.payex.android.ui.sale.history.SaleHistoryItem;
 import io.payex.android.ui.sale.history.SaleSlipActivity;
 import io.payex.android.ui.sale.voided.VoidFragment;
 import io.payex.android.ui.sale.voided.VoidItem;
+import io.payex.android.ui.sale.voided.VoidObject;
 import io.payex.android.ui.sale.voided.VoidSlipActivity;
+import io.payex.android.ui.sale.voided.VoidSlipFragment;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 
 public class MainActivity extends BaseActivity
@@ -178,7 +180,11 @@ public class MainActivity extends BaseActivity
         if (item instanceof VoidItem) {
             VoidItem voidItem = (VoidItem) item;
             Log.i(getLocalClassName(), voidItem.getPrimaryText());
-            startActivity(VoidSlipActivity.class, false);
+
+            Intent intent = new Intent(getBaseContext(), VoidSlipActivity.class);
+            intent.putExtra("VoidItem", voidItem.getTxn());
+
+            startActivity(intent);
         }
     }
 }

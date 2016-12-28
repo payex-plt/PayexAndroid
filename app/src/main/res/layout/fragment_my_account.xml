@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="24dp"
-            app:srcCompat="@drawable/ic_mood_black_72dp" />
+            app:srcCompat="@drawable/ic_ambank_75dp" />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv_acquirer"

@@ -178,7 +178,8 @@ public class VoidFragment extends Fragment
                     "RM 30.00",
                     c.getTimeInMillis(),
                     header,
-                    getString(R.string.sale_history_card_ending)
+                    getString(R.string.sale_history_card_ending),
+                    null
             ));
         }
         return list;
@@ -216,7 +217,7 @@ public class VoidFragment extends Fragment
         Date cd;
         String currentHeader, lastHeader = "";
 
-        DecimalFormat df = new DecimalFormat("#.00");
+        DecimalFormat df = new DecimalFormat("###,###.00");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
 //        int lastHeaderId = 0;
@@ -229,7 +230,7 @@ public class VoidFragment extends Fragment
             Log.d(TAG, "card brand -> " + txn.CardBrand);
 
             d = VectorDrawableCompat.create(getResources(),
-                    txn.CardBrand.toLowerCase().equals("visa") ? R.drawable.ic_mastercard_40dp : R.drawable.ic_mastercard_40dp,
+                    txn.CardBrand.toLowerCase().equals("visa") ? R.drawable.ic_visa_40dp : R.drawable.ic_mastercard_40dp,
                     null);
             d = DrawableCompat.wrap(d);
 
@@ -250,12 +251,15 @@ public class VoidFragment extends Fragment
                 list.add(new VoidItem(
                         Long.toString(txn.TransactionId),
                         d,
+                        //txn.CreateDate,
                         txn.CreateDate.substring(txn.CreateDate.length()-8),
                         //Long.toString(cd.getTime()),
                         (txn.Currency == null ? "rm" : txn.Currency) + df.format(txn.Amount/100.0),
                         cd.getTime(),
                         header,
-                        "Ending <br/><b>" + txn.CardNumber.substring(txn.CardNumber.length()-4) + "</b>"
+                        //txn.CardNumber,
+                        "Ending <br/><b>" + txn.CardNumber.substring(txn.CardNumber.length()-4) + "</b>",
+                        txn
                 ));
             } catch (ParseException pe) {};
         }

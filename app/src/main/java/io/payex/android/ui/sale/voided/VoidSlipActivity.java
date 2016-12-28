@@ -30,7 +30,13 @@ public class VoidSlipActivity extends BaseActivity
         setBackButton();
 
         if (savedInstanceState == null) {
-            addFragment(R.id.fragment_container, VoidSlipFragment.newInstance());
+            VoidSlipFragment fragment = VoidSlipFragment.newInstance();
+
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("VoidItem", getIntent().getExtras().getSerializable("VoidItem"));
+
+            fragment.setArguments(bundle);
+            addFragment(R.id.fragment_container, fragment);
         }
     }
 

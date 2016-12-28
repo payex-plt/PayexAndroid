@@ -1,12 +1,13 @@
 package io.payex.android;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
  * Created by vince on 12/27/2016.
  */
 
-public class TransactionJSON {
+public class TransactionJSON implements Serializable {
     public long TransactionId;
     public String CreateDate;
     public String Currency;
