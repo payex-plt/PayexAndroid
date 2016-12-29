@@ -1,13 +1,21 @@
 package io.payex.android.ui.sale;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.IsoDep;
 import android.os.Bundle;
+import android.support.graphics.drawable.VectorDrawableCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -24,10 +32,15 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import eu.davidea.flexibleadapter.FlexibleAdapter;
+import eu.davidea.flexibleadapter.items.IFlexible;
 import fr.devnied.bitlib.BytesUtils;
 import io.payex.android.R;
 import io.payex.android.Transaction;
@@ -58,6 +71,11 @@ public class CardReaderActivity extends BaseActivity
      */
     private GoogleApiClient client;
 
+    @BindView(R.id.tv_primary)
+    AppCompatTextView mPrimaryText;
+    @BindView(R.id.rv_logo)
+    RecyclerView mLogo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +84,19 @@ public class CardReaderActivity extends BaseActivity
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
         setBackButton();
+
+        // get amount from previous page
+        String amount = "RM0.00";
+        if (getIntent() != null) {
+            String temp = getIntent().getStringExtra("AMOUNT");
+            if (!TextUtils.isEmpty(temp)) {
+                amount = temp;
+            }
+        }
+        mPrimaryText.setText(amount);
+
+        setupLogo(this);
+
 
         // init NfcUtils
         mNfcUtils = new NFCUtils(this);
@@ -76,6 +107,31 @@ public class CardReaderActivity extends BaseActivity
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
+
+    private void setupLogo(Context context) {
+        // todo size of columns need more research. max now is 4 on my tiny phone
+        List<IFlexible> logos = getLogos();
+        mLogo.setLayoutManager(new GridLayoutManager(context, logos.size()));
+        mLogo.setHasFixedSize(true);
+        mLogo.setAdapter(new FlexibleAdapter<>(logos));
+    }
+
+    private List<IFlexible> getLogos() {
+        List<IFlexible> list = new ArrayList<>();
+
+        int[] logos = { R.drawable.ic_ambank_40dp, R.drawable.ic_visa_40dp, R.drawable.ic_mastercard_40dp };
+
+        int max = logos.length;    //3;
+        for (int i = 0 ; i < max ; i++) {
+
+            Drawable d = VectorDrawableCompat.create(getResources(), logos[i], null);
+            d = DrawableCompat.wrap(d);
+
+            list.add(new SaleLogoItem(i + 1 + "", d));
+        }
+
+        return list;
     }
 
     @Override

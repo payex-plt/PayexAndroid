@@ -161,7 +161,10 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onEnterPressed(String text) {
-        startActivity(CardReaderActivity.class, false);
+        Intent intent = new Intent(this, CardReaderActivity.class);
+//        Bundle bundle = new Bundle();
+//        bundle.put
+        startActivity(intent);
     }
 
     @Override

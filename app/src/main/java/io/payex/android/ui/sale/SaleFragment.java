@@ -125,7 +125,7 @@ public class SaleFragment extends Fragment {
 
 
     private void invalidateDisplayedAmount() {
-        DecimalFormat f = new DecimalFormat("###,###,##0.00");
+        DecimalFormat f = new DecimalFormat("#,###,##0.00");
         double d =  (double) mCurrentCents / (double) 100; // not work in cents - so convert to dollar
         String displayText = CURRENCY_SYMBOL + f.format(d);
         mPrimaryText.setText(displayText);
@@ -143,14 +143,17 @@ public class SaleFragment extends Fragment {
     private List<IFlexible> getLogos() {
         List<IFlexible> list = new ArrayList<>();
 
-        int max = 3;
+        int[] logos = { R.drawable.ic_ambank_40dp, R.drawable.ic_visa_40dp, R.drawable.ic_mastercard_40dp };
+
+        int max = logos.length;    //3;
         for (int i = 0 ; i < max ; i++) {
 
-            Drawable d = VectorDrawableCompat.create(getResources(), R.drawable.ic_mastercard_40dp, null);
+            Drawable d = VectorDrawableCompat.create(getResources(), logos[i], null);
             d = DrawableCompat.wrap(d);
 
             list.add(new SaleLogoItem(i + 1 + "", d));
         }
+
         return list;
     }
 

@@ -19,3 +19,12 @@
 -keep class com.daimajia.easing.** { *; }
 -keep interface com.daimajia.easing.** { *; }
 -keepattributes EnclosingMethod
+
+#icepick
+-dontwarn icepick.**
+-keep class icepick.** { *; }
+-keep class **$$Icepick { *; }
+-keepclasseswithmembernames class * {
+    @icepick.* <fields>;
+}
+-keepnames class * { @icepick.State *;}
