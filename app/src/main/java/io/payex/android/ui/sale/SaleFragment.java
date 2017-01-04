@@ -24,7 +24,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.items.IFlexible;
+import io.payex.android.MyApp;
 import io.payex.android.R;
+import io.payex.android.ui.MainActivity;
 import io.payex.android.util.HapticFeedbackUtil;
 
 public class SaleFragment extends Fragment {
@@ -56,7 +58,8 @@ public class SaleFragment extends Fragment {
 //        String display = String.format(pattern, "RM", "0", "00");
 //        String display = "<sup><small>RM</small></sup>0.00";
 //        HtmlCompat.setSpannedText(mPrimaryText, display);
-        mPrimaryText.setText("RM0.00");
+
+        mPrimaryText.setText(MainActivity.buildAmountText(MyApp.getCurrency(), mCurrentCents));
 
         return view;
     }
@@ -87,6 +90,7 @@ public class SaleFragment extends Fragment {
                 int max = numpadItems.size();
 
                 if (position == max - 1) { // entered
+                    MainActivity.setAmount(mCurrentCents);
                     mListener.onEnterPressed(item.getPrimaryText());
                 } else if (position == max - 3) { // backspace
                     // backspace - not intended as per Kevin's request
@@ -118,7 +122,7 @@ public class SaleFragment extends Fragment {
         mNumpad.setAdapter(adapter);
     }
 
-    private static final String CURRENCY_SYMBOL = "RM";
+    private static final String CURRENCY_SYMBOL = MyApp.getCurrency();   // "RM";
     private static final long MAX_CENTS = 9999999;
     private static final long MIN_CENTS = 0;
     private long mCurrentCents = 0;

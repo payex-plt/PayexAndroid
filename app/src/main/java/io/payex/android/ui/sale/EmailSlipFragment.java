@@ -6,8 +6,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.payex.android.R;
@@ -18,9 +20,19 @@ public class EmailSlipFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
+    @BindView(R.id.et_email) EditText mEmailEditText;
+
+
     @OnClick(R.id.btn_send)
     public void sendEmail() {
-        mListener.onSendEmailButtonPressed();
+        // check non-empty email address
+        if (mEmailEditText.getText().length() > 0) {
+            ((EmailSlipActivity) getActivity()).setEmail(mEmailEditText.getText().toString());
+            mListener.onSendEmailButtonPressed();
+        }
+        else {
+            Toast.makeText(getActivity(), "Email address cannot be empty!", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

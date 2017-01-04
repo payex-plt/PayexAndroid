@@ -8,6 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         android:text="This is NFC scanner" />
     <TextView
         android:text="Now tap your card at the back of the phone..."

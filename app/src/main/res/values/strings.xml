@@ -55,10 +55,13 @@
     <string name="sale_slip_amount">AMOUNT</string>
     <string name="sale_slip_approval_code">APPROVAL CODE</string>
     <string name="sale_slip_transaction_number">TRAN NUM</string>
-    <string name="sale_slip_title">Confirm Void?</string>
+    <string name="sale_slip_title">Resend Sales Slip?</string>
+    <string name="void_slip_title">Confirm Void?</string>
 
     <string name="sale_slip_btn_email">Email</string>
     <string name="sale_slip_btn_void">Void</string>
+    <string name="sale_slip_btn_resend">Resend Sales Slip</string>
+    <string name="void_slip_btn_resend">Resend Void Slip</string>
 
     <string name="drawer_menu_sales">Sales</string>
     <string name="drawer_menu_void">Void</string>
@@ -80,6 +83,7 @@
     <string name="sale_void_title">Confirm void?</string>
     <string name="sale_void_btn_yes">Yes</string>
     <string name="sale_void_btn_no">No</string>
+    <string name="sale_resend_title">Confirm resend?</string>
 
     <string name="sale_history_menu_calendar">Calendar</string>
     <string name="sale_history_menu_search">Search</string>

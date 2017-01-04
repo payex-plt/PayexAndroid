@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.payex.android.R;
 import io.payex.android.TransactionJSON;
+import io.payex.android.ui.sale.history.SaleSlipActivity;
 
 public class VoidSlipFragment extends Fragment {
 
@@ -30,10 +32,19 @@ public class VoidSlipFragment extends Fragment {
     @BindView(R.id.tv_txn_num_value) AppCompatTextView mTxnNum;
     @BindView(R.id.tv_approval_code_value) AppCompatTextView mApprovalCode;
     @BindView(R.id.tv_payment_voided) AppCompatTextView mPaymentVoided;
+    @BindView(R.id.btn_void) AppCompatButton mButtonVoid;
+    @BindView(R.id.btn_resend) AppCompatButton mButtonResend;
+    @BindView(R.id.tv_void_slip_title) AppCompatTextView mVoidSlipTitle;
 
     @OnClick(R.id.btn_void)
     public void voidSale() {
         mListener.onVoidButtonPressed();
+    }
+
+    @OnClick(R.id.btn_resend)
+    public void resendSale() {
+        ((VoidSlipActivity) getActivity()).setTransactionId(txn.TransactionId);
+        mListener.onResendButtonPressed();
     }
 
 
@@ -77,9 +88,22 @@ public class VoidSlipFragment extends Fragment {
         mCardPAN.setText("Ending " + txn.CardNumber.substring(txn.CardNumber.length()-4));
         mPaymentMade.setText(txn.CreateDate.replace("T", "  "));
         mAmount.setText((txn.Currency == null ? "rm" : txn.Currency) + df.format(txn.Amount/100.0));
-        mTxnNum.setText(txn.MerchantTxnNumber);
-        mApprovalCode.setText(txn.MerchantTxnNumber);
-        mPaymentVoided.setText(txn.MerchantTxnNumber);
+        if (txn.VoidStatus) {
+            mVoidSlipTitle.setText("Resend Void Slip?");
+            mTxnNum.setText(txn.VoidTxnNumber);
+            mApprovalCode.setText(txn.VoidApprovalCode);
+            mPaymentVoided.setText("Yes");
+            mButtonVoid.setVisibility(View.GONE);
+            mButtonResend.setVisibility(View.VISIBLE);
+        } else {
+            mVoidSlipTitle.setText("Confirm Void?");
+            mTxnNum.setText(String.valueOf(txn.TxnNumber));
+            mApprovalCode.setText(txn.ApprovalCode);
+            mPaymentVoided.setText("No");
+            mButtonVoid.setVisibility(View.VISIBLE);
+            mButtonResend.setVisibility(View.GONE);
+
+        }
 
         return view;
     }
@@ -103,5 +127,6 @@ public class VoidSlipFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void onVoidButtonPressed();
+        void onResendButtonPressed();
     }
 }

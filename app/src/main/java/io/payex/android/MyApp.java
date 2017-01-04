@@ -22,6 +22,12 @@ public class MyApp extends Application {
     static Bank[] banks;
     static Bank bank;
 
+    private static String currency = "RM";
+
+    public static String getCurrency() {
+        return currency;
+    }
+
     static Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("http://payexterminals.payex.io")
             .addConverterFactory(GsonConverterFactory.create())

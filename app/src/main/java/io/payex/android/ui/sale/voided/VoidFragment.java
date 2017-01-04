@@ -31,7 +31,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
 import java.security.SecureRandom;
-import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -39,7 +38,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.ListIterator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,10 +45,10 @@ import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.items.IFlexible;
 import io.payex.android.MyApp;
 import io.payex.android.R;
-import io.payex.android.Transaction;
 import io.payex.android.TransactionJSON;
 import io.payex.android.ui.common.CalendarFragment;
 import io.payex.android.ui.common.ProgressItem;
+import io.payex.android.ui.sale.HeaderItem;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -179,6 +177,7 @@ public class VoidFragment extends Fragment
                     c.getTimeInMillis(),
                     header,
                     getString(R.string.sale_history_card_ending),
+                    false,
                     null
             ));
         }
@@ -259,6 +258,7 @@ public class VoidFragment extends Fragment
                         header,
                         //txn.CardNumber,
                         "Ending <br/><b>" + txn.CardNumber.substring(txn.CardNumber.length()-4) + "</b>",
+                        txn.VoidStatus,
                         txn
                 ));
             } catch (ParseException pe) {};

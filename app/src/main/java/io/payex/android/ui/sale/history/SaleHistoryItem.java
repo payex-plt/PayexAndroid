@@ -1,5 +1,6 @@
 package io.payex.android.ui.sale.history;
 
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
@@ -13,11 +14,16 @@ import java.util.List;
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem;
 import eu.davidea.flexibleadapter.items.IFilterable;
+import eu.davidea.flexibleadapter.items.ISectionable;
 import eu.davidea.viewholders.FlexibleViewHolder;
 import io.payex.android.R;
+import io.payex.android.TransactionJSON;
+import io.payex.android.ui.sale.HeaderItem;
+import io.payex.android.ui.sale.voided.VoidItem;
+import io.payex.android.util.HtmlCompat;
 
 public class SaleHistoryItem extends AbstractFlexibleItem<SaleHistoryItem.SaleHistoryItemHolder>
-implements IFilterable
+implements IFilterable, ISectionable<SaleHistoryItem.SaleHistoryItemHolder, HeaderItem>
 {
 
     private String mId;
@@ -25,6 +31,10 @@ implements IFilterable
     private String mPrimaryText;
     private String mSecondaryText;
     private long mTimestampMs;
+    HeaderItem header;
+    private String card;   // ending pan
+    private boolean voidStatus;
+    private TransactionJSON txn;
 
     public String getPrimaryText() {
         return mPrimaryText;
@@ -38,12 +48,18 @@ implements IFilterable
         return mTimestampMs;
     }
 
-    SaleHistoryItem(String id, Drawable icon, String primary, String secondary, long timestamp) {
+    SaleHistoryItem(String id, Drawable icon, String primary, String secondary, long timestamp, HeaderItem header, String card, boolean voidStatus, TransactionJSON txn) {
         this.mId = id;
         this.mIcon = icon;
         this.mPrimaryText = primary;
         this.mSecondaryText = secondary;
         this.mTimestampMs = timestamp;
+        this.header = header;
+        setHidden(false);
+        setSelectable(false);
+        this.card = card;
+        this.voidStatus = voidStatus;
+        this.txn = txn;
     }
 
     /**
@@ -98,16 +114,39 @@ implements IFilterable
         holder.mIconView.setImageDrawable(mIcon);
         holder.mPrimaryView.setText(mPrimaryText);
         holder.mSecondaryView.setText(mSecondaryText);
-        holder.mTimestampView.setText(
-                DateUtils.getRelativeTimeSpanString(
-                        mTimestampMs,
-                        System.currentTimeMillis(),
-                        DateUtils.DAY_IN_MILLIS).toString());
+
+        HtmlCompat.setSpannedText(holder.mTimestampView, card);
+
+//        holder.mTimestampView.setText(
+//                DateUtils.getRelativeTimeSpanString(
+//                        mTimestampMs,
+//                        System.currentTimeMillis(),
+//                        DateUtils.DAY_IN_MILLIS).toString());
+
+
+//        if (mTimestampMs / 1000 % 5 == 4) {
+//            holder.mView.setBackgroundColor(Color.LTGRAY);
+//        }
+        if (voidStatus) {
+            holder.mView.setBackgroundColor(Color.LTGRAY);
+        }
     }
+
+    public TransactionJSON getTxn() { return txn; }
 
     @Override
     public boolean filter(String constraint) {
         return mSecondaryText.contains(constraint);
+    }
+
+    @Override
+    public HeaderItem getHeader() {
+        return header;
+    }
+
+    @Override
+    public void setHeader(HeaderItem header) {
+        this.header = header;
     }
 
     class SaleHistoryItemHolder extends FlexibleViewHolder {
@@ -116,9 +155,11 @@ implements IFilterable
         AppCompatTextView mPrimaryView;
         AppCompatTextView mSecondaryView;
         AppCompatTextView mTimestampView;
+        View mView;
 
         SaleHistoryItemHolder(View view, FlexibleAdapter adapter) {
             super(view, adapter);
+            mView = view;
             mIconView = (AppCompatImageView) view.findViewById(R.id.iv_icon);
             mPrimaryView = (AppCompatTextView) view.findViewById(R.id.tv_primary);
             mSecondaryView = (AppCompatTextView) view.findViewById(R.id.tv_secondary);

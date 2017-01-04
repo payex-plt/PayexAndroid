@@ -24,12 +24,12 @@ import io.payex.android.R;
  */
 public class CardReaderNfcFragment extends AbstractCardReaderFragment {
 
-    @OnClick(R.id.btn_scan)
-    public void scanCard() {
-        if (mListener != null) {
-            mListener.onSuccess();
-        }
-    }
+//    @OnClick(R.id.btn_scan)
+//    public void scanCard() {
+//        if (mListener != null) {
+//            mListener.onSuccess();
+//        }
+//    }
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.

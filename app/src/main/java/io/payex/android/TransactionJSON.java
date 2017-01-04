@@ -17,6 +17,12 @@ public class TransactionJSON implements Serializable {
     public String MerchantTxnNumber;
     public int MerchantId;
     public int TransactionTypeId;
+    public boolean VoidStatus;
+    public String TxnNumber;
+    public String ApprovalCode;
+    public String VoidTxnNumber;
+    public String VoidApprovalCode;
+    public String VoidMerchantTxnNumber;
 
     @Override
     public String toString() {

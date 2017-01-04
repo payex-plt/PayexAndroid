@@ -42,9 +42,11 @@ import butterknife.ButterKnife;
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.items.IFlexible;
 import fr.devnied.bitlib.BytesUtils;
+import io.payex.android.MyApp;
 import io.payex.android.R;
 import io.payex.android.Transaction;
 import io.payex.android.ui.BaseActivity;
+import io.payex.android.ui.MainActivity;
 import io.payex.android.ui.common.StateFragment;
 import io.payex.android.util.NFCUtils;
 import io.payex.android.util.PayexAPI;
@@ -65,6 +67,8 @@ public class CardReaderActivity extends BaseActivity
     private PayexProvider mProvider = new PayexProvider();
     private EmvCard mReadCard;
     private byte[] lastAts;
+
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -86,7 +90,7 @@ public class CardReaderActivity extends BaseActivity
         setBackButton();
 
         // get amount from previous page
-        String amount = "RM0.00";
+        String amount = MainActivity.buildAmountText(MyApp.getCurrency(), MainActivity.getAmount());
         if (getIntent() != null) {
             String temp = getIntent().getStringExtra("AMOUNT");
             if (!TextUtils.isEmpty(temp)) {
@@ -217,10 +221,13 @@ public class CardReaderActivity extends BaseActivity
 
                                 Transaction txn = new Transaction();
                                 txn.setCreateDate(new Timestamp(new Date().getTime()));
-                                txn.setCurrency("RM");
-                                txn.setAmount(100);
+                                txn.setCurrency(MyApp.getCurrency());
+                                txn.setAmount(MainActivity.getAmount());
                                 txn.setCardNumber(mReadCard.getCardNumber());
                                 txn.setCardBrand(mReadCard.getType().getName());
+                                txn.setMerchantTxnNumber(getNextNumber());
+                                txn.setTxnNumber(getNextNumber());
+                                txn.setApprovalCode(getNextNumber());
                                 txn.setMerchantId(1);
                                 txn.setTransactionTypeId(1);
 
@@ -326,5 +333,9 @@ public class CardReaderActivity extends BaseActivity
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
+    }
+
+    private String getNextNumber() {
+        return String.valueOf(10000 + (int) (Math.random() * ((99999 - 10000)+ 1)));
     }
 }

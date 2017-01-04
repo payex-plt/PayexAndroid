@@ -12,16 +12,18 @@ public class Transaction {
     private long transactionId;
     private Timestamp createDate;
     private String currency;
-    private int amount;
+    private long amount;
     private String cardNumber;
     private String cardBrand;
     private String merchantTxnNumber;
     private int merchantId;
     private int transactionTypeId;
+    private String approvalCode;
+    private  String txnNumber;
 
     public Transaction() {}
 
-    public Transaction(int amount, String cardBrand, String cardNumber, Timestamp createDate, String currency, int merchantId, String merchantTxnNumber, long transactionId, int transactionTypeId) {
+    public Transaction(int amount, String cardBrand, String cardNumber, Timestamp createDate, String currency, int merchantId, String merchantTxnNumber, long transactionId, int transactionTypeId, String approvalCode, String txnNumber) {
         this.amount = amount;
         this.cardBrand = cardBrand;
         this.cardNumber = cardNumber;
@@ -31,13 +33,31 @@ public class Transaction {
         this.merchantTxnNumber = merchantTxnNumber;
         this.transactionId = transactionId;
         this.transactionTypeId = transactionTypeId;
+        this.approvalCode = approvalCode;
+        this.txnNumber = txnNumber;
     }
 
-    public int getAmount() {
+    public String getApprovalCode() {
+        return approvalCode;
+    }
+
+    public void setApprovalCode(String approvalCode) {
+        this.approvalCode = approvalCode;
+    }
+
+    public String getTxnNumber() {
+        return txnNumber;
+    }
+
+    public void setTxnNumber(String txnNumber) {
+        this.txnNumber = txnNumber;
+    }
+
+    public long getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(long amount) {
         this.amount = amount;
     }
 

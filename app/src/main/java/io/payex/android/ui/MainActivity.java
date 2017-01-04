@@ -15,12 +15,17 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.crashlytics.android.Crashlytics;
+
 import org.chromium.customtabsclient.CustomTabsActivityHelper;
+
+import java.text.DecimalFormat;
 
 import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.davidea.flexibleadapter.items.IFlexible;
+import io.fabric.sdk.android.Fabric;
 import io.payex.android.R;
 import io.payex.android.ui.about.AboutFragment;
 import io.payex.android.ui.account.MyAccountFragment;
@@ -32,9 +37,7 @@ import io.payex.android.ui.sale.history.SaleHistoryItem;
 import io.payex.android.ui.sale.history.SaleSlipActivity;
 import io.payex.android.ui.sale.voided.VoidFragment;
 import io.payex.android.ui.sale.voided.VoidItem;
-import io.payex.android.ui.sale.voided.VoidObject;
 import io.payex.android.ui.sale.voided.VoidSlipActivity;
-import io.payex.android.ui.sale.voided.VoidSlipFragment;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 
 public class MainActivity extends BaseActivity
@@ -44,6 +47,22 @@ public class MainActivity extends BaseActivity
         VoidFragment.OnListFragmentInteractionListener,
         AboutFragment.OnFragmentInteractionListener
 {
+    private static DecimalFormat df = new DecimalFormat("#,###,##0.00");
+
+    // shared across pages
+    private static long amount;
+
+    public static long getAmount() {
+        return amount;
+    }
+
+    public static void setAmount(long value) {
+        amount = value;
+    }
+
+    public static String buildAmountText(String currency, long amount) {
+        return currency + df.format(amount / (double)100);
+    }
 
     private final CustomTabsActivityHelper.CustomTabsFallback mCustomTabsFallback =
             new CustomTabsActivityHelper.CustomTabsFallback() {
@@ -71,6 +90,8 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Fabric.with(this, new Crashlytics());
+
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(mToolbar);
@@ -125,15 +146,6 @@ public class MainActivity extends BaseActivity
         return true;
     }
 
-    @Override
-    public void onListFragmentInteraction(IFlexible item) {
-        if (item instanceof SaleHistoryItem) {
-            SaleHistoryItem saleHistoryItem = (SaleHistoryItem) item;
-            Log.i(getLocalClassName(), saleHistoryItem.getPrimaryText());
-            startActivity(SaleSlipActivity.class, false);
-        }
-    }
-
     private void openWithCustomTabs(final Uri uri) {
         // fixme may not be needed
         mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
@@ -186,6 +198,19 @@ public class MainActivity extends BaseActivity
 
             Intent intent = new Intent(getBaseContext(), VoidSlipActivity.class);
             intent.putExtra("VoidItem", voidItem.getTxn());
+
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    public void onSaleItemClicked(IFlexible item) {
+        if (item instanceof SaleHistoryItem) {
+            SaleHistoryItem saleItem = (SaleHistoryItem) item;
+            Log.i(getLocalClassName(), saleItem.getPrimaryText());
+
+            Intent intent = new Intent(getBaseContext(), SaleSlipActivity.class);
+            intent.putExtra("SalesItem", saleItem.getTxn());
 
             startActivity(intent);
         }

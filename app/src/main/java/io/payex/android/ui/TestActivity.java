@@ -21,7 +21,8 @@ implements
     }
 
     @Override
-    public void onListFragmentInteraction(IFlexible item) {
+    public void onSaleItemClicked(IFlexible item) {
 
     }
+
 }

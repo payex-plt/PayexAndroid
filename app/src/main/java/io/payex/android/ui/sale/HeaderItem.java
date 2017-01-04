@@ -1,4 +1,4 @@
-package io.payex.android.ui.sale.voided;
+package io.payex.android.ui.sale;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.io.Serializable;
 import java.util.List;
 
 import eu.davidea.flexibleadapter.FlexibleAdapter;

@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.io.Serializable;
 import java.util.List;
 
 import eu.davidea.flexibleadapter.FlexibleAdapter;
@@ -17,8 +16,8 @@ import eu.davidea.flexibleadapter.items.IFilterable;
 import eu.davidea.flexibleadapter.items.ISectionable;
 import eu.davidea.viewholders.FlexibleViewHolder;
 import io.payex.android.R;
-import io.payex.android.Transaction;
 import io.payex.android.TransactionJSON;
+import io.payex.android.ui.sale.HeaderItem;
 import io.payex.android.util.HtmlCompat;
 
 public class VoidItem extends AbstractFlexibleItem<VoidItem.VoidItemHolder>
@@ -32,6 +31,7 @@ public class VoidItem extends AbstractFlexibleItem<VoidItem.VoidItemHolder>
     private long mTimestampMs;
     HeaderItem header;
     private String card;   // ending pan
+    private boolean voidStatus;
     private TransactionJSON txn;
 
     public TransactionJSON getTxn() { return txn; }
@@ -52,7 +52,7 @@ public class VoidItem extends AbstractFlexibleItem<VoidItem.VoidItemHolder>
         return mTimestampMs;
     }
 
-    VoidItem(String id, Drawable icon, String primary, String secondary, long timestamp, HeaderItem header, String card, TransactionJSON txn) {
+    VoidItem(String id, Drawable icon, String primary, String secondary, long timestamp, HeaderItem header, String card, boolean voidStatus, TransactionJSON txn) {
         this.mId = id;
         this.mIcon = icon;
         this.mPrimaryText = primary;
@@ -62,6 +62,7 @@ public class VoidItem extends AbstractFlexibleItem<VoidItem.VoidItemHolder>
         setHidden(false);
         setSelectable(false);
         this.card = card;
+        this.voidStatus = voidStatus;
         this.txn = txn;
     }
 
@@ -129,7 +130,7 @@ public class VoidItem extends AbstractFlexibleItem<VoidItem.VoidItemHolder>
 //            holder.mView.setBackgroundColor(Color.LTGRAY);
 //        }
 
-        if (mTimestampMs / 1000 % 5 == 4) {
+        if (voidStatus) {
             holder.mView.setBackgroundColor(Color.LTGRAY);
         }
 

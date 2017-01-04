@@ -20,6 +20,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.text.InputType;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -30,6 +31,9 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -40,9 +44,16 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.items.IFlexible;
+import io.payex.android.MyApp;
 import io.payex.android.R;
+import io.payex.android.TransactionJSON;
 import io.payex.android.ui.common.CalendarFragment;
 import io.payex.android.ui.common.ProgressItem;
+import io.payex.android.ui.sale.HeaderItem;
+import io.payex.android.ui.sale.voided.VoidItem;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.content.ContentValues.TAG;
 
@@ -50,8 +61,121 @@ public class SaleHistoryFragment extends Fragment
 //        implements CalendarFragment.OnCalendarInteractionListener
     implements SearchView.OnQueryTextListener,
         FlexibleAdapter.OnUpdateListener,
-        FlexibleAdapter.EndlessScrollListener
+        FlexibleAdapter.EndlessScrollListener,
+        Callback<List<TransactionJSON>>
 {
+    @Override
+    public void onFailure(Call<List<TransactionJSON>> call, Throwable t) {
+        Log.d(TAG, "on failure -> " + t.getMessage());
+        Toast.makeText(getActivity(), "Failed to retrieve transactions!", Toast.LENGTH_LONG).show();
+
+    }
+
+    @Override
+    public void onResponse(Call<List<TransactionJSON>> call, Response<List<TransactionJSON>> response) {
+        final List<IFlexible> list = new ArrayList<>();
+
+        ArrayList<TransactionJSON> transactions = new ArrayList<TransactionJSON>();
+        transactions.addAll(response.body());
+
+        Log.d(TAG, "size -> " + transactions.size());
+
+        HeaderItem header = null;
+        Calendar c = Calendar.getInstance();
+        Drawable d;
+        Date cd;
+        String currentHeader, lastHeader = "";
+
+        DecimalFormat df = new DecimalFormat("###,###.00");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+
+//        int lastHeaderId = 0;
+//        int size = 25;
+//        int headerGroupOf = 5;
+//        int i = 0;
+
+        for (TransactionJSON txn : transactions) {
+            Log.d(TAG, "txn -> " + txn.toString());
+            Log.d(TAG, "card brand -> " + txn.CardBrand);
+
+            d = VectorDrawableCompat.create(getResources(),
+                    txn.CardBrand.toLowerCase().equals("visa") ? R.drawable.ic_visa_40dp : R.drawable.ic_mastercard_40dp,
+                    null);
+            d = DrawableCompat.wrap(d);
+
+            try {
+                cd = sdf.parse(txn.CreateDate);
+
+//            header = i++ % Math.round(size / headerGroupOf) == 0 ? newHeader(Integer.toString(++lastHeaderId)) : header;
+                currentHeader = DateUtils.getRelativeTimeSpanString(
+                        cd.getTime(),
+                        System.currentTimeMillis(),
+                        DateUtils.DAY_IN_MILLIS).toString();
+
+                if (!currentHeader.equals(lastHeader)) {
+                    header = newHeader(currentHeader);
+                    lastHeader = currentHeader;
+                }
+
+                list.add(new SaleHistoryItem(
+                        Long.toString(txn.TransactionId),
+                        d,
+                        //txn.CreateDate,
+                        txn.CreateDate.substring(txn.CreateDate.length()-8),
+                        //Long.toString(cd.getTime()),
+                        (txn.Currency == null ? "rm" : txn.Currency) + df.format(txn.Amount/100.0),
+                        cd.getTime(),
+                        header,
+                        //txn.CardNumber,
+                        "Ending <br/><b>" + txn.CardNumber.substring(txn.CardNumber.length()-4) + "</b>",
+                        txn.VoidStatus,
+                        txn
+                ));
+            } catch (ParseException pe) {};
+        }
+
+        mSaleHistoryClone = list;
+
+        //Initialize the Adapter
+        mAdapter = new FlexibleAdapter<>(list);
+        mAdapter.initializeListeners(new FlexibleAdapter.OnItemClickListener() {
+            @Override
+            public boolean onItemClick(int position) {
+                mListener.onSaleItemClicked(list.get(position));
+                return false;
+            }
+        });
+
+        //Initialize the RecyclerView and attach the Adapter to it as usual
+        mRecyclerView.setAdapter(mAdapter);
+//        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerView.setHasFixedSize(true);
+
+        //EndlessScrollListener - OnLoadMore (v5.0.0)
+//        mAdapter.setEndlessScrollListener(this, new ProgressItem());
+//        mAdapter.setEndlessScrollThreshold(1);//Default=1
+
+        mAdapter
+//                .setLongPressDragEnabled(true)
+//                .setHandleDragEnabled(true)
+//                .setSwipeEnabled(true)
+                .setUnlinkAllItemsOnRemoveHeaders(true)
+                //Show Headers at startUp, 1st call, correctly executed, no warning log message!
+                .setDisplayHeadersAtStartUp(true)
+                .enableStickyHeaders()
+//                //Simulate developer 2nd call mistake, now it's safe, not executed, no warning log message!
+//                .setDisplayHeadersAtStartUp(true)
+//                //Simulate developer 3rd call mistake, still safe, not executed, warning log message displayed!
+//                .showAllHeaders()
+        ;
+
+
+        // init swipe
+        mSwipeRefreshLayout.setEnabled(true);
+        initializeSwipeToRefresh();
+
+
+    }
 
     @BindView(R.id.rv_sale_history)
     RecyclerView mRecyclerView;
@@ -109,34 +233,24 @@ public class SaleHistoryFragment extends Fragment
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.setHasFixedSize(true);
 
-        final List<IFlexible> saleHistory = getSaleHistory();
-        mSaleHistoryClone = saleHistory;
-
-        //Initialize the Adapter
-        mAdapter = new FlexibleAdapter<>(saleHistory);
-        mAdapter.initializeListeners(new FlexibleAdapter.OnItemClickListener() {
-            @Override
-            public boolean onItemClick(int position) {
-                mListener.onListFragmentInteraction(saleHistory.get(position));
-                return false;
-            }
-        });
-
-        //Initialize the RecyclerView and attach the Adapter to it as usual
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        //EndlessScrollListener - OnLoadMore (v5.0.0)
-        mAdapter.setEndlessScrollListener(this, new ProgressItem());
-        mAdapter.setEndlessScrollThreshold(1);//Default=1
-
-
-        // init swipe
-        mSwipeRefreshLayout.setEnabled(true);
-        initializeSwipeToRefresh();
+        getSaleHistory(0);
 
         return view;
     }
+
+    public HeaderItem newHeader(String i) {
+        HeaderItem header = new HeaderItem(i);
+        header.setTitle(i);
+        //header is hidden and un-selectable by default!
+        return header;
+    }
+
+
+    public void getSaleHistory(int size) {
+        Call<List<TransactionJSON>> call = MyApp.payexAPI.getTransactions();
+        call.enqueue(this);
+    }
+
 
     public List<IFlexible> getSaleHistory() {
         List<IFlexible> list = new ArrayList<>();
@@ -146,15 +260,31 @@ public class SaleHistoryFragment extends Fragment
 
         Calendar c = Calendar.getInstance();
 
+        HeaderItem header = null;
+        int lastHeaderId = 0;
+
+        int size = 25;
+        int headerGroupOf = 5;
+
         for (int i = 0; i < 25; i++) {
             c.add(Calendar.DATE, -i);
+
+//            header = i % Math.round(size / headerGroupOf) == 0 ? newHeader(++lastHeaderId) : header;
+            header = newHeader(DateUtils.getRelativeTimeSpanString(
+                    c.getTimeInMillis(),
+                    System.currentTimeMillis(),
+                    DateUtils.DAY_IN_MILLIS).toString());
 
             list.add(new SaleHistoryItem(
                     i + 1 + "",
                     d,
                     "Paid RM80.99",
                     "Ending with " + (1234 + i),
-                    c.getTimeInMillis()
+                    c.getTimeInMillis(),
+                    header,
+                    getString(R.string.sale_history_card_ending),
+                    false,
+                    null
             ));
         }
         return list;
@@ -178,7 +308,8 @@ public class SaleHistoryFragment extends Fragment
     }
 
     public interface OnListFragmentInteractionListener {
-        void onListFragmentInteraction(IFlexible item);
+        //void onListFragmentInteraction(IFlexible item);
+        void onSaleItemClicked(IFlexible item);
     }
 
 
