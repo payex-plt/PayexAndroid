@@ -20,7 +20,7 @@ public interface PayexAPI {
     Call<Integer> authenticate(@Path("BIN") String BIN, @Path("MID2P") String MID2P, @Path("password") String password);
 
     @POST("/api/transactionsapi")
-    Call<Transaction> newTransaction(@Body Transaction txn);
+    Call<TransactionJSON> newTransaction(@Body Transaction txn);
 
     @GET("/api/transactionsapi")
     Call<List<TransactionJSON>> getTransactions();

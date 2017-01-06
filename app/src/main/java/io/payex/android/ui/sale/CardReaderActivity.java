@@ -10,6 +10,7 @@ import android.nfc.Tag;
 import android.nfc.tech.IsoDep;
 import android.os.Bundle;
 import android.support.graphics.drawable.VectorDrawableCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.GridLayoutManager;
@@ -19,6 +20,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.dgreenhalgh.android.simpleitemdecoration.grid.GridDividerItemDecoration;
 import com.github.devnied.emvnfccard.model.EmvCard;
 import com.github.devnied.emvnfccard.parser.EmvParser;
 import com.github.devnied.emvnfccard.utils.AtrUtils;
@@ -32,6 +34,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -45,21 +48,20 @@ import fr.devnied.bitlib.BytesUtils;
 import io.payex.android.MyApp;
 import io.payex.android.R;
 import io.payex.android.Transaction;
+import io.payex.android.TransactionJSON;
 import io.payex.android.ui.BaseActivity;
 import io.payex.android.ui.MainActivity;
 import io.payex.android.ui.common.StateFragment;
 import io.payex.android.util.NFCUtils;
-import io.payex.android.util.PayexAPI;
 import io.payex.android.util.PayexProvider;
 import io.payex.android.util.SimpleAsyncTask;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CardReaderActivity extends BaseActivity
         implements AbstractCardReaderFragment.OnScanListener,
+        CardReaderFragment.OnFragmentInteractionListener,
         StateFragment.OnFragmentInteractionListener {
     private static final String TAG = CardReaderActivity.class.getSimpleName();
 
@@ -68,6 +70,7 @@ public class CardReaderActivity extends BaseActivity
     private EmvCard mReadCard;
     private byte[] lastAts;
 
+    private long transactionId;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -79,6 +82,16 @@ public class CardReaderActivity extends BaseActivity
     AppCompatTextView mPrimaryText;
     @BindView(R.id.rv_logo)
     RecyclerView mLogo;
+    @BindView(R.id.rv_numpad)
+    RecyclerView mNumpad;
+
+    public RecyclerView getmNumpad() {
+        return mNumpad;
+    }
+
+    public AppCompatTextView getmPrimaryText() {
+        return mPrimaryText;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,7 +166,13 @@ public class CardReaderActivity extends BaseActivity
 
     @Override
     public void onDoneLoading() {
-        startActivity(EmailSlipActivity.class, true);
+        Intent intent = new Intent(this, EmailSlipActivity.class);
+        intent.putExtra("emailtype", "salesslip");
+        intent.putExtra("transactionid", transactionId);
+
+        startActivity(intent);  finish();
+
+        //startActivity(EmailSlipActivity.class, true);
     }
 
 
@@ -216,40 +235,10 @@ public class CardReaderActivity extends BaseActivity
                             if (StringUtils.isNotBlank(mCard.getCardNumber())) {
                                 mReadCard = mCard;
 
-                                Log.i(TAG, "card num -> " + mReadCard.getCardNumber());
-                                Log.i(TAG, "expiry date -> " + mReadCard.getExpireDate());
+                                Log.i(TAG, ">>> card num <<< " + mReadCard.getCardNumber());
+                                Log.i(TAG, ">>> expiry date <<< " + mReadCard.getExpireDate());
 
-                                Transaction txn = new Transaction();
-                                txn.setCreateDate(new Timestamp(new Date().getTime()));
-                                txn.setCurrency(MyApp.getCurrency());
-                                txn.setAmount(MainActivity.getAmount());
-                                txn.setCardNumber(mReadCard.getCardNumber());
-                                txn.setCardBrand(mReadCard.getType().getName());
-                                txn.setMerchantTxnNumber(getNextNumber());
-                                txn.setTxnNumber(getNextNumber());
-                                txn.setApprovalCode(getNextNumber());
-                                txn.setMerchantId(1);
-                                txn.setTransactionTypeId(1);
-
-                                Retrofit retrofit = new Retrofit.Builder()
-                                        .baseUrl("http://payexterminals.payex.io")
-                                        .addConverterFactory(GsonConverterFactory.create())
-                                        .build();
-
-                                PayexAPI payexAPI = retrofit.create(PayexAPI.class);
-
-                                Call<Transaction> call = payexAPI.newTransaction(txn);
-                                call.enqueue(new Callback<Transaction>() {
-                                    @Override
-                                    public void onResponse(Call<Transaction> call, Response<Transaction> response) {
-
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<Transaction> call, Throwable t) {
-
-                                    }
-                                });
+                                saveTransaction();
 
                             } else if (mCard.isNfcLocked()) {
                             }
@@ -258,7 +247,7 @@ public class CardReaderActivity extends BaseActivity
                     } else {
                     }
 
-                    onDoneLoading();
+                    //onDoneLoading();
                     mNfcUtils.disableDispatch();
                 }
 
@@ -337,5 +326,47 @@ public class CardReaderActivity extends BaseActivity
 
     private String getNextNumber() {
         return String.valueOf(10000 + (int) (Math.random() * ((99999 - 10000)+ 1)));
+    }
+
+    private void saveTransaction() {
+        Transaction txn = new Transaction();
+        txn.setCreateDate(new Timestamp(new Date().getTime()));
+        txn.setCurrency(MyApp.getCurrency());
+        txn.setAmount(MainActivity.getAmount());
+        txn.setCardNumber(mReadCard.getCardNumber());
+        txn.setCardBrand(mReadCard.getType().getName());
+        txn.setMerchantTxnNumber(getNextNumber());
+        txn.setTxnNumber(getNextNumber());
+        txn.setApprovalCode(getNextNumber());
+        txn.setMerchantId(1);
+        txn.setTransactionTypeId(1);
+
+//                                Retrofit retrofit = new Retrofit.Builder()
+//                                        .baseUrl("http://payexterminals.payex.io")
+//                                        .addConverterFactory(GsonConverterFactory.create())
+//                                        .build();
+//
+//                                PayexAPI payexAPI = retrofit.create(PayexAPI.class);
+
+        Call<TransactionJSON> call = MyApp.payexAPI.newTransaction(txn);
+        call.enqueue(new Callback<TransactionJSON>() {
+            @Override
+            public void onResponse(Call<TransactionJSON> call, Response<TransactionJSON> response) {
+                Log.d(TAG, ">>> new txn id <<< " + response.body().TransactionId);
+                transactionId = response.body().TransactionId;
+                onDoneLoading();
+            }
+
+            @Override
+            public void onFailure(Call<TransactionJSON> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    @Override
+    public void onEnterPressed(String text) {
+        // what to do after enter cvv
     }
 }
