@@ -84,6 +84,9 @@ public class MainActivity extends BaseActivity
     @BindColor(R.color.colorPrimary)
     int mColorPrimary;
 
+    @BindColor(R.color.colorToolbar)
+    int mColorToolbar;
+
     private CustomTabsHelperFragment mCustomTabsHelperFragment;
     private CustomTabsIntent mCustomTabsIntent;
 
@@ -164,7 +167,7 @@ public class MainActivity extends BaseActivity
 
         mCustomTabsIntent = new CustomTabsIntent.Builder()
                 .enableUrlBarHiding()
-                .setToolbarColor(mColorPrimary)
+                .setToolbarColor(mColorToolbar)  //mColorPrimary
                 .setShowTitle(true)
                 .build();
 

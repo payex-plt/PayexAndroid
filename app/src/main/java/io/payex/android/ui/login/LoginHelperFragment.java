@@ -36,6 +36,13 @@ public class LoginHelperFragment extends Fragment {
     @OnClick(R.id.btn_submit)
     public void resetPassword() {
         // todo reset password
+        mListener.onPasswordReset();
+    }
+
+    @OnClick(R.id.btn_cancel)
+    public void cancel() {
+        // todo cancel action
+        mListener.onCancelPressed();
     }
 
     @Override
@@ -57,6 +64,7 @@ public class LoginHelperFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void onPasswordReset();
+        void onCancelPressed();
     }
 
 }

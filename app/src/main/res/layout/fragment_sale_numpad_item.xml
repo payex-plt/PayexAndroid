@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
     android:gravity="center"
-    android:padding="@dimen/spacing_md"
     android:textAppearance="@style/Base.TextAppearance.AppCompat.Display4"
-    android:textSize="28sp"
+    android:textSize="35sp"
+    android:textColor="@android:color/black"
     tools:text="OK" />

@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="24dp"
-                app:srcCompat="@drawable/ic_mood_black_72dp" />
+                app:srcCompat="@drawable/ic_logo" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -34,7 +34,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/login_hint_bin"
-                    android:inputType="text"
+                    android:inputType="number"
+                    android:textSize="@dimen/text_md"
+                    android:gravity="center_horizontal"
                     android:maxLines="1" />
 
             </android.support.design.widget.TextInputLayout>
@@ -48,7 +50,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/login_hint_mid"
-                    android:inputType="text"
+                    android:inputType="number"
+                    android:textSize="@dimen/text_md"
+                    android:gravity="center_horizontal"
                     android:maxLines="1" />
 
             </android.support.design.widget.TextInputLayout>
@@ -56,10 +60,24 @@
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btn_submit"
                 style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="match_parent"
+                android:textColor="@android:color/white"
+                android:background="@color/colorButton"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="60dp"
                 android:text="@string/login_helper_btn_reset" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_cancel"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:textColor="@android:color/white"
+                android:background="@color/colorButton"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
+                android:text="@string/login_helper_btn_cancel" />
 
         </LinearLayout>
 

@@ -9,11 +9,12 @@
     <string name="login_hint_mid">Merchant ID</string>
     <string name="login_hint_password">Password</string>
     <string name="login_ime_login">Sign in</string>
-    <string name="login_btn_login">Login</string>
+    <string name="login_btn_login">Log In</string>
     <string name="login_btn_login_help">Forgot password?</string>
-    <string name="login_btn_register">Don\'t have an account?</string>
+    <string name="login_btn_register">Or don\'t have an account?</string>
 
     <string name="login_helper_btn_reset">Reset</string>
+    <string name="login_helper_btn_cancel">Cancel</string>
 
     <string name="about_btn_faq">F.A.Q.</string>
     <string name="about_btn_libs">Third-party libraries</string>
@@ -68,7 +69,7 @@
     <string name="drawer_menu_history">History</string>
     <string name="drawer_menu_account">My Account</string>
     <string name="drawer_menu_about">About Payex</string>
-    <string name="drawer_menu_logout">Terminal Logout</string>
+    <string name="drawer_menu_logout">Logout</string>
     <string name="drawer_menu_help">Need help?</string>
 
     <string name="state_title_loading">Please wait..</string>

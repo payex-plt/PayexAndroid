@@ -3,6 +3,7 @@ package io.payex.android.ui.sale.voided;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,6 +29,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.security.SecureRandom;
@@ -67,6 +69,8 @@ public class VoidFragment extends Fragment
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout mSwipeRefreshLayout;
     @BindView(R.id.empty_view) View mEmptyView;
+//    @BindView(R.id.rl_void_item)
+//    RelativeLayout relativeLayout;
 
     private OnListFragmentInteractionListener mListener;
     private FlexibleAdapter<IFlexible> mAdapter;
@@ -114,6 +118,15 @@ public class VoidFragment extends Fragment
         Context context = view.getContext();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.setHasFixedSize(true);
+
+
+        // add bottom border
+//        View bottomBorder = new View(context);
+//        bottomBorder.setBackgroundColor(Color.GRAY);
+//        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 1);
+//        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+//
+//        relativeLayout.addView(bottomBorder, params);
 
         //final List<IFlexible> saleHistory = getSaleHistory();
         //mSaleHistoryClone = saleHistory;
@@ -257,7 +270,7 @@ public class VoidFragment extends Fragment
                         cd.getTime(),
                         header,
                         //txn.CardNumber,
-                        "Ending <br/><b>" + txn.CardNumber.substring(txn.CardNumber.length()-4) + "</b>",
+                        txn.CardNumber.substring(txn.CardNumber.length()-4),
                         txn.VoidStatus,
                         txn
                 ));

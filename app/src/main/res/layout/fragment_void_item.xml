@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_void_item"
     android:layout_width="wrap_content"
     android:layout_height="72dp"
+    android:layout_gravity="center"
+    android:background="@drawable/bottom_border"
     android:paddingLeft="@dimen/spacing_lg"
     android:paddingRight="@dimen/spacing_lg">
 
@@ -19,8 +22,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/spacing_lg"
+        android:text="Ending"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_ending"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/tv_timestamp"
+        android:layout_below="@id/tv_timestamp"
         android:layout_centerVertical="true"
-        android:text="@string/sale_history_card_ending"
+        android:layout_marginTop="@dimen/spacing_md"
+        android:text="1234"
+        android:textStyle="bold"
+        android:textSize="15dp"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
 
     <LinearLayout

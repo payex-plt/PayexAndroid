@@ -92,6 +92,12 @@ public class LoginActivity extends BaseActivity
     }
 
     @Override
+    public void onCancelPressed() {
+        changeFragment(R.id.fragment_container, LoginFragment.newInstance());
+        Snackbar.make(mRootView, "Cancel button pressed", Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
     public void onSetupCompleted() {
         startActivity(MainActivity.class, true);
     }

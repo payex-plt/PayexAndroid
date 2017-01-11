@@ -19,7 +19,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="24dp"
-            android:layout_marginTop="@dimen/spacing_xl"
             app:srcCompat="@drawable/ic_shopicon_myaccount" />
 
         <android.support.v7.widget.AppCompatTextView

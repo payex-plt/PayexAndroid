@@ -52,10 +52,16 @@ public class EmailSlipActivity extends BaseActivity implements EmailSlipFragment
                 Log.d(TAG, ">>> email sales slip " + transactionId + " to " + email + " <<<");
                 Call<Boolean> call = MyApp.payexAPI.emailSalesSlip(email, transactionId);
                 call.enqueue(this);
+
+                Toast.makeText(this, "Sending email...", Toast.LENGTH_LONG).show();
+
             } else if (emailType.equals("voidslip")) {
                 Log.d(TAG, ">>> email void slip " + transactionId + " to " + email + " <<<");
                 Call<Boolean> call = MyApp.payexAPI.emailVoidSlip(email, transactionId);
                 call.enqueue(this);
+
+                Toast.makeText(this, "Sending email...", Toast.LENGTH_LONG).show();
+
             } else {
                 Toast.makeText(this, "No email sent!", Toast.LENGTH_LONG).show();
             }
@@ -66,7 +72,7 @@ public class EmailSlipActivity extends BaseActivity implements EmailSlipFragment
 
     @Override
     public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-        Toast.makeText(this, "Email sent!", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "Sending email...", Toast.LENGTH_LONG).show();
         //finish();
     }
 

@@ -42,7 +42,10 @@
                 android:gravity="center"
                 android:maxLines="1"
                 android:text="RM0.00"
-                android:textSize="38sp" />
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:textSize="50sp" />
 
         </LinearLayout>
 
@@ -56,6 +59,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:overScrollMode="never"
+            android:background="#eeeeee"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
             app:layoutManager="GridLayoutManager" />
 
         <FrameLayout

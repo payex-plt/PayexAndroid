@@ -76,10 +76,10 @@ public class SetupFragment extends Fragment {
 
         @Override
         protected String doInBackground(Void... params) {
-            while (count < 5) {
-                SystemClock.sleep(1500);
+            while (count < 10) {
+                SystemClock.sleep(250);
                 count++;
-                publishProgress(count * 20);
+                publishProgress(count * 10);
             }
             return "Complete";
         }

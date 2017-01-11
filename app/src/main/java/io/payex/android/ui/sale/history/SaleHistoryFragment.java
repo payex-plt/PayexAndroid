@@ -127,7 +127,7 @@ public class SaleHistoryFragment extends Fragment
                         cd.getTime(),
                         header,
                         //txn.CardNumber,
-                        "Ending <br/><b>" + txn.CardNumber.substring(txn.CardNumber.length()-4) + "</b>",
+                        txn.CardNumber.substring(txn.CardNumber.length()-4),
                         txn.VoidStatus,
                         txn
                 ));

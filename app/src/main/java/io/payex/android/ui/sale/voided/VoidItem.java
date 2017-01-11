@@ -118,8 +118,9 @@ public class VoidItem extends AbstractFlexibleItem<VoidItem.VoidItemHolder>
         holder.mIconView.setImageDrawable(mIcon);
         holder.mPrimaryView.setText(mPrimaryText);
         holder.mSecondaryView.setText(mSecondaryText);
+        holder.mEndingView.setText(card);
 
-        HtmlCompat.setSpannedText(holder.mTimestampView, card);
+        //HtmlCompat.setSpannedText(holder.mTimestampView, card);
 //        holder.mTimestampView.setText(
 //                DateUtils.getRelativeTimeSpanString(
 //                        mTimestampMs,
@@ -157,6 +158,7 @@ public class VoidItem extends AbstractFlexibleItem<VoidItem.VoidItemHolder>
         AppCompatTextView mPrimaryView;
         AppCompatTextView mSecondaryView;
         AppCompatTextView mTimestampView;
+        AppCompatTextView mEndingView;
         View mView;
 
         VoidItemHolder(View view, FlexibleAdapter adapter) {
@@ -166,6 +168,7 @@ public class VoidItem extends AbstractFlexibleItem<VoidItem.VoidItemHolder>
             mPrimaryView = (AppCompatTextView) view.findViewById(R.id.tv_primary);
             mSecondaryView = (AppCompatTextView) view.findViewById(R.id.tv_secondary);
             mTimestampView = (AppCompatTextView) view.findViewById(R.id.tv_timestamp);
+            mEndingView = (AppCompatTextView) view.findViewById(R.id.tv_ending);
         }
     }
 

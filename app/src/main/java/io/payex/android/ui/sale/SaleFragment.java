@@ -76,8 +76,9 @@ public class SaleFragment extends Fragment {
         mNumpad.setLayoutManager(new SpanningGridLayoutManager(context, NUMPAD_COL));
         mNumpad.setHasFixedSize(true);
 
-        Drawable divider = ContextCompat.getDrawable(context, R.drawable.divider);
-        mNumpad.addItemDecoration(new GridDividerItemDecoration(divider, divider, NUMPAD_COL));
+        Drawable dividerHorizontal = ContextCompat.getDrawable(context, R.drawable.bottom_divider);
+        Drawable dividerVerticle = ContextCompat.getDrawable(context, R.drawable.divider);
+        mNumpad.addItemDecoration(new GridDividerItemDecoration(dividerVerticle, dividerHorizontal, NUMPAD_COL));
 
         final List<IFlexible> numpadItems = getNumPadItems();
 

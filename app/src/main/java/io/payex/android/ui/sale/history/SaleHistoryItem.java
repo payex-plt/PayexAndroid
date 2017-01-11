@@ -114,8 +114,9 @@ implements IFilterable, ISectionable<SaleHistoryItem.SaleHistoryItemHolder, Head
         holder.mIconView.setImageDrawable(mIcon);
         holder.mPrimaryView.setText(mPrimaryText);
         holder.mSecondaryView.setText(mSecondaryText);
+        holder.mEndingView.setText(card);
 
-        HtmlCompat.setSpannedText(holder.mTimestampView, card);
+        //HtmlCompat.setSpannedText(holder.mTimestampView, card);
 
 //        holder.mTimestampView.setText(
 //                DateUtils.getRelativeTimeSpanString(
@@ -155,6 +156,7 @@ implements IFilterable, ISectionable<SaleHistoryItem.SaleHistoryItemHolder, Head
         AppCompatTextView mPrimaryView;
         AppCompatTextView mSecondaryView;
         AppCompatTextView mTimestampView;
+        AppCompatTextView mEndingView;
         View mView;
 
         SaleHistoryItemHolder(View view, FlexibleAdapter adapter) {
@@ -164,6 +166,7 @@ implements IFilterable, ISectionable<SaleHistoryItem.SaleHistoryItemHolder, Head
             mPrimaryView = (AppCompatTextView) view.findViewById(R.id.tv_primary);
             mSecondaryView = (AppCompatTextView) view.findViewById(R.id.tv_secondary);
             mTimestampView = (AppCompatTextView) view.findViewById(R.id.tv_timestamp);
+            mEndingView = (AppCompatTextView) view.findViewById(R.id.tv_ending);
         }
     }
 

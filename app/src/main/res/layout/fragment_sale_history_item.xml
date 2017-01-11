@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_sales_history_item"
     android:layout_width="wrap_content"
     android:layout_height="72dp"
     android:layout_gravity="center"
+    android:background="@drawable/bottom_border"
     android:paddingLeft="@dimen/spacing_lg"
     android:paddingRight="@dimen/spacing_lg">
 
@@ -24,8 +26,8 @@
         android:layout_marginTop="@dimen/spacing_lg"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="Paid RM 81.99"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
+        android:text="11:22:33"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
         android:textSize="16sp" />
 
     <android.support.v7.widget.AppCompatTextView
@@ -37,7 +39,7 @@
         android:layout_marginTop="@dimen/spacing_md"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="Ending with 1234"
+        android:text="RM1.00"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
     <android.support.v7.widget.AppCompatTextView
@@ -46,7 +48,19 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginTop="@dimen/spacing_lg"
-        android:text="3 hours ago"
+        android:text="Ending"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_ending"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/tv_timestamp"
+        android:layout_below="@id/tv_primary"
+        android:layout_marginTop="@dimen/spacing_md"
+        android:text="1234"
+        android:textStyle="bold"
+        android:textSize="15dp"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
 
 </RelativeLayout>

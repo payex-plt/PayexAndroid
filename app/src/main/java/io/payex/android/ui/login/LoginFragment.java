@@ -35,6 +35,7 @@ public class LoginFragment extends Fragment {
 
         mBinEditText.setText("429313");
         mMidEditText.setText("10000052");
+        mPasswordEditText.requestFocus();
 
         return view;
     }
