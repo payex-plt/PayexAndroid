@@ -64,7 +64,7 @@
                         android:gravity="right"
                         android:maxLines="1"
                         android:text="Ending 0001"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+                        android:textAppearance="@style/AppTheme.Body2Bold" />
 
                 </LinearLayout>
 
@@ -85,7 +85,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/spacing_md"
                         android:text="@string/sale_slip_payment_made"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+                        android:textAppearance="@style/AppTheme.Body2" />
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tv_payment_made_value"
@@ -95,7 +95,7 @@
                         android:gravity="right"
                         android:maxLines="1"
                         android:text="2016/10/20 15:00"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+                        android:textAppearance="@style/AppTheme.Body2Bold" />
 
                 </LinearLayout>
 
@@ -112,7 +112,7 @@
                         android:layout_marginRight="@dimen/spacing_md"
                         android:text="@string/sale_slip_amount"
                         android:textColor="@android:color/black"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+                        android:textAppearance="@style/AppTheme.Body2" />
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tv_amount_value"
@@ -122,7 +122,7 @@
                         android:gravity="right"
                         android:maxLines="1"
                         android:text="RM 99,999.00"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+                        android:textAppearance="@style/AppTheme.Body2Bold" />
 
                 </LinearLayout>
 
@@ -139,7 +139,7 @@
                         android:layout_marginRight="@dimen/spacing_md"
                         android:text="@string/sale_slip_transaction_number"
                         android:textColor="@android:color/black"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+                        android:textAppearance="@style/AppTheme.Body2" />
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tv_txn_num_value"
@@ -149,7 +149,7 @@
                         android:gravity="right"
                         android:maxLines="1"
                         android:text="00001234567"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+                        android:textAppearance="@style/AppTheme.Body2Bold" />
 
                 </LinearLayout>
 
@@ -165,7 +165,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/spacing_md"
                         android:text="@string/sale_slip_approval_code"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+                        android:textAppearance="@style/AppTheme.Body2" />
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tv_approval_code_value"
@@ -175,7 +175,7 @@
                         android:gravity="right"
                         android:maxLines="1"
                         android:text="000126"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+                        android:textAppearance="@style/AppTheme.Body2Bold" />
 
                 </LinearLayout>
 
@@ -190,7 +190,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/spacing_md"
                         android:text="@string/sale_slip_payment_voided"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+                        android:textAppearance="@style/AppTheme.Body2" />
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tv_payment_voided"
@@ -199,8 +199,8 @@
                         android:ellipsize="end"
                         android:gravity="right"
                         android:maxLines="1"
-                        android:text="n/a"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+                        android:text="N/A"
+                        android:textAppearance="@style/AppTheme.Body2Bold" />
 
                 </LinearLayout>
 

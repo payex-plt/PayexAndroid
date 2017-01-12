@@ -23,12 +23,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="72dp"
-        android:layout_marginTop="@dimen/spacing_lg"
+        android:layout_marginTop="@dimen/spacing_md"
         android:ellipsize="end"
         android:maxLines="1"
         android:text="11:22:33"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-        android:textSize="16sp" />
+        android:textAppearance="@style/AppTheme.Body1" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/tv_secondary"
@@ -36,20 +35,20 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/tv_primary"
         android:layout_below="@id/tv_primary"
-        android:layout_marginTop="@dimen/spacing_md"
+        android:layout_marginTop="@dimen/spacing_sm"
         android:ellipsize="end"
         android:maxLines="1"
         android:text="RM1.00"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+        android:textAppearance="@style/AppTheme.Body1" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/tv_timestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="@dimen/spacing_lg"
+        android:layout_marginTop="@dimen/spacing_md"
         android:text="Ending"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+        android:textAppearance="@style/AppTheme.Body1" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/tv_ending"
@@ -57,10 +56,9 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/tv_timestamp"
         android:layout_below="@id/tv_primary"
-        android:layout_marginTop="@dimen/spacing_md"
+        android:layout_marginTop="@dimen/spacing_sm"
         android:text="1234"
         android:textStyle="bold"
-        android:textSize="15dp"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+        android:textAppearance="@style/AppTheme.Body1" />
 
 </RelativeLayout>

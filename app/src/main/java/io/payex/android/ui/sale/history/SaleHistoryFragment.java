@@ -86,7 +86,7 @@ public class SaleHistoryFragment extends Fragment
         Date cd;
         String currentHeader, lastHeader = "";
 
-        DecimalFormat df = new DecimalFormat("###,###.00");
+        DecimalFormat df = new DecimalFormat("###,##0.00");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
 //        int lastHeaderId = 0;
@@ -123,7 +123,7 @@ public class SaleHistoryFragment extends Fragment
                         //txn.CreateDate,
                         txn.CreateDate.substring(txn.CreateDate.length()-8),
                         //Long.toString(cd.getTime()),
-                        (txn.Currency == null ? "rm" : txn.Currency) + df.format(txn.Amount/100.0),
+                        (txn.Currency == null ? "rm" : txn.Currency) + (" " + df.format(txn.Amount/100.0)),
                         cd.getTime(),
                         header,
                         //txn.CardNumber,

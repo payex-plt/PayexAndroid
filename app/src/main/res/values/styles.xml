@@ -20,6 +20,24 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.Body1" parent="Base.TextAppearance.AppCompat.Body1">
+        <!-- Customize your theme here. -->
+        <item name="android:textSize">@dimen/text_md</item>
+        <item name="android:textColor">?android:textColorPrimary</item>
+    </style>
+
+    <style name="AppTheme.Body2" parent="Base.TextAppearance.AppCompat.Body1">
+        <!-- Customize your theme here. -->
+        <item name="android:textSize">@dimen/text_sm</item>
+        <item name="android:textColor">?android:textColorPrimary</item>
+    </style>
+
+    <style name="AppTheme.Body2Bold" parent="Base.TextAppearance.AppCompat.Body1">
+        <!-- Customize your theme here. -->
+        <item name="android:textSize">@dimen/text_sm</item>
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
     <style name="AppTheme.Dark.NoActionBar">
         <item name="windowActionBar">false</item>

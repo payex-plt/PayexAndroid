@@ -11,7 +11,7 @@
         android:visibility="gone"
         android:text="This is NFC scanner" />
     <TextView
-        android:text="Now tap your card at the back of the phone..."
+        android:text="Please tap your card at the back of the phone..."
         android:textStyle="bold"
         android:textSize="20dp"
         android:gravity="center_horizontal"

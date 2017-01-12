@@ -61,7 +61,7 @@ public class MainActivity extends BaseActivity
     }
 
     public static String buildAmountText(String currency, long amount) {
-        return currency + df.format(amount / (double)100);
+        return currency + " " + df.format(amount / (double)100);
     }
 
     private final CustomTabsActivityHelper.CustomTabsFallback mCustomTabsFallback =
@@ -138,7 +138,7 @@ public class MainActivity extends BaseActivity
             changeFragment(R.id.fragment_container, MyAccountFragment.newInstance(), null);
             setTitle(R.string.title_activity_my_account);
         } else if (id == R.id.nav_about) {
-            changeFragment(R.id.fragment_container, AboutFragment.newInstance(), AboutFragment.TAG);
+            changeFragment(R.id.fragment_container, AboutFragment.newInstance(), null);   //AboutFragment.TAG);
             setTitle(R.string.title_activity_about);
         } else if (id == R.id.nav_logout) {
             // todo clear all the cache before logout

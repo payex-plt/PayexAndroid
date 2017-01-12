@@ -76,7 +76,7 @@ public class VoidSlipFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_void_slip, container, false);
         ButterKnife.bind(this, view);
 
-        DecimalFormat df = new DecimalFormat("###,###.00");
+        DecimalFormat df = new DecimalFormat("###,##0.00");
 
         Drawable d = VectorDrawableCompat.create(getResources(),
                 txn.CardBrand.toLowerCase().equals("visa") ? R.drawable.ic_visa_40dp : R.drawable.ic_mastercard_40dp,
@@ -87,7 +87,7 @@ public class VoidSlipFragment extends Fragment {
         mCardType.setImageDrawable(d);
         mCardPAN.setText("Ending " + txn.CardNumber.substring(txn.CardNumber.length()-4));
         mPaymentMade.setText(txn.CreateDate.replace("T", "  "));
-        mAmount.setText((txn.Currency == null ? "rm" : txn.Currency) + df.format(txn.Amount/100.0));
+        mAmount.setText((txn.Currency == null ? "rm" : txn.Currency) + (" " + df.format(txn.Amount/100.0)));
         if (txn.VoidStatus) {
             mVoidSlipTitle.setText("Resend Void Slip?");
             mTxnNum.setText(txn.VoidTxnNumber);

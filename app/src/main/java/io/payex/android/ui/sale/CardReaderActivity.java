@@ -106,7 +106,7 @@ public class CardReaderActivity extends BaseActivity
         String amount = MainActivity.buildAmountText(MyApp.getCurrency(), MainActivity.getAmount());
         if (getIntent() != null) {
             String temp = getIntent().getStringExtra("AMOUNT");
-            if (!TextUtils.isEmpty(temp)) {
+            if (!(temp == null || TextUtils.isEmpty(temp))) {
                 amount = temp;
             }
         }

@@ -130,9 +130,10 @@ public class SaleFragment extends Fragment {
 
 
     private void invalidateDisplayedAmount() {
-        DecimalFormat f = new DecimalFormat("#,###,##0.00");
-        double d =  (double) mCurrentCents / (double) 100; // not work in cents - so convert to dollar
-        String displayText = CURRENCY_SYMBOL + f.format(d);
+        //DecimalFormat f = new DecimalFormat("#,###,##0.00");
+        //double d =  (double) mCurrentCents / (double) 100; // not work in cents - so convert to dollar
+        //String displayText = CURRENCY_SYMBOL + f.format(d);
+        String displayText = MainActivity.buildAmountText(MyApp.getCurrency(), mCurrentCents);
         mPrimaryText.setText(displayText);
     }
 

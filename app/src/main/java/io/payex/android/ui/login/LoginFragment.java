@@ -6,13 +6,17 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatEditText;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnEditorAction;
 import io.payex.android.R;
 import io.payex.android.ui.sale.SaleFragment;
 
@@ -36,6 +40,16 @@ public class LoginFragment extends Fragment {
         mBinEditText.setText("429313");
         mMidEditText.setText("10000052");
         mPasswordEditText.requestFocus();
+
+        mPasswordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if ((keyEvent != null && (keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (i == EditorInfo.IME_ACTION_DONE)) {
+                    attemptLogin();
+                }
+                return false;
+            }
+        });
 
         return view;
     }
