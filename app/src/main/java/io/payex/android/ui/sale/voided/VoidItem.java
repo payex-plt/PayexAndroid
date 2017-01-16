@@ -139,7 +139,7 @@ public class VoidItem extends AbstractFlexibleItem<VoidItem.VoidItemHolder>
 
     @Override
     public boolean filter(String constraint) {
-        return mSecondaryText.contains(constraint);
+        return card.contains(constraint);
     }
 
     @Override

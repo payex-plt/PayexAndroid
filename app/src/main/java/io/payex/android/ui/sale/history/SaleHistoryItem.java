@@ -137,7 +137,7 @@ implements IFilterable, ISectionable<SaleHistoryItem.SaleHistoryItemHolder, Head
 
     @Override
     public boolean filter(String constraint) {
-        return mSecondaryText.contains(constraint);
+        return card.contains(constraint);
     }
 
     @Override

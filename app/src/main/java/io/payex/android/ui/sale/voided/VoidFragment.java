@@ -1,6 +1,7 @@
 package io.payex.android.ui.sale.voided;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -51,6 +52,7 @@ import io.payex.android.TransactionJSON;
 import io.payex.android.ui.common.CalendarFragment;
 import io.payex.android.ui.common.ProgressItem;
 import io.payex.android.ui.sale.HeaderItem;
+import io.payex.android.util.ConnectivityReceiver;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -61,8 +63,10 @@ public class VoidFragment extends Fragment
         implements SearchView.OnQueryTextListener,
         FlexibleAdapter.OnUpdateListener,
         FlexibleAdapter.EndlessScrollListener,
+        ConnectivityReceiver.ConnectivityReceiverListener,
         Callback<List<TransactionJSON>>
 {
+    ProgressDialog progressDialog;
 
     @BindView(R.id.rv_sale_history)
     RecyclerView mRecyclerView;
@@ -155,8 +159,18 @@ public class VoidFragment extends Fragment
     }
 
     public void getSaleHistory(int size) {
-        Call<List<TransactionJSON>> call = MyApp.payexAPI.getTransactions();
-        call.enqueue(this);
+        if (ConnectivityReceiver.isConnected()) {
+            progressDialog = new ProgressDialog(getActivity());
+            progressDialog.setMessage("Please wait...");
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setIndeterminate(true);
+            progressDialog.show();
+
+            Call<List<TransactionJSON>> call = MyApp.payexAPI.getTransactions();
+            call.enqueue(this);
+        } else {
+            Toast.makeText(getActivity(), "No internet connection.", Toast.LENGTH_LONG).show();
+        }
     }
 
     public List<IFlexible> getSaleHistory() {
@@ -277,6 +291,10 @@ public class VoidFragment extends Fragment
             } catch (ParseException pe) {};
         }
 
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+
         mSaleHistoryClone = list;
 
         //Initialize the Adapter
@@ -322,7 +340,18 @@ public class VoidFragment extends Fragment
     @Override
     public void onFailure(Call<List<TransactionJSON>> call, Throwable t) {
         Log.d(TAG, "on failure -> " + t.getMessage());
+
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+
         Toast.makeText(getActivity(), "Failed to retrieve transactions!", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        String status = isConnected ? "Connectd to internet." : "No internet connection.";
+        Toast.makeText(getActivity(), status, Toast.LENGTH_LONG).show();
     }
 
     public interface OnListFragmentInteractionListener {

@@ -86,7 +86,7 @@
     <string name="sale_resend_title">Confirm resend?</string>
 
     <string name="sale_history_menu_calendar">Calendar</string>
-    <string name="sale_history_menu_search">Search</string>
+    <string name="sale_history_menu_search">Search by last 4 digits</string>
     <string name="sale_history_card_ending">
         <![CDATA[
             Ending<br/>

@@ -8,6 +8,7 @@ import android.util.Log;
 
 import java.util.HashMap;
 
+import io.payex.android.util.ConnectivityReceiver;
 import io.payex.android.util.PayexAPI;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -18,6 +19,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MyApp extends Application {
     private static final String TAG = MyApp.class.getSimpleName();
+
+    private static MyApp mInstance;
 
     static Bank[] banks;
     static Bank bank;
@@ -37,9 +40,19 @@ public class MyApp extends Application {
 
     public HashMap<String, Merchant> merchants = new HashMap<String, Merchant>();
 
+    public static synchronized MyApp getInstance() {
+        return mInstance;
+    }
+
+    public void setConnectivityListener(ConnectivityReceiver.ConnectivityReceiverListener listener) {
+        ConnectivityReceiver.connectivityReceiverListener = listener;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
+
+        mInstance = this;
 
         banks = new Bank[] {
                 new Bank("1111", "Chase Manhattan Bank", "enquiry@chase.com", "+1-800-555-7134", "+1-800-555-9876"),

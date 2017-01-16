@@ -1,11 +1,13 @@
 package io.payex.android.ui.login;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import butterknife.BindView;
@@ -15,6 +17,8 @@ import io.payex.android.MyApp;
 import io.payex.android.R;
 import io.payex.android.ui.BaseActivity;
 import io.payex.android.ui.MainActivity;
+import io.payex.android.ui.common.ProgressItem;
+import io.payex.android.util.ConnectivityReceiver;
 import io.payex.android.util.PayexAPI;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,9 +28,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends BaseActivity
         implements LoginFragment.OnFragmentInteractionListener, LoginHelperFragment.OnFragmentInteractionListener,
+        ConnectivityReceiver.ConnectivityReceiverListener,
         SetupFragment.OnFragmentInteractionListener, Callback<Integer>
 {
     private static final String TAG = LoginActivity.class.getSimpleName();
+
+    private ProgressDialog progressDialog;
 
     @BindView(R.id.root_container) View mRootView;
     LoginFragment loginFragment;
@@ -70,14 +77,25 @@ public class LoginActivity extends BaseActivity
 //
 //                PayexAPI payexAPI = retrofit.create(PayexAPI.class);
 
-                //Call<Boolean> call = payexAPI.authenticate("429313", "10000052", "123456");
-                Call<Integer> call = MyApp.payexAPI.authenticate(loginFragment.mBinEditText.getText().toString(),
-                        loginFragment.mMidEditText.getText().toString(), loginFragment.mPasswordEditText.getText().toString());
-                //asynchronous call
-                call.enqueue(this);
+                if (ConnectivityReceiver.isConnected()) {
 
-                //                        startActivity(new Intent(getActivity(), MainActivity.class));
-                //                        getActivity().finish();
+                    progressDialog = new ProgressDialog(this);
+                    progressDialog.setMessage("Please wait...");
+                    progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    progressDialog.setIndeterminate(true);
+                    progressDialog.show();
+
+                    //Call<Boolean> call = payexAPI.authenticate("429313", "10000052", "123456");
+                    Call<Integer> call = MyApp.payexAPI.authenticate(loginFragment.mBinEditText.getText().toString(),
+                            loginFragment.mMidEditText.getText().toString(), loginFragment.mPasswordEditText.getText().toString());
+                    //asynchronous call
+                    call.enqueue(this);
+
+                    //                        startActivity(new Intent(getActivity(), MainActivity.class));
+                    //                        getActivity().finish();
+                } else {
+                    Toast.makeText(this, "No internet connection.", Toast.LENGTH_LONG).show();
+                }
             }
 
         } else {
@@ -107,6 +125,10 @@ public class LoginActivity extends BaseActivity
         Log.d(TAG, "on response -> " + response.raw());
         Log.d(TAG, "on response -> " + response.body());
 
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+
         if (response.message().equals("OK")) {
             changeFragment(R.id.fragment_container, SetupFragment.newInstance());
         } else {
@@ -117,7 +139,25 @@ public class LoginActivity extends BaseActivity
     @Override
     public void onFailure(Call<Integer> call, Throwable t) {
         Log.d(TAG, "on failure -> " + t.getMessage());
+
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+
         Toast.makeText(this, "Login error!", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // register connection status listener
+        MyApp.getInstance().setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        String status = isConnected ? "Connectd to internet." : "No internet connection.";
+        Toast.makeText(this, status, Toast.LENGTH_LONG).show();
     }
 }
 
