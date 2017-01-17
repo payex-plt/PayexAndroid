@@ -34,6 +34,8 @@
                 android:inputType="textEmailAddress" />
         </android.support.design.widget.TextInputLayout>
 
+
+
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_send"
             style="@style/Widget.AppCompat.Button.Colored"
@@ -41,8 +43,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:textColor="@android:color/white"
-            android:background="@color/colorButton"
+            android:background="@color/colorPrimary"
             android:layout_marginTop="20dp"
+            android:textSize="20dp"
             android:text="@string/email_slip_btn_send" />
 
         <android.support.v7.widget.AppCompatTextView

@@ -29,6 +29,7 @@ public class SaleSlipFragment extends Fragment {
     @BindView(R.id.tv_card_pan)
     AppCompatTextView mCardPAN;
     @BindView(R.id.tv_payment_made_value) AppCompatTextView mPaymentMade;
+    @BindView(R.id.tv_time_payment_made_value) AppCompatTextView mTimePaymentMade;
     @BindView(R.id.tv_amount_value) AppCompatTextView mAmount;
     @BindView(R.id.tv_txn_num_value) AppCompatTextView mTxnNum;
     @BindView(R.id.tv_approval_code_value) AppCompatTextView mApprovalCode;
@@ -80,15 +81,20 @@ public class SaleSlipFragment extends Fragment {
 
         mCardType.setImageDrawable(d);
         mCardPAN.setText("Ending " + txn.CardNumber.substring(txn.CardNumber.length()-4));
-        mPaymentMade.setText(txn.CreateDate.replace("T", "  "));
+
+        String[] dates = txn.CreateDate.split("T");
+//        mPaymentMade.setText(txn.CreateDate.replace("T", "  "));
+        mPaymentMade.setText(dates[0]);
+        mTimePaymentMade.setText(dates[1]);
+
         mAmount.setText((txn.Currency == null ? "rm" : txn.Currency) + (" " + df.format(txn.Amount/100.0)));
         mTxnNum.setText(String.valueOf(txn.TxnNumber));
         mApprovalCode.setText(txn.ApprovalCode);
 
         if (txn.VoidStatus) {
-            mPaymentVoided.setText("Yes");
+            mPaymentVoided.setText("Void");
         } else {
-            mPaymentVoided.setText("No");
+            mPaymentVoided.setText("N/A");
         }
         //mButtonResend.setText("Resend Sales Slip");
 

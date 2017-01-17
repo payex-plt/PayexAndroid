@@ -132,7 +132,10 @@ public class VoidItem extends AbstractFlexibleItem<VoidItem.VoidItemHolder>
 //        }
 
         if (voidStatus) {
-            holder.mView.setBackgroundColor(Color.LTGRAY);
+            //holder.mView.setBackgroundColor(Color.LTGRAY);
+            holder.mPaymentVoidView.setVisibility(View.VISIBLE);
+        } else {
+            holder.mPaymentVoidView.setVisibility(View.GONE);
         }
 
     }
@@ -159,6 +162,7 @@ public class VoidItem extends AbstractFlexibleItem<VoidItem.VoidItemHolder>
         AppCompatTextView mSecondaryView;
         AppCompatTextView mTimestampView;
         AppCompatTextView mEndingView;
+        AppCompatTextView mPaymentVoidView;
         View mView;
 
         VoidItemHolder(View view, FlexibleAdapter adapter) {
@@ -169,6 +173,7 @@ public class VoidItem extends AbstractFlexibleItem<VoidItem.VoidItemHolder>
             mSecondaryView = (AppCompatTextView) view.findViewById(R.id.tv_secondary);
             mTimestampView = (AppCompatTextView) view.findViewById(R.id.tv_timestamp);
             mEndingView = (AppCompatTextView) view.findViewById(R.id.tv_ending);
+            mPaymentVoidView = (AppCompatTextView) view.findViewById(R.id.tv_payment_void);
         }
     }
 

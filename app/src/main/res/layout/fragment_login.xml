@@ -91,16 +91,17 @@
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btn_login_help"
-                style="@style/Widget.AppCompat.Button.Borderless"
+                style="@style/AppTheme.ThinButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/login_btn_login_help"
+                android:layout_marginTop="15sp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btn_register"
-                style="@style/Widget.AppCompat.Button.Borderless"
+                style="@style/AppTheme.ThinButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

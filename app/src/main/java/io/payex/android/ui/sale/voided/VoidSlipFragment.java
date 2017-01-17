@@ -28,13 +28,14 @@ public class VoidSlipFragment extends Fragment {
     @BindView(R.id.iv_card_type) AppCompatImageView mCardType;
     @BindView(R.id.tv_card_pan) AppCompatTextView mCardPAN;
     @BindView(R.id.tv_payment_made_value) AppCompatTextView mPaymentMade;
+    @BindView(R.id.tv_time_payment_made_value) AppCompatTextView mTimePaymentMade;
     @BindView(R.id.tv_amount_value) AppCompatTextView mAmount;
     @BindView(R.id.tv_txn_num_value) AppCompatTextView mTxnNum;
     @BindView(R.id.tv_approval_code_value) AppCompatTextView mApprovalCode;
     @BindView(R.id.tv_payment_voided) AppCompatTextView mPaymentVoided;
     @BindView(R.id.btn_void) AppCompatButton mButtonVoid;
     @BindView(R.id.btn_resend) AppCompatButton mButtonResend;
-    @BindView(R.id.tv_void_slip_title) AppCompatTextView mVoidSlipTitle;
+//    @BindView(R.id.tv_void_slip_title) AppCompatTextView mVoidSlipTitle;
 
     @OnClick(R.id.btn_void)
     public void voidSale() {
@@ -86,17 +87,22 @@ public class VoidSlipFragment extends Fragment {
 
         mCardType.setImageDrawable(d);
         mCardPAN.setText("Ending " + txn.CardNumber.substring(txn.CardNumber.length()-4));
-        mPaymentMade.setText(txn.CreateDate.replace("T", "  "));
+
+        String[] dates = txn.CreateDate.split("T");
+//        mPaymentMade.setText(txn.CreateDate.replace("T", "  "));
+        mPaymentMade.setText(dates[0]);
+        mTimePaymentMade.setText(dates[1]);
+
         mAmount.setText((txn.Currency == null ? "rm" : txn.Currency) + (" " + df.format(txn.Amount/100.0)));
         if (txn.VoidStatus) {
-            mVoidSlipTitle.setText("Resend Void Slip?");
+            //mVoidSlipTitle.setText("Resend Void Slip?");
             mTxnNum.setText(txn.VoidTxnNumber);
             mApprovalCode.setText(txn.VoidApprovalCode);
             mPaymentVoided.setText("Yes");
             mButtonVoid.setVisibility(View.GONE);
             mButtonResend.setVisibility(View.VISIBLE);
         } else {
-            mVoidSlipTitle.setText("Confirm Void?");
+            //mVoidSlipTitle.setText("Confirm Void?");
             mTxnNum.setText(String.valueOf(txn.TxnNumber));
             mApprovalCode.setText(txn.ApprovalCode);
             mPaymentVoided.setText("No");

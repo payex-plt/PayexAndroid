@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rl_sales_history_item"
     android:layout_width="wrap_content"
-    android:layout_height="72dp"
+    android:layout_height="55dp"
     android:layout_gravity="center"
     android:background="@drawable/list_bottom_border"
     android:paddingLeft="@dimen/spacing_lg"
@@ -18,12 +18,25 @@
         app:srcCompat="@drawable/ic_mastercard_40dp" />
 
     <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_payment_void"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:background="#797979"
+        android:textColor="@android:color/white"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="@dimen/spacing_md"
+        android:text="Void"
+        android:visibility="visible"
+        android:textAppearance="@style/AppTheme.TextBody1Bold" />
+
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/tv_primary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="72dp"
-        android:layout_marginTop="@dimen/spacing_md"
+        android:layout_marginTop="@dimen/spacing_sm"
         android:ellipsize="end"
         android:maxLines="1"
         android:text="11:22:33"
@@ -35,7 +48,6 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/tv_primary"
         android:layout_below="@id/tv_primary"
-        android:layout_marginTop="@dimen/spacing_sm"
         android:ellipsize="end"
         android:maxLines="1"
         android:text="RM1.00"
@@ -46,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="@dimen/spacing_md"
+        android:layout_marginTop="@dimen/spacing_sm"
         android:text="Ending"
         android:textAppearance="@style/AppTheme.Body1" />
 
@@ -56,9 +68,8 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/tv_timestamp"
         android:layout_below="@id/tv_primary"
-        android:layout_marginTop="@dimen/spacing_sm"
         android:text="1234"
         android:textStyle="bold"
-        android:textAppearance="@style/AppTheme.Body1" />
+        android:textAppearance="@style/AppTheme.Body2" />
 
 </RelativeLayout>

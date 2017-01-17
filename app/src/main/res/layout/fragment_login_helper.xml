@@ -66,13 +66,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="60dp"
+                android:textSize="20dp"
                 android:text="@string/login_helper_btn_reset" />
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btn_cancel"
-                style="@style/Widget.AppCompat.Button.Colored"
+                style="@style/AppTheme.ThinButton"
                 android:textColor="@android:color/white"
-                android:background="@color/colorButton"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

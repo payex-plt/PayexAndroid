@@ -12,8 +12,8 @@
         android:text="This is OCR scanner" />
 
     <TextView
-        android:text="Camera function.  Rectangular coutout for card scanning."
-        android:textStyle="bold"
+        android:text="Camera function.  Rectangular cutout for card scanning."
+        android:textColor="@android:color/black"
         android:textSize="20dp"
         android:gravity="center_horizontal"
         android:layout_width="250dp"

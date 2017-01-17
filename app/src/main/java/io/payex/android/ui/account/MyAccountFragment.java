@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.payex.android.MyApp;
 import io.payex.android.R;
 import io.payex.android.util.HtmlCompat;
 
@@ -16,6 +17,11 @@ public class MyAccountFragment extends Fragment {
 
     @BindView(R.id.tv_merchant) AppCompatTextView mMerchantTextView;
     @BindView(R.id.tv_acquirer) AppCompatTextView mAcquirerTextView;
+    @BindView(R.id.tv_bin) AppCompatTextView mBINTextView;
+    @BindView(R.id.tv_mid) AppCompatTextView mMIDTextView;
+    @BindView(R.id.tv_bank_contact_1) AppCompatTextView mBankContact1TextView;
+    @BindView(R.id.tv_bank_contact_2) AppCompatTextView mBankContact2TextView;
+    @BindView(R.id.tv_bank_email) AppCompatTextView mBankEmailTextView;
 
     public static MyAccountFragment newInstance() {
         return new MyAccountFragment();
@@ -26,8 +32,8 @@ public class MyAccountFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_account, container, false);
         ButterKnife.bind(this, view);
-        setMerchantInfo();
-        setAcquirerInfo();
+        setMerchantInfo2();
+        setAcquirerInfo2();
         return view;
     }
 
@@ -39,6 +45,12 @@ public class MyAccountFragment extends Fragment {
         HtmlCompat.setSpannedText(mMerchantTextView, message);
     }
 
+    private void setMerchantInfo2() {
+        mMerchantTextView.setText("Starsbuck Coffee Malaysia");
+        mBINTextView.setText(MyApp.getBIN());
+        mMIDTextView.setText(MyApp.getMID());
+    }
+
     private void setAcquirerInfo() {
         String message = String.format(getString(R.string.account_acquirer),
                 "Ambank Malaysia",
@@ -48,4 +60,10 @@ public class MyAccountFragment extends Fragment {
         HtmlCompat.setSpannedText(mAcquirerTextView, message);
     }
 
+    private void setAcquirerInfo2() {
+        mAcquirerTextView.setText(MyApp.getBank().getName());
+        mBankContact1TextView.setText(MyApp.getBank().getContact1());
+        mBankContact2TextView.setText(MyApp.getBank().getContact2());
+        mBankEmailTextView.setText(MyApp.getBank().getEmail());
+    }
 }

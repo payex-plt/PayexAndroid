@@ -34,6 +34,9 @@
             android:name=".ui.sale.CardReaderActivity"
             android:label="@string/title_activity_card_reader" />
         <activity android:screenOrientation="portrait"
+            android:name=".ui.register.RegisterActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:screenOrientation="portrait"
             android:name=".ui.login.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.Dark.NoActionBar">

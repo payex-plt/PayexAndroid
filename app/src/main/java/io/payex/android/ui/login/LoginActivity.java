@@ -18,6 +18,7 @@ import io.payex.android.R;
 import io.payex.android.ui.BaseActivity;
 import io.payex.android.ui.MainActivity;
 import io.payex.android.ui.common.ProgressItem;
+import io.payex.android.ui.register.RegisterActivity;
 import io.payex.android.util.ConnectivityReceiver;
 import io.payex.android.util.PayexAPI;
 import retrofit2.Call;
@@ -58,7 +59,8 @@ public class LoginActivity extends BaseActivity
     @Override
     public void onRegisterButtonPressed() {
         // todo register page
-        Snackbar.make(mRootView, "Register page under construction", Snackbar.LENGTH_LONG).show();
+        //Snackbar.make(mRootView, "Register page under construction", Snackbar.LENGTH_LONG).show();
+        startActivity(RegisterActivity.class);
     }
 
     @Override
@@ -106,13 +108,14 @@ public class LoginActivity extends BaseActivity
 
     @Override
     public void onPasswordReset() {
-        Snackbar.make(mRootView, "Resetting password", Snackbar.LENGTH_LONG).show();
+        //Snackbar.make(mRootView, "Resetting password", Snackbar.LENGTH_LONG).show();
+        Toast.makeText(this, "Resetting password...", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onCancelPressed() {
         changeFragment(R.id.fragment_container, LoginFragment.newInstance());
-        Snackbar.make(mRootView, "Cancel button pressed", Snackbar.LENGTH_LONG).show();
+        //Snackbar.make(mRootView, "Cancel button pressed", Snackbar.LENGTH_LONG).show();
     }
 
     @Override
@@ -130,6 +133,9 @@ public class LoginActivity extends BaseActivity
         }
 
         if (response.message().equals("OK")) {
+            MyApp.setBIN(loginFragment.mBinEditText.getText().toString());
+            MyApp.setMID(loginFragment.mMidEditText.getText().toString());
+
             changeFragment(R.id.fragment_container, SetupFragment.newInstance());
         } else {
             Toast.makeText(this, "Login error!", Toast.LENGTH_LONG).show();

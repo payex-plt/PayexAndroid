@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.MenuItem;
 
+import io.payex.android.R;
+
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -47,6 +49,42 @@ public class BaseActivity extends AppCompatActivity {
 
     protected void changeFragment(@IdRes int containerViewId, Fragment fragment, String addToBackStack) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        // Replace whatever is in the fragment_container mRootView with this fragment,
+        // and add the transaction to the back stack so the user can navigate back
+        ft.replace(containerViewId, fragment);
+        if (!TextUtils.isEmpty(addToBackStack)) {
+            ft.addToBackStack(null);
+        }
+
+        // Commit the transaction
+        ft.commit();
+    }
+
+    protected void startFragment(@IdRes int containerViewId, Fragment fragment) {
+        replaceFragment(containerViewId, fragment, null, true);
+    }
+
+    protected void startFragment(@IdRes int containerViewId, Fragment fragment, String addToBackStack) {
+        replaceFragment(containerViewId, fragment, addToBackStack, true);
+    }
+
+    protected void exitFragment(@IdRes int containerViewId, Fragment fragment) {
+        replaceFragment(containerViewId, fragment, null, false);
+    }
+
+    protected void exitFragment(@IdRes int containerViewId, Fragment fragment, String addToBackStack) {
+        replaceFragment(containerViewId, fragment, addToBackStack, false);
+    }
+
+    private void replaceFragment(@IdRes int containerViewId, Fragment fragment, String addToBackStack, boolean forward) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        if (forward) {
+            ft.setCustomAnimations(R.anim.slide_from_right, R.anim.slide_to_left, R.anim.slide_from_left, R.anim.slide_to_right);
+        } else {
+            ft.setCustomAnimations(R.anim.slide_from_left, R.anim.slide_to_right, R.anim.slide_from_right, R.anim.slide_to_left);
+        }
 
         // Replace whatever is in the fragment_container mRootView with this fragment,
         // and add the transaction to the back stack so the user can navigate back

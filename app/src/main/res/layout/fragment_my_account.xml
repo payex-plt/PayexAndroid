@@ -26,7 +26,56 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="@string/account_merchant" />
+            android:text="Starbucks Malaysia"
+            android:textAppearance="@style/AppTheme.TextBody1Bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="BIN: "
+                android:textAppearance="@style/AppTheme.TextBody1" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_bin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:maxLines="1"
+                android:text="123456"
+                android:textAppearance="@style/AppTheme.TextBody1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="MID: "
+                android:textAppearance="@style/AppTheme.TextBody1" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_mid"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:maxLines="1"
+                android:text="1234567890"
+                android:textAppearance="@style/AppTheme.TextBody1" />
+        </LinearLayout>
 
 
         <View
@@ -48,9 +97,80 @@
             android:id="@+id/tv_acquirer"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginBottom="24dp"
             android:gravity="center"
-            android:text="@string/account_acquirer" />
+            android:text="My Bank International"
+            android:textAppearance="@style/AppTheme.TextBody1Bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Tel: "
+                android:textAppearance="@style/AppTheme.TextBody1" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_bank_contact_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:maxLines="1"
+                android:text="(60)3-12345678"
+                android:textAppearance="@style/AppTheme.TextBody1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textAppearance="@style/AppTheme.TextBody1" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_bank_contact_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:maxLines="1"
+                android:text="(60)3-12345678"
+                android:textAppearance="@style/AppTheme.TextBody1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Email: "
+                android:textAppearance="@style/AppTheme.TextBody1" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_bank_email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:maxLines="1"
+                android:text="payex@payex.io"
+                android:textAppearance="@style/AppTheme.TextBody1" />
+        </LinearLayout>
 
     </LinearLayout>
 

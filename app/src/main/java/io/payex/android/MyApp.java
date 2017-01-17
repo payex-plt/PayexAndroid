@@ -25,6 +25,26 @@ public class MyApp extends Application {
     static Bank[] banks;
     static Bank bank;
 
+    static String bin;
+    static String mid;
+    static String merchant;
+
+    public static String getMID() {
+        return mid;
+    }
+
+    public static void setMID(String mid) {
+        MyApp.mid = mid;
+    }
+
+    public static String getBIN() {
+        return bin;
+    }
+
+    public static void setBIN(String bin) {
+        MyApp.bin = bin;
+    }
+
     private static String currency = "RM";
 
     public static String getCurrency() {

@@ -9,38 +9,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="5dp"
+        android:padding="15dp"
         android:orientation="vertical">
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/spacing_lg"
+            android:layout_marginBottom="@dimen/spacing_xl"
             app:cardElevation="5dp"
             app:cardCornerRadius="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:paddingTop="@dimen/spacing_lg"
+                android:paddingBottom="@dimen/spacing_lg"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/spacing_lg">
-
-                    <android.support.v7.widget.AppCompatTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:gravity="center"
-                        android:maxLines="1"
-                        android:text="@string/sale_slip_title"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -64,7 +50,7 @@
                         android:gravity="right"
                         android:maxLines="1"
                         android:text="Ending 0001"
-                        android:textAppearance="@style/AppTheme.Body2Bold" />
+                        android:textAppearance="@style/AppTheme.TextBody1Bold" />
 
                 </LinearLayout>
 
@@ -85,7 +71,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/spacing_md"
                         android:text="@string/sale_slip_payment_made"
-                        android:textAppearance="@style/AppTheme.Body2" />
+                        android:textAppearance="@style/AppTheme.TextBody1" />
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tv_payment_made_value"
@@ -95,7 +81,33 @@
                         android:gravity="right"
                         android:maxLines="1"
                         android:text="2016/10/20 15:00"
-                        android:textAppearance="@style/AppTheme.Body2Bold" />
+                        android:textAppearance="@style/AppTheme.TextBody1Bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/spacing_lg">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_time_payment_made"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/spacing_md"
+                        android:text="@string/sale_slip_time_payment_made"
+                        android:textAppearance="@style/AppTheme.TextBody1" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_time_payment_made_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="right"
+                        android:maxLines="1"
+                        android:text="2016/10/20 15:00"
+                        android:textAppearance="@style/AppTheme.TextBody1Bold" />
 
                 </LinearLayout>
 
@@ -112,7 +124,7 @@
                         android:layout_marginRight="@dimen/spacing_md"
                         android:text="@string/sale_slip_amount"
                         android:textColor="@android:color/black"
-                        android:textAppearance="@style/AppTheme.Body2" />
+                        android:textAppearance="@style/AppTheme.TextBody1" />
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tv_amount_value"
@@ -122,7 +134,7 @@
                         android:gravity="right"
                         android:maxLines="1"
                         android:text="RM 99,999.00"
-                        android:textAppearance="@style/AppTheme.Body2Bold" />
+                        android:textAppearance="@style/AppTheme.TextBody1Bold" />
 
                 </LinearLayout>
 
@@ -139,7 +151,7 @@
                         android:layout_marginRight="@dimen/spacing_md"
                         android:text="@string/sale_slip_transaction_number"
                         android:textColor="@android:color/black"
-                        android:textAppearance="@style/AppTheme.Body2" />
+                        android:textAppearance="@style/AppTheme.TextBody1" />
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tv_txn_num_value"
@@ -149,7 +161,7 @@
                         android:gravity="right"
                         android:maxLines="1"
                         android:text="00001234567"
-                        android:textAppearance="@style/AppTheme.Body2Bold" />
+                        android:textAppearance="@style/AppTheme.TextBody1Bold" />
 
                 </LinearLayout>
 
@@ -165,7 +177,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/spacing_md"
                         android:text="@string/sale_slip_approval_code"
-                        android:textAppearance="@style/AppTheme.Body2" />
+                        android:textAppearance="@style/AppTheme.TextBody1" />
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tv_approval_code_value"
@@ -175,11 +187,11 @@
                         android:gravity="right"
                         android:maxLines="1"
                         android:text="000126"
-                        android:textAppearance="@style/AppTheme.Body2Bold" />
+                        android:textAppearance="@style/AppTheme.TextBody1Bold" />
 
                 </LinearLayout>
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -190,19 +202,24 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/spacing_md"
                         android:text="@string/sale_slip_payment_voided"
-                        android:textAppearance="@style/AppTheme.Body2" />
+                        android:textAppearance="@style/AppTheme.TextBody1" />
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tv_payment_voided"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:background="#797979"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@android:color/white"
                         android:ellipsize="end"
                         android:gravity="right"
                         android:maxLines="1"
                         android:text="N/A"
-                        android:textAppearance="@style/AppTheme.Body2Bold" />
+                        android:textAppearance="@style/AppTheme.TextBody1Bold" />
 
-                </LinearLayout>
+
+                </RelativeLayout>
 
                 <!--<android.support.v7.widget.AppCompatButton-->
                 <!--android:id="@+id/btn_email"-->
@@ -221,51 +238,11 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="@color/colorButton"
+            android:background="@color/colorPrimary"
+            android:textSize="20dp"
             android:layout_marginBottom="@dimen/spacing_lg"
             android:text="@string/sale_slip_btn_resend" />
 
-        <!--<android.support.v7.widget.CardView-->
-        <!--android:id="@+id/cv_sale_void"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center"-->
-        <!--app:cardCornerRadius="4dp">-->
-
-        <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:orientation="vertical">-->
-
-        <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:padding="@dimen/spacing_lg">-->
-
-        <!--<android.support.v7.widget.AppCompatTextView-->
-        <!--android:id="@+id/tv_payment_voided"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginRight="@dimen/spacing_md"-->
-        <!--android:text="@string/sale_slip_payment_voided"-->
-        <!--android:textAppearance="@style/TextAppearance.AppCompat.Caption" />-->
-
-        <!--<android.support.v7.widget.AppCompatTextView-->
-        <!--android:id="@+id/tv_payment_voided_value"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:ellipsize="end"-->
-        <!--android:gravity="right"-->
-        <!--android:maxLines="1"-->
-        <!--android:text="2016/10/20 15:00"-->
-        <!--android:textAppearance="@style/TextAppearance.AppCompat.Body2" />-->
-
-        <!--</LinearLayout>-->
-
-        <!--</LinearLayout>-->
-
-        <!--</android.support.v7.widget.CardView>-->
 
     </LinearLayout>
 
