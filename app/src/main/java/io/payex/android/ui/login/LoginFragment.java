@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -12,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
+
+import com.klinker.android.link_builder.Link;
+import com.klinker.android.link_builder.LinkBuilder;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,6 +29,8 @@ public class LoginFragment extends Fragment {
     @BindView(R.id.et_bin) AppCompatEditText mBinEditText;
     @BindView(R.id.et_mid) AppCompatEditText mMidEditText;
     @BindView(R.id.et_password) AppCompatEditText mPasswordEditText;
+    @BindView(R.id.tv_forget_password)
+    AppCompatTextView mForgetPasswordTextView;
 
     private OnFragmentInteractionListener mListener;
 
@@ -50,6 +56,8 @@ public class LoginFragment extends Fragment {
                 return false;
             }
         });
+
+        setupForgetPasswordLink();
 
         return view;
     }
@@ -86,11 +94,34 @@ public class LoginFragment extends Fragment {
         mListener = null;
     }
 
+    private void setupForgetPasswordLink() {
+        // Create the link rule to set what text should be linked.
+        // can use a specific string or a regex pattern
+        Link link = new Link("Forgot password?")
+                .setUnderlined(false)                                       // optional, defaults to true
+                .setOnClickListener(new Link.OnClickListener() {
+                    @Override
+                    public void onClick(String clickedText) {
+                        mListener.onForgetPasswordPressed();
+                    }
+                })
+                ;
+
+        // create the link builder object add the link rule
+        LinkBuilder.on(mForgetPasswordTextView)
+                .addLink(link)
+                .setFindOnlyFirstMatchesForAnyLink(true)
+                .build(); // create the clickable links
+    }
+
+
     public interface OnFragmentInteractionListener {
         void onLoginHelpButtonPressed();
 
         void onRegisterButtonPressed();
 
         void onLoginButtonPressed();
+
+        void onForgetPasswordPressed();
     }
 }

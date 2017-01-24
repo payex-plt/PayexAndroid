@@ -32,6 +32,16 @@
         <item name="android:textColor">?android:textColorPrimary</item>
     </style>
 
+    <style name="AppTheme.Button" parent="Base.Widget.AppCompat.Button">
+        <item name="android:background">@color/colorAccent</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="AppTheme.Button.Colored" parent="Base.Widget.AppCompat.Button.Colored">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
     <style name="AppTheme.TextBody1" parent="Base.TextAppearance.AppCompat.Body1">
         <!-- Customize your theme here. -->
         <item name="android:textSize">@dimen/text_sm</item>

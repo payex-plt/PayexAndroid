@@ -46,11 +46,12 @@
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_done"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="@dimen/spacing_lg"
         android:layout_marginTop="@dimen/spacing_lg"
+        android:background="@color/colorPrimary"
         android:text="@string/register_info_btn_ok" />
 
 

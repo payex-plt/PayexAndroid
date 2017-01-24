@@ -107,6 +107,11 @@ public class LoginActivity extends BaseActivity
     }
 
     @Override
+    public void onForgetPasswordPressed() {
+        changeFragment(R.id.fragment_container, LoginHelperFragment.newInstance());
+    }
+
+    @Override
     public void onPasswordReset() {
         //Snackbar.make(mRootView, "Resetting password", Snackbar.LENGTH_LONG).show();
         Toast.makeText(this, "Resetting password...", Toast.LENGTH_LONG).show();

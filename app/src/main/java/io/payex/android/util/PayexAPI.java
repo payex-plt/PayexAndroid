@@ -25,6 +25,9 @@ public interface PayexAPI {
     @GET("/api/transactionsapi")
     Call<List<TransactionJSON>> getTransactions();
 
+    @GET("/api/transactionsapi/{card}")
+    Call<List<TransactionJSON>> getTransactions(@Path("card") String card);
+
     @GET("/api/sendemailsapi/salesslip/{email}/{id}")
     Call<Boolean> emailSalesSlip(@Path("email") String email, @Path("id") long id);
 

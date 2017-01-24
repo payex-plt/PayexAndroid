@@ -16,7 +16,6 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -48,11 +47,11 @@ import eu.davidea.flexibleadapter.items.IFlexible;
 import io.payex.android.MyApp;
 import io.payex.android.R;
 import io.payex.android.TransactionJSON;
+import io.payex.android.ui.MainActivity;
 import io.payex.android.ui.common.CalendarFragment;
-import io.payex.android.ui.common.ProgressItem;
 import io.payex.android.ui.sale.HeaderItem;
-import io.payex.android.ui.sale.voided.VoidItem;
 import io.payex.android.util.ConnectivityReceiver;
+import io.payex.android.ui.common.DateRangePickerFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -69,6 +68,8 @@ public class SaleHistoryFragment extends Fragment
 {
     ProgressDialog progressDialog;
 
+    DateRangePickerFragment dateRangePickerFragment;
+
     @Override
     public void onFailure(Call<List<TransactionJSON>> call, Throwable t) {
         Log.d(TAG, "on failure -> " + t.getMessage());
@@ -81,12 +82,11 @@ public class SaleHistoryFragment extends Fragment
 
     }
 
-    @Override
-    public void onResponse(Call<List<TransactionJSON>> call, Response<List<TransactionJSON>> response) {
+    private List<IFlexible> processResponse(List<TransactionJSON> body) {
         final List<IFlexible> list = new ArrayList<>();
 
         ArrayList<TransactionJSON> transactions = new ArrayList<TransactionJSON>();
-        transactions.addAll(response.body());
+        transactions.addAll(body);
 
         Log.d(TAG, "size -> " + transactions.size());
 
@@ -147,6 +147,14 @@ public class SaleHistoryFragment extends Fragment
         if (progressDialog != null) {
             progressDialog.dismiss();
         }
+
+        return list;
+    }
+
+    @Override
+    public void onResponse(Call<List<TransactionJSON>> call, Response<List<TransactionJSON>> response) {
+
+        final List<IFlexible> list = processResponse(response.body());
 
         mSaleHistoryClone = list;
 
@@ -243,6 +251,8 @@ public class SaleHistoryFragment extends Fragment
         ButterKnife.bind(this, view);
         setHasOptionsMenu(true);
 
+        dateRangePickerFragment = DateRangePickerFragment.newInstance(((MainActivity)getActivity()), false);
+
         Context context = view.getContext();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.setHasFixedSize(true);
@@ -259,6 +269,21 @@ public class SaleHistoryFragment extends Fragment
         return header;
     }
 
+
+    public void getSalesHistory(String card) {
+        if (ConnectivityReceiver.isConnected()) {
+            progressDialog = new ProgressDialog(getActivity());
+            progressDialog.setMessage("Please wait...");
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setIndeterminate(true);
+            progressDialog.show();
+
+            Call<List<TransactionJSON>> call = MyApp.payexAPI.getTransactions();
+            call.enqueue(this);
+        } else {
+            Toast.makeText(getActivity(), "No internet connection.", Toast.LENGTH_LONG).show();
+        }
+    }
 
     public void getSaleHistory(int size) {
         if (ConnectivityReceiver.isConnected()) {
@@ -351,7 +376,8 @@ public class SaleHistoryFragment extends Fragment
 //            f.show(getFragmentManager(), f.getTag());
 
 
-            CalendarFragment f = CalendarFragment.newInstance();
+            //CalendarFragment f = CalendarFragment.newInstance();
+            DateRangePickerFragment f = dateRangePickerFragment;
             FragmentManager fm = getFragmentManager();
             f.setTargetFragment(this, DIALOG_FRAGMENT);
             f.show(fm, f.getTag());
@@ -385,22 +411,38 @@ public class SaleHistoryFragment extends Fragment
     @Override
     public boolean onQueryTextChange(String newText) {
 //        Log.e(TAG, "onQueryTextChange newText: " + newText);
-        if (mAdapter.hasNewSearchText(newText)) {
-            Log.e("SaleHistory", "onQueryTextChange newText: " + newText);
-            mAdapter.setSearchText(newText);
-            //Fill and Filter mItems with your custom list and automatically animate the changes
-            //Watch out! The original list must be a copy
-            mAdapter.filterItems(mSaleHistoryClone, 200L);
-        }
-        //Disable SwipeRefresh if search is active!!
-//        mSwipeRefreshLayout.setEnabled(!mAdapter.hasSearchText());
-        return true;
+//        if (mAdapter.hasNewSearchText(newText)) {
+//            Log.e("SaleHistory", "onQueryTextChange newText: " + newText);
+//            mAdapter.setSearchText(newText);
+//            //Fill and Filter mItems with your custom list and automatically animate the changes
+//            //Watch out! The original list must be a copy
+//
+//            //mAdapter.filterItems(mSaleHistoryClone, 200L);
+//
+//            getSalesHistory(newText);
+//        }
+//        //Disable SwipeRefresh if search is active!!
+////        mSwipeRefreshLayout.setEnabled(!mAdapter.hasSearchText());
+        return false;
     }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
         Log.v("SaleHistory", "onQueryTextSubmit called!");
-        return onQueryTextChange(query);
+        //return onQueryTextChange(query);
+        if (mAdapter.hasNewSearchText(query)) {
+            Log.e("SaleHistory", "onQueryTextChange newText: " + query);
+            mAdapter.setSearchText(query);
+            //Fill and Filter mItems with your custom list and automatically animate the changes
+            //Watch out! The original list must be a copy
+
+            //mAdapter.filterItems(mSaleHistoryClone, 200L);
+
+            getSalesHistory(query);
+        }
+        //Disable SwipeRefresh if search is active!!
+//        mSwipeRefreshLayout.setEnabled(!mAdapter.hasSearchText());
+        return true;
     }
 
 

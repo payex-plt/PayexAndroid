@@ -16,6 +16,8 @@ import android.view.ViewGroup;
 
 import com.dgreenhalgh.android.simpleitemdecoration.grid.GridDividerItemDecoration;
 
+import org.apache.log4j.chainsaw.Main;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +30,9 @@ import io.payex.android.MyApp;
 import io.payex.android.R;
 import io.payex.android.ui.MainActivity;
 import io.payex.android.util.HapticFeedbackUtil;
+
+import static io.payex.android.ui.MainActivity.EntryMode.amount;
+import static io.payex.android.ui.MainActivity.EntryMode.cvv;
 
 public class SaleFragment extends Fragment {
 
@@ -59,6 +64,7 @@ public class SaleFragment extends Fragment {
 //        String display = "<sup><small>RM</small></sup>0.00";
 //        HtmlCompat.setSpannedText(mPrimaryText, display);
 
+        ((MainActivity) getActivity()).entryMode = MainActivity.EntryMode.amount;
         mPrimaryText.setText(MainActivity.buildAmountText(MyApp.getCurrency(), mCurrentCents));
 
         return view;
@@ -91,7 +97,13 @@ public class SaleFragment extends Fragment {
                 int max = numpadItems.size();
 
                 if (position == max - 1) { // entered
-                    MainActivity.setAmount(mCurrentCents);
+                    if (isCVVMode()) {   // current mode is cvv
+                        MainActivity.setCVV(mCurrentCents);
+                    } else {   // current mode is sales amount
+                        MainActivity.setAmount(mCurrentCents);
+                        mCurrentCents = MIN_CVV;
+                        mPrimaryText.setText(Long.toString(mCurrentCents));
+                    }
                     mListener.onEnterPressed(item.getPrimaryText());
                 } else if (position == max - 3) { // backspace
                     // backspace - not intended as per Kevin's request
@@ -126,19 +138,25 @@ public class SaleFragment extends Fragment {
     private static final String CURRENCY_SYMBOL = MyApp.getCurrency();   // "RM";
     private static final long MAX_CENTS = 9999999;
     private static final long MIN_CENTS = 0;
+    private static final long MAX_CVV = 999;
+    private static final long MIN_CVV = 0;
     private long mCurrentCents = 0;
 
+
+    private boolean isCVVMode() {
+        return ((MainActivity) getActivity()).entryMode == cvv;
+    }
 
     private void invalidateDisplayedAmount() {
         //DecimalFormat f = new DecimalFormat("#,###,##0.00");
         //double d =  (double) mCurrentCents / (double) 100; // not work in cents - so convert to dollar
         //String displayText = CURRENCY_SYMBOL + f.format(d);
-        String displayText = MainActivity.buildAmountText(MyApp.getCurrency(), mCurrentCents);
+        String displayText = isCVVMode() ? Long.toString(mCurrentCents) : MainActivity.buildAmountText(MyApp.getCurrency(), mCurrentCents);
         mPrimaryText.setText(displayText);
     }
 
     private boolean isExceeded( int newDigit ) {
-        return mCurrentCents * 10 + newDigit > MAX_CENTS;
+        return isCVVMode() ? mCurrentCents * 10 + newDigit > MAX_CVV : mCurrentCents * 10 + newDigit > MAX_CENTS;
     }
 
     private void performHapticFeedback(Context context) {
@@ -196,6 +214,11 @@ public class SaleFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
+        // always back to amount mode
+        ((MainActivity) getActivity()).entryMode = MainActivity.EntryMode.amount;
+        MainActivity.setAmount(MIN_CENTS);
+        MainActivity.setCVV(MIN_CVV);
 
         mCurrentCents = MIN_CENTS;
         invalidateDisplayedAmount();

@@ -15,8 +15,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
-import com.crashlytics.android.Crashlytics;
-
 import org.chromium.customtabsclient.CustomTabsActivityHelper;
 
 import java.text.DecimalFormat;
@@ -25,7 +23,6 @@ import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.davidea.flexibleadapter.items.IFlexible;
-import io.fabric.sdk.android.Fabric;
 import io.payex.android.R;
 import io.payex.android.ui.about.AboutFragment;
 import io.payex.android.ui.account.MyAccountFragment;
@@ -38,6 +35,7 @@ import io.payex.android.ui.sale.history.SaleSlipActivity;
 import io.payex.android.ui.sale.voided.VoidFragment;
 import io.payex.android.ui.sale.voided.VoidItem;
 import io.payex.android.ui.sale.voided.VoidSlipActivity;
+import io.payex.android.ui.common.DateRangePickerFragment;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 
 public class MainActivity extends BaseActivity
@@ -45,9 +43,15 @@ public class MainActivity extends BaseActivity
         SaleHistoryFragment.OnListFragmentInteractionListener,
         SaleFragment.OnFragmentInteractionListener,
         VoidFragment.OnListFragmentInteractionListener,
-        AboutFragment.OnFragmentInteractionListener
+        AboutFragment.OnFragmentInteractionListener,
+        DateRangePickerFragment.OnDateRangeSelectedListener
 {
+    private static String TAG = MainActivity.class.getSimpleName();
+
     private static DecimalFormat df = new DecimalFormat("#,###,##0.00");
+
+    public enum EntryMode { amount, cvv};
+    public EntryMode entryMode;
 
     // shared across pages
     private static long amount;
@@ -62,6 +66,16 @@ public class MainActivity extends BaseActivity
 
     public static String buildAmountText(String currency, long amount) {
         return currency + " " + df.format(amount / (double)100);
+    }
+
+    private static long cvv;
+
+    public static long getCVV() {
+        return cvv;
+    }
+
+    public static void setCVV(long value) {
+        cvv = value;
     }
 
     private final CustomTabsActivityHelper.CustomTabsFallback mCustomTabsFallback =
@@ -176,10 +190,18 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onEnterPressed(String text) {
-        Intent intent = new Intent(this, CardReaderActivity.class);
+        Log.d(TAG, ">>> amount <<< " + amount);
+        Log.d(TAG, ">>> cvv <<< " + cvv);
+
+        if (entryMode == EntryMode.cvv) {
+            Intent intent = new Intent(this, CardReaderActivity.class);
 //        Bundle bundle = new Bundle();
 //        bundle.put
-        startActivity(intent);
+            startActivity(intent);
+        } else {   // assume entry mode is amount, go to cvv
+            entryMode = EntryMode.cvv;
+        }
+
     }
 
     @Override
@@ -218,4 +240,11 @@ public class MainActivity extends BaseActivity
             startActivity(intent);
         }
     }
+
+    @Override
+    public void onDateRangeSelected(int startDay, int startMonth, int startYear, int endDay, int endMonth, int endYear) {
+        Log.d(TAG, ">>> range <<< from: "+startDay+"-"+startMonth+"-"+startYear+" to: "+endDay+"-"+endMonth+"-"+endYear );
+    }
+
+
 }

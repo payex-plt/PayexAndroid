@@ -77,6 +77,8 @@ dependencies {
     compile 'frankiesardo:icepick:3.2.0'
     provided 'frankiesardo:icepick-processor:3.2.0'
 
+    compile 'com.appeaser.sublimepickerlibrary:sublimepickerlibrary:2.1.1'
+
     compile('com.crashlytics.sdk.android:crashlytics:2.6.5@aar') {
         transitive = true;
     }

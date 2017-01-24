@@ -98,14 +98,14 @@ public class VoidSlipFragment extends Fragment {
             //mVoidSlipTitle.setText("Resend Void Slip?");
             mTxnNum.setText(txn.VoidTxnNumber);
             mApprovalCode.setText(txn.VoidApprovalCode);
-            mPaymentVoided.setText("Yes");
+            mPaymentVoided.setText("Void");
             mButtonVoid.setVisibility(View.GONE);
             mButtonResend.setVisibility(View.VISIBLE);
         } else {
             //mVoidSlipTitle.setText("Confirm Void?");
             mTxnNum.setText(String.valueOf(txn.TxnNumber));
             mApprovalCode.setText(txn.ApprovalCode);
-            mPaymentVoided.setText("No");
+            mPaymentVoided.setText("N/A");
             mButtonVoid.setVisibility(View.VISIBLE);
             mButtonResend.setVisibility(View.GONE);
 
