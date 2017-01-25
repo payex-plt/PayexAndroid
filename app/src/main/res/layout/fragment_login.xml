@@ -89,16 +89,6 @@
                 android:textSize="20dp"
                 android:text="@string/login_btn_login" />
 
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tv_forget_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="@dimen/spacing_lg"
-                android:layout_marginTop="@dimen/spacing_lg"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                tools:text="@string/login_btn_login_help" />
-
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btn_login_help"
                 style="@style/AppTheme.ThinButton"

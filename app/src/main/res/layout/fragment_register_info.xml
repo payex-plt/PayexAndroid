@@ -52,6 +52,8 @@
         android:layout_marginBottom="@dimen/spacing_lg"
         android:layout_marginTop="@dimen/spacing_lg"
         android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
         android:text="@string/register_info_btn_ok" />
 
 

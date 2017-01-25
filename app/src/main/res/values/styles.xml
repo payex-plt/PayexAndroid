@@ -70,12 +70,12 @@
 
     <style name="AppTheme.ThinButton" parent="android:Widget">
         <item name="android:textAppearance">?android:attr/textAppearanceButton</item>
-        <item name="android:minHeight">12dip</item>
+        <item name="android:minHeight">36dip</item>
         <item name="android:minWidth">88dip</item>
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
         <item name="android:gravity">center_vertical|center_horizontal</item>
-        <item name="android:background">@drawable/abc_btn_borderless_material</item>
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
 </resources>

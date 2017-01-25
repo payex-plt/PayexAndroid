@@ -24,6 +24,8 @@
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_no"
             style="@style/AppTheme.Button"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -33,6 +35,8 @@
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_yes"
             style="@style/AppTheme.Button.Colored"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

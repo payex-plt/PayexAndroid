@@ -32,6 +32,7 @@
 
                     <DatePicker
                         android:id="@+id/start_date_picker"
+                        android:headerBackground="@color/colorPrimary"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content" />
 
@@ -46,6 +47,7 @@
 
                     <DatePicker
                         android:id="@+id/end_date_picker"
+                        android:headerBackground="@color/colorPrimary"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
@@ -56,6 +58,8 @@
                 android:id="@+id/but_set_time_range"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:background="@color/colorPrimary"
                 android:text="@string/but_done" />
         </LinearLayout>
     </TabHost>

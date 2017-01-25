@@ -2,6 +2,7 @@ package io.payex.android.ui;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,9 +12,12 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import org.chromium.customtabsclient.CustomTabsActivityHelper;
 
@@ -23,6 +27,7 @@ import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.davidea.flexibleadapter.items.IFlexible;
+import io.payex.android.MyApp;
 import io.payex.android.R;
 import io.payex.android.ui.about.AboutFragment;
 import io.payex.android.ui.account.MyAccountFragment;
@@ -49,6 +54,7 @@ public class MainActivity extends BaseActivity
     private static String TAG = MainActivity.class.getSimpleName();
 
     private static DecimalFormat df = new DecimalFormat("#,###,##0.00");
+    private static DecimalFormat cvvf = new DecimalFormat("000");
 
     public enum EntryMode { amount, cvv};
     public EntryMode entryMode;
@@ -66,6 +72,10 @@ public class MainActivity extends BaseActivity
 
     public static String buildAmountText(String currency, long amount) {
         return currency + " " + df.format(amount / (double)100);
+    }
+
+    public static String buildCVVText(long value) {
+        return cvvf.format(value);
     }
 
     private static long cvv;
@@ -118,6 +128,12 @@ public class MainActivity extends BaseActivity
         mDrawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        View header = mNavView.getHeaderView(0);
+        TextView merchant = (TextView) header.findViewById(R.id.tv_merchant);
+        TextView mid = (TextView) header.findViewById(R.id.tv_mid);
+        merchant.setText("Starsbuck Coffee Malaysia");
+        mid.setText(MyApp.getMID());
+
         mNavView.setNavigationItemSelectedListener(this);
 
         // select the default
@@ -156,7 +172,17 @@ public class MainActivity extends BaseActivity
             setTitle(R.string.title_activity_about);
         } else if (id == R.id.nav_logout) {
             // todo clear all the cache before logout
-            startActivity(LoginActivity.class, true);
+
+            new AlertDialog.Builder(this)
+                .setTitle("Logout")
+                .setMessage("Do you really want to logout?")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        startActivity(LoginActivity.class, true);
+                    }})
+                .setNegativeButton(android.R.string.no, null).show();
+
         }
 
         mDrawer.closeDrawer(GravityCompat.START);
@@ -200,6 +226,7 @@ public class MainActivity extends BaseActivity
             startActivity(intent);
         } else {   // assume entry mode is amount, go to cvv
             entryMode = EntryMode.cvv;
+            setTitle(R.string.title_activity_cvv);
         }
 
     }

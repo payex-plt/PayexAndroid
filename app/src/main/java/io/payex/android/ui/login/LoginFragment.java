@@ -29,7 +29,7 @@ public class LoginFragment extends Fragment {
     @BindView(R.id.et_bin) AppCompatEditText mBinEditText;
     @BindView(R.id.et_mid) AppCompatEditText mMidEditText;
     @BindView(R.id.et_password) AppCompatEditText mPasswordEditText;
-    @BindView(R.id.tv_forget_password)
+//    @BindView(R.id.tv_forget_password)
     AppCompatTextView mForgetPasswordTextView;
 
     private OnFragmentInteractionListener mListener;
@@ -57,7 +57,7 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        setupForgetPasswordLink();
+        //setupForgetPasswordLink();
 
         return view;
     }

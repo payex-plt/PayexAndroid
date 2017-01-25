@@ -118,15 +118,20 @@
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_cancel"
+            style="@style/AppTheme.Button"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            android:layout_marginRight="10dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/register_form_btn_cancel"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+            android:text="@string/register_form_btn_cancel" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_done"
-            style="@style/Widget.AppCompat.Button.Colored"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

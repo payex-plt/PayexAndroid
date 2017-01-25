@@ -102,7 +102,7 @@ public class SaleFragment extends Fragment {
                     } else {   // current mode is sales amount
                         MainActivity.setAmount(mCurrentCents);
                         mCurrentCents = MIN_CVV;
-                        mPrimaryText.setText(Long.toString(mCurrentCents));
+                        mPrimaryText.setText(MainActivity.buildCVVText(mCurrentCents));
                     }
                     mListener.onEnterPressed(item.getPrimaryText());
                 } else if (position == max - 3) { // backspace
@@ -151,7 +151,7 @@ public class SaleFragment extends Fragment {
         //DecimalFormat f = new DecimalFormat("#,###,##0.00");
         //double d =  (double) mCurrentCents / (double) 100; // not work in cents - so convert to dollar
         //String displayText = CURRENCY_SYMBOL + f.format(d);
-        String displayText = isCVVMode() ? Long.toString(mCurrentCents) : MainActivity.buildAmountText(MyApp.getCurrency(), mCurrentCents);
+        String displayText = isCVVMode() ? MainActivity.buildCVVText(mCurrentCents) : MainActivity.buildAmountText(MyApp.getCurrency(), mCurrentCents);
         mPrimaryText.setText(displayText);
     }
 
@@ -217,6 +217,7 @@ public class SaleFragment extends Fragment {
 
         // always back to amount mode
         ((MainActivity) getActivity()).entryMode = MainActivity.EntryMode.amount;
+        getActivity().setTitle(R.string.title_activity_sale);
         MainActivity.setAmount(MIN_CENTS);
         MainActivity.setCVV(MIN_CVV);
 

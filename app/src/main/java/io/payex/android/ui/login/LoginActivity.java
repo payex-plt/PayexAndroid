@@ -65,6 +65,10 @@ public class LoginActivity extends BaseActivity
 
     @Override
     public void onLoginButtonPressed() {
+        Log.d(TAG, ">>> bin <<< " + loginFragment.mBinEditText.getText());
+        Log.d(TAG, ">>> mid <<< " + loginFragment.mMidEditText.getText());
+        Log.d(TAG, ">>> password <<< " + loginFragment.mPasswordEditText.getText());
+
         if (loginFragment.mBinEditText.getText().length() > 0 && loginFragment.mMidEditText.getText().length() > 0 && loginFragment.mPasswordEditText.getText().length() > 0) {
             Bank bank = MyApp.findBank(loginFragment.mBinEditText.getText().toString());
             if (bank != null) {
