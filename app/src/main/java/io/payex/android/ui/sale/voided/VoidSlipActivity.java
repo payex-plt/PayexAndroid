@@ -10,6 +10,7 @@ import butterknife.ButterKnife;
 import io.payex.android.R;
 import io.payex.android.ui.BaseActivity;
 import io.payex.android.ui.common.StateFragment;
+import io.payex.android.ui.common.VoidStateFragment;
 import io.payex.android.ui.sale.EmailSlipActivity;
 import io.payex.android.ui.sale.history.SaleResendFragment;
 import io.payex.android.ui.sale.history.SaleVoidFragment;
@@ -18,7 +19,7 @@ public class VoidSlipActivity extends BaseActivity
         implements VoidSlipFragment.OnFragmentInteractionListener,
         SaleVoidFragment.OnFragmentInteractionListener,
         VoidResendFragment.OnFragmentInteractionListener,
-        StateFragment.OnFragmentInteractionListener {
+        VoidStateFragment.OnFragmentInteractionListener {
 
     private long transactionId;
 
@@ -62,8 +63,8 @@ public class VoidSlipActivity extends BaseActivity
 
     @Override
     public void onConfirmVoidButtonPressed() {
-        changeFragment(R.id.fragment_container, StateFragment.newInstance(
-                R.drawable.ic_mood_black_72dp, R.string.state_title_loading, 0));
+        changeFragment(R.id.fragment_container, VoidStateFragment.newInstance(
+                0, R.string.state_title_void_approved, 0));
     }
 
     @Override

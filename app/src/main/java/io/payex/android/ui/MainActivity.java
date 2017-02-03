@@ -17,6 +17,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.chromium.customtabsclient.CustomTabsActivityHelper;
@@ -105,6 +108,9 @@ public class MainActivity extends BaseActivity
     @BindView(R.id.drawer_layout) DrawerLayout mDrawer;
     @BindView(R.id.nav_view) NavigationView mNavView;
 
+    @BindView(R.id.toolbar_title)
+    ImageView mToolbarIcon;
+
     @BindColor(R.color.colorPrimary)
     int mColorPrimary;
 
@@ -113,6 +119,8 @@ public class MainActivity extends BaseActivity
 
     private CustomTabsHelperFragment mCustomTabsHelperFragment;
     private CustomTabsIntent mCustomTabsIntent;
+
+    public ImageView getToolbarIcon() { return mToolbarIcon; }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,6 +131,15 @@ public class MainActivity extends BaseActivity
         ButterKnife.bind(this);
         setSupportActionBar(mToolbar);
 
+//        Window window = getWindow();
+//
+//        // clear FLAG_TRANSLUCENT_STATUS flag:
+//        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//        // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+//        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+//        // finally change the color
+//        window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawer.setDrawerListener(toggle);
@@ -132,7 +149,7 @@ public class MainActivity extends BaseActivity
         TextView merchant = (TextView) header.findViewById(R.id.tv_merchant);
         TextView mid = (TextView) header.findViewById(R.id.tv_mid);
         merchant.setText("Starsbuck Coffee Malaysia");
-        mid.setText(MyApp.getMID());
+        mid.setText("MID: " + MyApp.getMID());
 
         mNavView.setNavigationItemSelectedListener(this);
 
@@ -157,19 +174,24 @@ public class MainActivity extends BaseActivity
 
         if (id == R.id.nav_sale) {
             changeFragment(R.id.fragment_container, SaleFragment.newInstance(), null);
-            setTitle(R.string.title_activity_sale);
+            //setTitle(R.string.title_activity_sale);
+            setTitle("");
         } else if (id == R.id.nav_void_transaction) {
             changeFragment(R.id.fragment_container, VoidFragment.newInstance(), null);
             setTitle(R.string.title_activity_void);
+            mToolbarIcon.setVisibility(View.GONE);
         } else if (id == R.id.nav_sale_history) {
             changeFragment(R.id.fragment_container, SaleHistoryFragment.newInstance(), null);
             setTitle(R.string.title_activity_sale_history);
+            mToolbarIcon.setVisibility(View.GONE);
         } else if (id == R.id.nav_account) {
             changeFragment(R.id.fragment_container, MyAccountFragment.newInstance(), null);
             setTitle(R.string.title_activity_my_account);
+            mToolbarIcon.setVisibility(View.GONE);
         } else if (id == R.id.nav_about) {
             changeFragment(R.id.fragment_container, AboutFragment.newInstance(), null);   //AboutFragment.TAG);
             setTitle(R.string.title_activity_about);
+            mToolbarIcon.setVisibility(View.GONE);
         } else if (id == R.id.nav_logout) {
             // todo clear all the cache before logout
 
@@ -227,6 +249,7 @@ public class MainActivity extends BaseActivity
         } else {   // assume entry mode is amount, go to cvv
             entryMode = EntryMode.cvv;
             setTitle(R.string.title_activity_cvv);
+            mToolbarIcon.setVisibility(View.GONE);
         }
 
     }

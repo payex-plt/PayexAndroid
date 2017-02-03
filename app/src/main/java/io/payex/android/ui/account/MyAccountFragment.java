@@ -47,8 +47,8 @@ public class MyAccountFragment extends Fragment {
 
     private void setMerchantInfo2() {
         mMerchantTextView.setText("Starsbuck Coffee Malaysia");
-        mBINTextView.setText(MyApp.getBIN());
-        mMIDTextView.setText(MyApp.getMID());
+        mBINTextView.setText(MyApp.getBIN() + " (BIN)");
+        mMIDTextView.setText(MyApp.getMID() + " (MID)");
     }
 
     private void setAcquirerInfo() {
@@ -62,8 +62,8 @@ public class MyAccountFragment extends Fragment {
 
     private void setAcquirerInfo2() {
         mAcquirerTextView.setText(MyApp.getBank().getName());
-        mBankContact1TextView.setText(MyApp.getBank().getContact1());
-        mBankContact2TextView.setText(MyApp.getBank().getContact2());
+        mBankContact1TextView.setText(MyApp.getBank().getContact1() + " (Tel 1)");
+        mBankContact2TextView.setText(MyApp.getBank().getContact2() + " (Tel 2)");
         mBankEmailTextView.setText(MyApp.getBank().getEmail());
     }
 }

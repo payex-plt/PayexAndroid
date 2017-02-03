@@ -33,4 +33,7 @@ public interface PayexAPI {
 
     @GET("/api/sendemailsapi/voidslip/{email}/{id}")
     Call<Boolean> emailVoidSlip(@Path("email") String email, @Path("id") long id);
+
+    @GET("/api/sendemailsapi/resetpassword/{BIN}/{MID2P}")
+    Call<Boolean> emailResetPassword(@Path("BIN") String BIN, @Path("MID2P") String MID2P);
 }

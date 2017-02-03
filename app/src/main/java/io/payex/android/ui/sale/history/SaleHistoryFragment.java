@@ -109,7 +109,7 @@ public class SaleHistoryFragment extends Fragment
             Log.d(TAG, "card brand -> " + txn.CardBrand);
 
             d = VectorDrawableCompat.create(getResources(),
-                    txn.CardBrand.toLowerCase().equals("visa") ? R.drawable.ic_visa_40dp : R.drawable.ic_mastercard_40dp,
+                    txn.CardBrand.toLowerCase().equals("visa") ? R.drawable.ic_visa_logo_40dp : R.drawable.ic_mastercard_logo_40dp,
                     null);
             d = DrawableCompat.wrap(d);
 

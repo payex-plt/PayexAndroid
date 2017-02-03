@@ -54,6 +54,8 @@ public class SaleFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_sale, container, false);
         ButterKnife.bind(this, view);
 
+        ((MainActivity) getActivity()).getToolbarIcon().setVisibility(View.VISIBLE);
+
         Context context = view.getContext();
         setupLogo(context);
         setupNumPad(context);
@@ -167,7 +169,7 @@ public class SaleFragment extends Fragment {
     private List<IFlexible> getLogos() {
         List<IFlexible> list = new ArrayList<>();
 
-        int[] logos = { R.drawable.ic_ambank_40dp, R.drawable.ic_visa_40dp, R.drawable.ic_mastercard_40dp };
+        int[] logos = { R.drawable.ic_ambank_logo_40dp, R.drawable.ic_visa_logo_40dp, R.drawable.ic_mastercard_logo_40dp };
 
         int max = logos.length;    //3;
         for (int i = 0 ; i < max ; i++) {
@@ -217,7 +219,8 @@ public class SaleFragment extends Fragment {
 
         // always back to amount mode
         ((MainActivity) getActivity()).entryMode = MainActivity.EntryMode.amount;
-        getActivity().setTitle(R.string.title_activity_sale);
+        getActivity().setTitle("");
+        ((MainActivity) getActivity()).getToolbarIcon().setVisibility(View.VISIBLE);
         MainActivity.setAmount(MIN_CENTS);
         MainActivity.setCVV(MIN_CVV);
 

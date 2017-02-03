@@ -60,12 +60,13 @@ public class CardReaderFragment extends Fragment {
         mPrimaryText = ((CardReaderActivity) getActivity()).getmPrimaryText();
 
         List<AbstractCardReaderFragment> mFragments = new ArrayList<>();
-        mFragments.add(CardReaderQrFragment.newInstance());
+        //mFragments.add(CardReaderQrFragment.newInstance());
         mFragments.add(CardReaderNfcFragment.newInstance());
-        mFragments.add(CardReaderOcrFragment.newInstance());
+        //mFragments.add(CardReaderOcrFragment.newInstance());
         PagerAdapter adapter = new SectionsPagerAdapter(getChildFragmentManager(), mFragments);
         mViewPager.setAdapter(adapter);
-        mViewPager.setCurrentItem(1);
+        //mViewPager.setCurrentItem(1);
+        mViewPager.setCurrentItem(0);
 
         mTabLayout.setupWithViewPager(mViewPager);
 

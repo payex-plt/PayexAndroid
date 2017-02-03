@@ -1,12 +1,17 @@
 package io.payex.android.ui.login;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.BoolRes;
 import android.support.design.widget.Snackbar;
 
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -116,9 +121,31 @@ public class LoginActivity extends BaseActivity
     }
 
     @Override
-    public void onPasswordReset() {
+    public void onPasswordReset(final String bin, final String mid) {
         //Snackbar.make(mRootView, "Resetting password", Snackbar.LENGTH_LONG).show();
-        Toast.makeText(this, "Resetting password...", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "Resetting password...", Toast.LENGTH_LONG).show();
+
+        new AlertDialog.Builder(this)
+                .setTitle("Reset password")
+                .setMessage("Do you really want to reset your password?")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                        Call<Boolean> call = MyApp.payexAPI.emailResetPassword(bin, mid);
+                        call.enqueue(new Callback<Boolean>() {
+                            @Override
+                            public void onResponse(Call<Boolean> call, Response<Boolean> response) {}
+
+                            @Override
+                            public void onFailure(Call<Boolean> call, Throwable t) {}
+                        });
+
+                        Toast.makeText(getApplicationContext(), "Sending reset password email...", Toast.LENGTH_LONG).show();
+                        changeFragment(R.id.fragment_container, LoginFragment.newInstance());
+                    }})
+                .setNegativeButton(android.R.string.no, null).show();
+
     }
 
     @Override
@@ -174,5 +201,9 @@ public class LoginActivity extends BaseActivity
         String status = isConnected ? "Connectd to internet." : "No internet connection.";
         Toast.makeText(this, status, Toast.LENGTH_LONG).show();
     }
+
+
+
+
 }
 

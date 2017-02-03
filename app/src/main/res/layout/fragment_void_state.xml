@@ -1,0 +1,78 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    tools:context="io.payex.android.ui.common.VoidStateFragment">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="24dp"
+            app:srcCompat="@drawable/ic_mood_black_72dp" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="100dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/state_title_loading"
+            android:textSize="45sp"
+            android:fontFamily="@string/sans_serif"
+            android:textColor="@android:color/black"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="We're processing your payment."
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_no"
+            style="@style/AppTheme.Button"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:text="@string/sale_slip_btn_email" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_yes"
+            style="@style/AppTheme.Button.Colored"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/register_form_btn_done" />
+
+    </LinearLayout>
+</FrameLayout>

@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        app:srcCompat="@drawable/ic_mastercard_40dp" />
+        app:srcCompat="@drawable/ic_visa_logo_40dp" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/tv_payment_void"

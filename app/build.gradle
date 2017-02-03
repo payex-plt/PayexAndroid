@@ -11,7 +11,7 @@ android {
     buildToolsVersion "24.0.3"
     defaultConfig {
         applicationId "io.payex.android"
-        minSdkVersion 16
+        minSdkVersion 21  ///16
         targetSdkVersion 24
         versionCode 1
         versionName "0.1.5"

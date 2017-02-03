@@ -30,13 +30,17 @@ public class LoginHelperFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login_helper, container, false);
         ButterKnife.bind(this, view);
+
+        mBinEditText.setText("429313");
+        mMidEditText.setText("10000052");
+
         return view;
     }
 
     @OnClick(R.id.btn_submit)
     public void resetPassword() {
         // todo reset password
-        mListener.onPasswordReset();
+        mListener.onPasswordReset(mBinEditText.getText().toString(), mMidEditText.getText().toString());
     }
 
     @OnClick(R.id.btn_cancel)
@@ -63,7 +67,7 @@ public class LoginHelperFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        void onPasswordReset();
+        void onPasswordReset(String bin, String mid);
         void onCancelPressed();
     }
 

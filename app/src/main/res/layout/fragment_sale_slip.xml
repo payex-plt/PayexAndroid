@@ -39,7 +39,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/spacing_md"
-                        app:srcCompat="@drawable/ic_mastercard_40dp" />
+                        app:srcCompat="@drawable/ic_mastercard_75dp" />
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tv_card_pan"

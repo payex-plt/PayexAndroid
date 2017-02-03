@@ -52,6 +52,7 @@ import io.payex.android.TransactionJSON;
 import io.payex.android.ui.BaseActivity;
 import io.payex.android.ui.MainActivity;
 import io.payex.android.ui.common.StateFragment;
+import io.payex.android.ui.common.VoidStateFragment;
 import io.payex.android.util.NFCUtils;
 import io.payex.android.util.PayexProvider;
 import io.payex.android.util.SimpleAsyncTask;
@@ -62,7 +63,7 @@ import retrofit2.Response;
 public class CardReaderActivity extends BaseActivity
         implements AbstractCardReaderFragment.OnScanListener,
         CardReaderFragment.OnFragmentInteractionListener,
-        StateFragment.OnFragmentInteractionListener {
+        VoidStateFragment.OnFragmentInteractionListener {
     private static final String TAG = CardReaderActivity.class.getSimpleName();
 
     private NFCUtils mNfcUtils;
@@ -137,7 +138,7 @@ public class CardReaderActivity extends BaseActivity
     private List<IFlexible> getLogos() {
         List<IFlexible> list = new ArrayList<>();
 
-        int[] logos = { R.drawable.ic_ambank_40dp, R.drawable.ic_visa_40dp, R.drawable.ic_mastercard_40dp };
+        int[] logos = { R.drawable.ic_ambank_logo_40dp, R.drawable.ic_mastercard_logo_40dp, R.drawable.ic_visa_logo_40dp };
 
         int max = logos.length;    //3;
         for (int i = 0 ; i < max ; i++) {
@@ -153,8 +154,8 @@ public class CardReaderActivity extends BaseActivity
 
     @Override
     public void onSuccess() {
-        changeFragment(R.id.fragment_container, StateFragment.newInstance(
-                R.drawable.ic_mood_black_72dp, R.string.state_title_loading, 0));
+        changeFragment(R.id.fragment_container, VoidStateFragment.newInstance(
+                0, R.string.state_title_payment_approved, 0));
 
 
     }
@@ -354,7 +355,7 @@ public class CardReaderActivity extends BaseActivity
             public void onResponse(Call<TransactionJSON> call, Response<TransactionJSON> response) {
                 Log.d(TAG, ">>> new txn id <<< " + response.body().TransactionId);
                 transactionId = response.body().TransactionId;
-                onDoneLoading();
+                //onDoneLoading();
             }
 
             @Override

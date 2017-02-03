@@ -8,5 +8,5 @@
     android:clickable="false"
     android:soundEffectsEnabled="false"
     android:gravity="center"
-    android:padding="@dimen/spacing_lg"
+    android:padding="@dimen/spacing_sm"
     app:srcCompat="@drawable/ic_mastercard_40dp" />

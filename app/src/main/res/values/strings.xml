@@ -73,9 +73,12 @@
     <string name="drawer_menu_help">Need help?</string>
 
     <string name="state_title_loading">Please wait..</string>
-    <string name="state_title_payment_approved">Payment approved!</string>
-    <string name="state_title_payment_rejected">Payment rejected!</string>
+    <string name="state_title_payment_approved">Approved</string>
+    <string name="state_title_payment_rejected">Payment rejected</string>
     <string name="state_title_sale_voided">Sale voided!</string>
+    <string name="state_title_void_approved">Void approved</string>
+    <string name="state_title_void_declined">Void declined</string>
+    <string name="state_title_payment_declined">Declined</string>
 
     <string name="email_slip_hint_email">Email</string>
     <string name="email_slip_sent_success">You will receive your slip shortly.</string>
@@ -135,7 +138,7 @@
     <string name="title_activity_login">Payex</string>
     <!--<string name="title_activity_main">Payex</string>-->
     <string name="title_activity_email_slip">Email Slip</string>
-    <string name="title_activity_card_reader">Card Reader</string>
+    <string name="title_activity_card_reader">Read Card</string>
     <string name="title_activity_sale">Sales</string>
     <string name="title_activity_cvv">Enter CVV</string>
     <string name="title_activity_void">Void</string>
