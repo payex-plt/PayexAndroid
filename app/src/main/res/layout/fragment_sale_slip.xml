@@ -23,7 +23,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingTop="@dimen/spacing_lg"
+                android:paddingTop="@dimen/spacing_sm"
                 android:paddingBottom="@dimen/spacing_lg"
                 android:orientation="vertical">
 
@@ -63,7 +63,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="@dimen/spacing_lg">
+                    android:padding="@dimen/spacing_slip">
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tv_payment_made"
@@ -89,7 +89,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="@dimen/spacing_lg">
+                    android:padding="@dimen/spacing_slip">
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tv_time_payment_made"
@@ -115,7 +115,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="@dimen/spacing_lg">
+                    android:padding="@dimen/spacing_slip">
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tv_amount"
@@ -142,7 +142,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="@dimen/spacing_lg">
+                    android:padding="@dimen/spacing_slip">
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tv_txn_num"
@@ -169,7 +169,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="@dimen/spacing_lg">
+                    android:padding="@dimen/spacing_slip">
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tv_approval_code"
@@ -195,7 +195,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="@dimen/spacing_lg">
+                    android:padding="@dimen/spacing_slip">
 
                     <android.support.v7.widget.AppCompatTextView
                         android:layout_width="wrap_content"

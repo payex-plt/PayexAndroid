@@ -28,14 +28,14 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="+1 619-656-54456"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="16sp" />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv_secondary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_md"
+            android:layout_marginTop="@dimen/spacing_xxs"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="support@barclay.com"

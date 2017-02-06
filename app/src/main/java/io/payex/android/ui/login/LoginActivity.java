@@ -127,7 +127,7 @@ public class LoginActivity extends BaseActivity
 
         new AlertDialog.Builder(this)
                 .setTitle("Reset password")
-                .setMessage("Do you really want to reset your password?")
+                .setMessage("Are you sure you want to reset your password?")
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {

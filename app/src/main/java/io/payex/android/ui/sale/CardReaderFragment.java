@@ -27,6 +27,7 @@ import butterknife.ButterKnife;
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.items.IFlexible;
 import io.payex.android.R;
+import io.payex.android.ui.MainActivity;
 import io.payex.android.util.HapticFeedbackUtil;
 
 public class CardReaderFragment extends Fragment {

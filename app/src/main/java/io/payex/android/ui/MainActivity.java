@@ -13,6 +13,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -148,7 +149,7 @@ public class MainActivity extends BaseActivity
         View header = mNavView.getHeaderView(0);
         TextView merchant = (TextView) header.findViewById(R.id.tv_merchant);
         TextView mid = (TextView) header.findViewById(R.id.tv_mid);
-        merchant.setText("Starsbuck Coffee Malaysia");
+        merchant.setText("Starbucks Malaysia Sdn Bhd");
         mid.setText("MID: " + MyApp.getMID());
 
         mNavView.setNavigationItemSelectedListener(this);
@@ -196,9 +197,10 @@ public class MainActivity extends BaseActivity
             // todo clear all the cache before logout
 
             new AlertDialog.Builder(this)
+                .setIcon(R.drawable.ic_logouticon)
                 .setTitle("Logout")
-                .setMessage("Do you really want to logout?")
-                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setMessage("Are you sure you want to logout?")
+                //.setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         startActivity(LoginActivity.class, true);

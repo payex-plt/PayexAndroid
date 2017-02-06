@@ -60,6 +60,7 @@ public class AboutFragment extends Fragment {
         mListener = null;
     }
 
+
     @OnClick(R.id.btn_faq)
     public void openFaqPage() {
         mListener.onLinkClicked(Uri.parse(getString(R.string.FAQ_LINK)));

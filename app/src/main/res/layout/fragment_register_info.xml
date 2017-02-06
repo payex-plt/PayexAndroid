@@ -12,6 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="40dp"
+        android:textColor="#03a9f4"
         android:text="@string/register_info_title" />
 
     <android.support.v7.widget.AppCompatTextView
@@ -19,10 +21,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="@dimen/spacing_lg"
-        android:layout_marginTop="@dimen/spacing_lg"
+        android:layout_margin="@dimen/spacing_lg"
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textSize="17dp"
         tools:text="@string/register_info_desc" />
 
     <android.support.v7.widget.RecyclerView
@@ -30,6 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:scrollbars="vertical"
         app:layoutManager="LinearLayoutManager"
         tools:context=".ui.register.RegisterInfoFragment"
         tools:listitem="@layout/fragment_register_info_item" />

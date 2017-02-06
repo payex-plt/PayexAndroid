@@ -11,10 +11,11 @@
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/iv_icon"
-        android:layout_width="wrap_content"
+        android:layout_width="56dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
         app:srcCompat="@drawable/ic_visa_logo_40dp" />
 
     <android.support.v7.widget.AppCompatTextView

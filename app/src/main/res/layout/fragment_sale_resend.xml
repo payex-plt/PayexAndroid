@@ -29,7 +29,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:text="@string/sale_void_btn_no" />
 
         <android.support.v7.widget.AppCompatButton
@@ -38,6 +39,7 @@
             android:textColor="@android:color/white"
             android:textSize="20dp"
             android:layout_width="0dp"
+            android:layout_marginRight="20dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/sale_void_btn_yes" />

@@ -64,7 +64,7 @@ public class VoidSlipActivity extends BaseActivity
     @Override
     public void onConfirmVoidButtonPressed() {
         changeFragment(R.id.fragment_container, VoidStateFragment.newInstance(
-                0, R.string.state_title_void_approved, 0));
+                R.drawable.ic_approvedicon_125dp, R.string.state_title_void_approved, 0));
     }
 
     @Override

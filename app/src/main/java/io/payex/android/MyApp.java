@@ -78,9 +78,10 @@ public class MyApp extends Application {
                 new Bank("1111", "Chase Manhattan Bank", "enquiry@chase.com", "+1-800-555-7134", "+1-800-555-9876"),
                 new Bank("2222", "Maybank", "maybank@gmail.com", "+2222222221", "+2222222222"),
                 new Bank("3333", "CIMB Bank", "cimb@gmail.com", "+3333333331", "+3333333332"),
-                new Bank("429313", "Am Bank", "am@gmail.com", "+3333333331", "+3333333332"),
+                new Bank("429313", "AmBank (M) Berhad", "info@ambankgroup.com.my", "(+60)3 2132 6532 (Helpdesk)", "(+60)2-5653 0964 (Auth Centre)"),
                 new Bank("5555", "Hong Leong Bank Berhad", "support@hlbb.hongleong.com.my", "03-2773 0100 (Office Hours)", "03-7956 8166 (24 Hours)")
         };
+
 
         bank = banks[0];
         Log.d(TAG, "default bank -> " + bank.getName());

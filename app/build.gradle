@@ -18,12 +18,13 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary true
 
+
         resValue 'string', 'COMPANY_ABBR', '"Payex"'
-        resValue 'string', 'COMPANY', '"Payex Plt"'
-        resValue 'string', 'FAQ_LINK', '"https://www.google.com"'
-        resValue 'string', 'LIBS_LINK', '"https://www.google.com"'
-        resValue 'string', 'TERMS_LINK', '"https://www.google.com"'
-        resValue 'string', 'LEGAL_LINK', '"https://www.google.com"'
+        resValue 'string', 'COMPANY', '"Payex PLT"'
+        resValue 'string', 'FAQ_LINK', '"http://www.payex.io/faqs.html"'
+        resValue 'string', 'LIBS_LINK', '"http://www.payex.io/third-party-licenses.html"'
+        resValue 'string', 'TERMS_LINK', '"http://www.payex.io/conditions-of-use.html"'
+        resValue 'string', 'LEGAL_LINK', '"http://www.payex.io/legal-information.html"'
     }
     buildTypes {
         debug {

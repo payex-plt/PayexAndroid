@@ -99,6 +99,8 @@ public class CardReaderActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_reader);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
         setBackButton();
@@ -138,7 +140,7 @@ public class CardReaderActivity extends BaseActivity
     private List<IFlexible> getLogos() {
         List<IFlexible> list = new ArrayList<>();
 
-        int[] logos = { R.drawable.ic_ambank_logo_40dp, R.drawable.ic_mastercard_logo_40dp, R.drawable.ic_visa_logo_40dp };
+        int[] logos = { R.drawable.ic_ambank_logo_40dp, R.drawable.ic_visa_logo_40dp, R.drawable.ic_mastercard_logo_40dp };
 
         int max = logos.length;    //3;
         for (int i = 0 ; i < max ; i++) {

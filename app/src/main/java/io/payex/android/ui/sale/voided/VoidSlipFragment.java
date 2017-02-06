@@ -80,7 +80,7 @@ public class VoidSlipFragment extends Fragment {
         DecimalFormat df = new DecimalFormat("###,##0.00");
 
         Drawable d = VectorDrawableCompat.create(getResources(),
-                txn.CardBrand.toLowerCase().equals("visa") ? R.drawable.ic_visa_75dp : R.drawable.ic_mastercard_75dp,
+                txn.CardBrand.toLowerCase().equals("visa") ? R.drawable.ic_visa_logo_75dp : R.drawable.ic_mastercard_logo_75dp,
                 null);
         d = DrawableCompat.wrap(d);
 

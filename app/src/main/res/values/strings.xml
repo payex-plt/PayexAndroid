@@ -16,10 +16,10 @@
     <string name="login_helper_btn_reset">Reset</string>
     <string name="login_helper_btn_cancel">Cancel</string>
 
-    <string name="about_btn_faq">F.A.Q.</string>
-    <string name="about_btn_libs">Third-party libraries</string>
-    <string name="about_btn_terms_of_use">Conditions of use</string>
-    <string name="about_btn_legal">Legal information</string>
+    <string name="about_btn_faq">FAQs</string>
+    <string name="about_btn_libs">Third-Party Licenses</string>
+    <string name="about_btn_terms_of_use">Conditions of Use</string>
+    <string name="about_btn_legal">Legal Information</string>
     <string name="about_btn_tutorial">Tutorial</string>
     <string name="about_copyright">
         <![CDATA[
@@ -61,7 +61,7 @@
 
     <string name="sale_slip_btn_email">Email</string>
     <string name="sale_slip_btn_void">Void</string>
-    <string name="sale_slip_btn_resend">Resend Sales Slip</string>
+    <string name="sale_slip_btn_resend">Resend Slip</string>
     <string name="void_slip_btn_resend">Resend Void Slip</string>
 
     <string name="drawer_menu_sales">Sales</string>
@@ -76,8 +76,10 @@
     <string name="state_title_payment_approved">Approved</string>
     <string name="state_title_payment_rejected">Payment rejected</string>
     <string name="state_title_sale_voided">Sale voided!</string>
-    <string name="state_title_void_approved">Void approved</string>
-    <string name="state_title_void_declined">Void declined</string>
+    <string name="state_title_void_approved">
+        Void Approved
+    </string>
+    <string name="state_title_void_declined">Void Declined</string>
     <string name="state_title_payment_declined">Declined</string>
 
     <string name="email_slip_hint_email">Email</string>
@@ -90,7 +92,7 @@
     <string name="sale_resend_title">Confirm resend?</string>
 
     <string name="sale_history_menu_calendar">Calendar</string>
-    <string name="sale_history_menu_search">Search by last 4 digits</string>
+    <string name="sale_history_menu_search">Enter Last 4 Digits of Card</string>
     <string name="sale_history_card_ending">
         <![CDATA[
             Ending<br/>
@@ -101,12 +103,12 @@
     <string name="register_info_title">Sign Up</string>
     <string name="register_info_desc">
         <![CDATA[
-            Please contact any of our bank partners<br/>
-            below for account sign up.
+            Please contact any of our partners below to sign up for an account.
+
         ]]>
     </string>
     <string name="register_info_teaser1">Don\'t see your bank? </string>
-    <string name="register_info_teaser2">Request to try.</string>
+    <string name="register_info_teaser2">Register interest.</string>
     <string name="register_info_btn_ok">Okay</string>
 
     <string name="register_form_btn_cancel">Cancel</string>
@@ -114,16 +116,14 @@
     <string name="register_form_title">Sign Up</string>
     <string name="register_form_desc">
         <![CDATA[
-            Enter your details below and<br/>
-            we will add your preferred banks<br/>
-            when there are enough interest.
+            Enter your details below to be notified once we have added your preferred bank.
         ]]>
     </string>
     <string name="register_form_name">Name</string>
     <string name="register_form_email">Email</string>
     <string name="register_form_country">Country</string>
     <string name="register_form_preferred_bank">Preferred bank</string>
-    <string name="register_form_phone_number">+Phone Number</string>
+    <string name="register_form_phone_number">Phone Number</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -133,8 +133,8 @@
     <string name="title_activity_pager">PagerActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_test_reader">TestReaderActivity</string>
-    <string name="title_activity_sale_slip">Sale Slip</string>
-    <string name="title_activity_void_slip">Void Slip</string>
+    <string name="title_activity_sale_slip">Transaction Info</string>
+    <string name="title_activity_void_slip">Transaction Info</string>
     <string name="title_activity_login">Payex</string>
     <!--<string name="title_activity_main">Payex</string>-->
     <string name="title_activity_email_slip">Email Slip</string>
@@ -142,7 +142,7 @@
     <string name="title_activity_sale">Sales</string>
     <string name="title_activity_cvv">Enter CVV</string>
     <string name="title_activity_void">Void</string>
-    <string name="title_activity_sale_history">Sale History</string>
+    <string name="title_activity_sale_history">Sales History</string>
     <string name="title_activity_about">About Us</string>
     <string name="title_activity_my_account">My Account</string>
 

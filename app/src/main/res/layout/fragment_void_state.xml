@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="24dp"
-            app:srcCompat="@drawable/ic_mood_black_72dp" />
+            app:srcCompat="@drawable/ic_approvedicon_125dp" />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv_title"
@@ -28,7 +28,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="100dp"
             android:ellipsize="end"
-            android:maxLines="1"
+            android:maxLines="2"
             android:text="@string/state_title_loading"
             android:textSize="45sp"
             android:fontFamily="@string/sans_serif"
@@ -51,6 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:layout_marginBottom="20dp"
         android:orientation="horizontal">
 
         <android.support.v7.widget.AppCompatButton
@@ -61,7 +62,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:text="@string/sale_slip_btn_email" />
 
         <android.support.v7.widget.AppCompatButton
@@ -70,6 +72,7 @@
             android:textColor="@android:color/white"
             android:textSize="20dp"
             android:layout_width="0dp"
+            android:layout_marginRight="20dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/register_form_btn_done" />

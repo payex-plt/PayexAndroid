@@ -108,21 +108,71 @@ public class RegisterInfoFragment extends Fragment {
     public List<IFlexible> getData() {
         List<IFlexible> list = new ArrayList<>();
 
-        Drawable d = VectorDrawableCompat.create(getResources(), R.drawable.ic_mastercard_40dp, null);
-        d = DrawableCompat.wrap(d);
+        Drawable d;
 
         Calendar c = Calendar.getInstance();
 
-        for (int i = 0; i < 25; i++) {
-            c.add(Calendar.DATE, -i);
+//        for (int i = 0; i < 25; i++) {
+//            c.add(Calendar.DATE, -i);
+//
+//            list.add(new RegisterInfoItem(
+//                    i + 1 + "",
+//                    d,
+//                    "+1 619-656-54456",
+//                    "support@barclay.com"
+//            ));
+//        }
 
-            list.add(new RegisterInfoItem(
-                    i + 1 + "",
-                    d,
-                    "+1 619-656-54456",
-                    "support@barclay.com"
-            ));
-        }
+        d = VectorDrawableCompat.create(getResources(), R.drawable.ic_ambank_logo_60dp, null);
+        d = DrawableCompat.wrap(d);
+        list.add(new RegisterInfoItem(
+                "1",
+                d,
+                "(+60) 3-2167 7800",
+                "support@ambankgroup.com"
+        ));
+        d = VectorDrawableCompat.create(getResources(), R.drawable.ic_hongleong_60dp, null);
+        d = DrawableCompat.wrap(d);
+        list.add(new RegisterInfoItem(
+                "2",
+                d,
+                "(+60) 3-2773 0100",
+                "support@hlbb.hongleong.com.my"
+        ));
+        d = VectorDrawableCompat.create(getResources(), R.drawable.ic_hsbclogo_60dp, null);
+        d = DrawableCompat.wrap(d);
+        list.add(new RegisterInfoItem(
+                "3",
+                d,
+                "(+60) 3 8321 5400",
+                "merchant@hsbc.com.my"
+        ));
+        d = VectorDrawableCompat.create(getResources(), R.drawable.ic_citilogo_60dp, null);
+        d = DrawableCompat.wrap(d);
+        list.add(new RegisterInfoItem(
+                "4",
+                d,
+                "(+60) 3-2383 0000",
+                "merchant@citi.com.my"
+        ));
+//        d = VectorDrawableCompat.create(getResources(), R.drawable.ic_hsbclogo_60dp, null);
+//        d = DrawableCompat.wrap(d);
+//        list.add(new RegisterInfoItem(
+//                "5",
+//                d,
+//                "(+60) 3 8321 5400",
+//                "merchant@hsbc.com.my"
+//        ));
+//        d = VectorDrawableCompat.create(getResources(), R.drawable.ic_citilogo_60dp, null);
+//        d = DrawableCompat.wrap(d);
+//        list.add(new RegisterInfoItem(
+//                "6",
+//                d,
+//                "(+60) 3-2383 0000",
+//                "merchant@citi.com.my"
+//        ));
+
+
         return list;
     }
 

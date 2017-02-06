@@ -15,4 +15,5 @@
     <color name="colorWelcome">@android:color/white</color>
     <color name="colorHint">#bee1f0</color>
     <color name="colorStatusBar">@android:color/black</color>
+    <color name="colorNumPadDivider">#dddddd</color>
 </resources>

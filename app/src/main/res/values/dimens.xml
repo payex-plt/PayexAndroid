@@ -5,7 +5,9 @@
     <dimen name="spacing_xs">2dp</dimen>
     <dimen name="spacing_sm">4dp</dimen>
     <dimen name="spacing_md">8dp</dimen>
+    <dimen name="spacing_slip">12dp</dimen>
     <dimen name="spacing_lg">16dp</dimen>
+    <dimen name="spacing_nav">25dp</dimen>
     <dimen name="spacing_xl">32dp</dimen>
     <dimen name="spacing_xxl">64dp</dimen>
 
