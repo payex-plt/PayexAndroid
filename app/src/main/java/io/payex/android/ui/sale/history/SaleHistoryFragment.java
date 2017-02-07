@@ -1,6 +1,8 @@
 package io.payex.android.ui.sale.history;
 
 import android.app.Activity;
+//import android.app.Fragment;
+//import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +14,10 @@ import android.os.Message;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewCompat;
@@ -49,6 +55,7 @@ import io.payex.android.R;
 import io.payex.android.TransactionJSON;
 import io.payex.android.ui.MainActivity;
 import io.payex.android.ui.common.CalendarFragment;
+import io.payex.android.ui.common.NewDateRangePickerFragment;
 import io.payex.android.ui.sale.HeaderItem;
 import io.payex.android.util.ConnectivityReceiver;
 import io.payex.android.ui.common.DateRangePickerFragment;
@@ -68,7 +75,8 @@ public class SaleHistoryFragment extends Fragment
 {
     ProgressDialog progressDialog;
 
-    DateRangePickerFragment dateRangePickerFragment;
+    NewDateRangePickerFragment dateRangePickerFragment;
+    //SmoothDateRangePickerFragment smoothDateRangePickerFragment;
 
     @Override
     public void onFailure(Call<List<TransactionJSON>> call, Throwable t) {
@@ -251,7 +259,7 @@ public class SaleHistoryFragment extends Fragment
         ButterKnife.bind(this, view);
         setHasOptionsMenu(true);
 
-        dateRangePickerFragment = DateRangePickerFragment.newInstance(((MainActivity)getActivity()), false);
+        dateRangePickerFragment = NewDateRangePickerFragment.newInstance(((MainActivity)getActivity()), false);
 
         Context context = view.getContext();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -377,10 +385,11 @@ public class SaleHistoryFragment extends Fragment
 
 
             //CalendarFragment f = CalendarFragment.newInstance();
-            DateRangePickerFragment f = dateRangePickerFragment;
+            NewDateRangePickerFragment f = dateRangePickerFragment;
             FragmentManager fm = getFragmentManager();
             f.setTargetFragment(this, DIALOG_FRAGMENT);
             f.show(fm, f.getTag());
+
             return true;
         }
         return super.onOptionsItemSelected(item);

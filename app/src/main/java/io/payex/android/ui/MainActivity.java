@@ -35,6 +35,7 @@ import io.payex.android.MyApp;
 import io.payex.android.R;
 import io.payex.android.ui.about.AboutFragment;
 import io.payex.android.ui.account.MyAccountFragment;
+import io.payex.android.ui.common.NewDateRangePickerFragment;
 import io.payex.android.ui.login.LoginActivity;
 import io.payex.android.ui.sale.CardReaderActivity;
 import io.payex.android.ui.sale.SaleFragment;
@@ -53,7 +54,7 @@ public class MainActivity extends BaseActivity
         SaleFragment.OnFragmentInteractionListener,
         VoidFragment.OnListFragmentInteractionListener,
         AboutFragment.OnFragmentInteractionListener,
-        DateRangePickerFragment.OnDateRangeSelectedListener
+        NewDateRangePickerFragment.OnDateRangeSelectedListener
 {
     private static String TAG = MainActivity.class.getSimpleName();
 

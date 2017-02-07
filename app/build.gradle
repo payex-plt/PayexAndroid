@@ -79,6 +79,7 @@ dependencies {
     provided 'frankiesardo:icepick-processor:3.2.0'
 
     compile 'com.appeaser.sublimepickerlibrary:sublimepickerlibrary:2.1.1'
+    //compile 'com.leavjenn.smoothdaterangepicker:library:0.2.0'
 
     compile('com.crashlytics.sdk.android:crashlytics:2.6.5@aar') {
         transitive = true;
